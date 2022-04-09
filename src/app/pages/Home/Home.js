@@ -21,6 +21,8 @@ import featured5img from "../../../assets/images/featured-icons/featured5-img.pn
 import featured6img from "../../../assets/images/featured-icons/featured6-img.png";
 import featured7img from "../../../assets/images/featured-icons/featured7-img.png";
 import featured8img from "../../../assets/images/featured-icons/featured8-img.png";
+import Ethereum from '../../../assets/images/ethereum.png';
+import Polygon from '../../../assets/images/polygon-matic-logo.png';
 import "./Home.css";
 export default function ButtonAppBar() {
   const {
@@ -64,8 +66,8 @@ export default function ButtonAppBar() {
 
       <Header />
       <section class="text-gray-600 body-font">
-        <div class="container mx-auto flex md:flex-row flex-col items-center">
-          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <div class="w-full flex flex-row">
+          <div class="ml-24 mx-auto my-auto">
             <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
               Create NFT
               <br class="hidden lg:inline-block" />
@@ -75,13 +77,13 @@ export default function ButtonAppBar() {
               Create NFT collections, tradeable on Opensea & marketplaces
               without writing a single line of code
             </p>
-            <div class="flex justify-center">
+            <div class="flex">
               <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                 Join the Discord
               </button>
-              <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+              <a href="/create-collections"><button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
                 Generate Collection
-              </button>
+              </button></a>
             </div>
           </div>
           <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
@@ -122,7 +124,7 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 body-font overflow-hidden">
         <div class="lg:w-4/5 mx-auto flex flex-row">
-          <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mt-6 lg:mt-0 text-left">
+          <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mx-auto my-auto text-left">
             <h2 class="text-sm title-font text-blue-800 tracking-widest mt-4">
               Compatible
             </h2>
@@ -139,11 +141,11 @@ export default function ButtonAppBar() {
             <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
               Learn More
             </button>
-          </div>
-          <div class="lg:w-1/2 w-full lg:pl-0 my-10 text-right">
+          </div>  
+          <div class="lg:w-1/2 md:w1/2 w-full p-20 text-center">
             <img
               alt="ecommerce"
-              class="lg:w-1/2 w-full lg:h-auto h-64 rounded"
+              class="w-full h-full"
               src={Section3img}
             />
           </div>
@@ -151,15 +153,15 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 body-font overflow-hidden">
         <div class="lg:w-4/5 mx-auto flex flex-row">
-          <div class="lg:w-1/2 w-full lg:pl-0 my-10 text-center">
+          <div class="lg:w-1/2 md:w1/2 w-full lg:pl-0 text-center">
             <img
               alt="ecommerce"
-              class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+              class="w-full h-full"
               src={Section4img}
             />
           </div>
 
-          <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mt-6 lg:mt-0 text-left">
+          <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mx-auto my-auto text-left">
             <h2 class="text-sm title-font text-blue-800 tracking-widest mt-4">
               Powerful
             </h2>
@@ -181,7 +183,7 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 body-font overflow-hidden">
         <div class="lg:w-4/5 mx-auto flex flex-row">
-          <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mt-6 lg:mt-0 text-left">
+          <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mx-auto my-auto text-left">
             <h2 class="text-sm title-font text-pink-500 tracking-widest mt-4">
               Fast
             </h2>
@@ -199,10 +201,10 @@ export default function ButtonAppBar() {
               Learn More
             </button>
           </div>
-          <div class="lg:w-1/2 w-full lg:pl-0 my-10 text-center">
+          <div class="lg:w-1/2 md:w1/2 w-full lg:pl-0 text-center">
             <img
               alt="ecommerce"
-              class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+              class="w-full h-full"
               src={Section5img}
             />
           </div>
@@ -229,7 +231,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured1 bg-no-repeat bg-right-bottom bg-opacity-90">
+               <div class="-mr-7 -mb-7 h-16 bg-featured1 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -246,7 +248,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured2 bg-no-repeat bg-right-bottom bg-opacity-90">
+               <div class="-mr-7 -mb-7 h-16 bg-featured2 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -263,7 +265,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured3 bg-no-repeat bg-right-bottom bg-opacity-90">
+               <div class="-mr-7 -mb-7 h-16 bg-featured3 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -280,7 +282,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured4 bg-no-repeat bg-right-bottom bg-opacity-90">
+               <div class="-mr-7 -mb-7 h-16 bg-featured4 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -297,7 +299,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured5 bg-no-repeat bg-right-bottom bg-opacity-90">
+               <div class="-mr-7 -mb-7 h-16 bg-featured5 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -314,7 +316,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured6 bg-no-repeat bg-right-bottom bg-opacity-90">
+               <div class="-mr-7 -mb-7 h-16 bg-featured6 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -331,7 +333,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured7 bg-no-repeat bg-right-bottom bg-opacity-90">
+               <div class="-mr-7 -mb-7 h-16 bg-featured7 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -348,7 +350,7 @@ export default function ButtonAppBar() {
                 <p class="text-sm">Create NFT collections with ease,
                 using the all-in-one generator</p>
                </div>
-               <div class="-mr-7 -mb-7 h-16 bg-featured8 bg-no-repeat bg-right-bottom bg-opacity-10">
+               <div class="-mr-7 -mb-7 h-16 bg-featured8 bg-no-repeat bg-right-bottom opacity-10">
 
                </div>
                </div>
@@ -366,9 +368,9 @@ export default function ButtonAppBar() {
         <h2 class="text-center font-extrabold text-xl">Use for FREE</h2>
         <div class="md:w-4/5 px-5 py-24 mx-auto flex flex-grow">
           <div class="md:w-1/2 m-4 shadow-lg">
-            <div class="bg-purple-800 rounded-t-xl h-20 relative">
-            <div class="rounded-full bg-white h-16 w-16 p-3 absolute inset-2/4">
-            <img src={Vector} class="w-10 h-10 absolute inset-x-auto"/>
+            <div class="bg-purple-800 rounded-t-xl h-20 relative flex justify-center items-end">
+            <div class="rounded-full bg-white h-16 w-16 p-3 -mb-8">
+            <img src={Polygon} class="w-10 h-10 rotate-14"/>
             </div>
             </div>
 
@@ -389,9 +391,9 @@ export default function ButtonAppBar() {
             </div>
           </div>
           <div class="md:w-1/2 m-4 shadow-lg">
-            <div class="bg-cyan-600 rounded-t-xl h-20 relative">
-            <div class="rounded-full bg-white h-16 w-16 p-3 absolute inset-2/4">
-            <img src={Vector} class="w-10 h-10 absolute inset-x-auto"/>
+            <div class="bg-cyan-600 rounded-t-xl h-20 relative flex justify-center items-end">
+            <div class="rounded-full bg-white h-16 w-16 p-3 -mb-8">
+            <img src={Ethereum} class="w-10 h-10"/>
             </div>
             </div>
             <div class="bg-white rounded-b-xl pt-14 pb-10">
