@@ -61,7 +61,6 @@ export default function ButtonAppBar() {
     <div>
       {/*<button onClick={login}>Moralis Metamask Login</button>*/}
       {/*<button onClick={logOut} disabled={isAuthenticating}>Logout</button>*/}
-
       <header class="text-gray-600 body-font shadow-lg md:px-5">
         <div class="container mx-auto flex flex-wrap p-5 sm:flex-row items-center">
           <a class="flex title-font font-medium items-center text-gray-900 md:mb-0">
