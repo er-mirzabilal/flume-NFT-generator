@@ -13,6 +13,7 @@ module.exports = {
         'featured6': "url('/src/assets/images/featured-icons/featured6-img.png')",
         'featured7': "url('/src/assets/images/featured-icons/featured7-img.png')",
         'featured8': "url('/src/assets/images/featured-icons/featured8-img.png')",
+        'login1': "url('/src/assets/images/login/background.png')"
       }
     },
   },
