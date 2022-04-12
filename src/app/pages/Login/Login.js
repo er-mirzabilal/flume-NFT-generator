@@ -1,13 +1,11 @@
 import React, {useEffect} from 'react'
 import { useMoralis } from "react-moralis";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faAngleRight} from '@fortawesome/free-solid-svg-icons'
 import Logo from "../../../assets/images/Logo.png";
 import login1img from "../../../assets/images/login/login1-img.png";
 import login2img from "../../../assets/images/login/login2-img.png";
 import login3img from "../../../assets/images/login/login3-img.png";
 import {useNavigate} from "react-router-dom";
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 export default function Login(props){
     const {
         authenticate,
@@ -53,23 +51,23 @@ export default function Login(props){
     });
 
     return (
-        <div class="bg-gray-200 bg-login1 h-screen flex justify-center items-center">
+        <div className="bg-gray-200 bg-login1 h-screen flex justify-center items-center">
         <section class="  lg:w-2/6 md:w-3/6 w-4/6 mx-auto align-middle">
         <div class="w-full text-center py-8">
-            <img src={Logo} class="mx-auto" />
+            <img src={Logo} class="mx-auto"  />
         </div>
         <div class="p-8 bg-white shadow-lg rounded-xl">
         <h2 class="text-center mb-6 font-semibold text-xl">Login</h2>
         <div class="container flex flex-row p-7 m-1 border-2 border-gray-200 cursor-pointer" onClick={() => connectMetaMask()}>
         <div class="w-fit"><img src={login1img} /></div>
         <div class="flex-grow px-5"><h4 class="font-bold text-lg">Metamask</h4><p class="font-light">Connect your browser wallet</p></div>
-        <div class="flex item-center"><button> <FontAwesomeIcon icon={faAngleRight} /></button></div>
+        <div class="flex item-center"><button> <ArrowForwardIosIcon  /></button></div>
         </div>
         <div class="container flex flex-row p-7 m-1 border-2 border-gray-200 cursor-pointer" onClick={() => authWalletConnect()}>
         <div class="w-fit"><img src={login2img} /></div>
         <div class="flex-grow px-5"><h4 class="font-bold text-lg">Connect Wallet</h4><p class="font-light">Connect your browser wallet</p></div>
             <div className="flex item-center">
-                <button><FontAwesomeIcon icon={faAngleRight}/></button>
+                <button><ArrowForwardIosIcon /></button>
             </div>
 
         </div>
@@ -77,7 +75,7 @@ export default function Login(props){
         <div class="w-fit"><img src={login3img} /></div>
         <div class="flex-grow px-5"><h4 class="font-bold text-lg">Coinbase Wallet</h4><p class="font-light">Connect your browser wallet</p></div>
             <div className="flex item-center">
-                <button><FontAwesomeIcon icon={faAngleRight}/></button>
+                <button><ArrowForwardIosIcon  /></button>
             </div>
 
         </div>
