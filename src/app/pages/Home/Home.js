@@ -24,6 +24,7 @@ import featured8img from "../../../assets/images/featured-icons/featured8-img.pn
 import Ethereum from '../../../assets/images/ethereum.png';
 import Polygon from '../../../assets/images/polygon-matic-logo.png';
 import "./Home.css";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 export default function ButtonAppBar() {
   const {
     authenticate,
@@ -68,7 +69,7 @@ export default function ButtonAppBar() {
       <section class="text-gray-600 body-font">
         <div class="w-full flex flex-row">
           <div class="ml-24 mx-auto my-auto">
-            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+            <h1 class="title-font  text-6xl mb-4 font-medium text-gray-900">
               Create NFT
               <br class="hidden lg:inline-block" />
               Collections Easily
@@ -378,13 +379,13 @@ export default function ButtonAppBar() {
               <div class="flex flex-row">
                 <div class="p-5">
                 <p>Polygon</p>
-                <h3 class="text-purple-700">FREE</h3>
+                <h3 class="text-purple-700 text-2xl">FREE</h3>
                 </div>
                 <div class="pl-10 border-l-2">
                 <ul class="list-disc text-lg">
-                <li class="list-item">FREE (just pay gas)</li>
-                <li class="list-item">10% Minting fee on the initial sale</li>
-                <li class="list-item">0 - 1% royalty</li>
+                <li class="list-item list-none	m-2"> <CheckCircleIcon fontSize='small'/> FREE (just pay gas)</li>
+                <li class="list-item list-none	m-2">  <CheckCircleIcon fontSize='small'/>10% Minting fee on the initial sale</li>
+                <li class="list-item list-none	m-2"> <CheckCircleIcon fontSize='small'/> 0 - 1% royalty</li>
                 </ul>
                 </div>
               </div>
@@ -405,10 +406,10 @@ export default function ButtonAppBar() {
                 </div>
                 <div class="pl-10 border-l-2">
                 <ul class="list-disc text-lg">
-                <li class="list-item">0.02 ETH to add collection to
+                <li class="list-item list-none	m-2"> <CheckCircleIcon fontSize='small'/>0.02 ETH to add collection to
                 blockchain + pay gas
                 </li>
-                <li class="list-item">9% Minting fee on the initial sale</li>
+                <li class="list-item list-none	m-2"> <CheckCircleIcon fontSize='small'/>9% Minting fee on the initial sale</li>
                 </ul>
                 </div>
               </div>

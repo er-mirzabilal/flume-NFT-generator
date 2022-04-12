@@ -1,20 +1,28 @@
 import React from 'react';
-import {  Route, Routes } from 'react-router-dom';
+import {  Route, Routes, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Home from './app/pages/Home/Home';
 import ViewCollection from './app/pages/View-Collections/view-collections';
 import CreateCollection from './app/pages/Create-Collections/create-collections';
 import  Login  from './app/pages/Login/Login';
 // import './App.css';
-
+import ProtectedRoute from './Route/ProtectedRoute'
 function App() {
+    const location = useLocation();
   return (
     <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/view-collections" element={<ViewCollection />}></Route>
-          <Route path="/create-collections" element={<CreateCollection />}></Route>
-         <Route path="/login" element={<Login />} />
-        </Routes>
+        <TransitionGroup component={null}>
+            <CSSTransition key={location.key} classNames="fade" timeout={300}>
+                <Routes>
+                  <Route path="/" element={<Home/>}/>
+                 <Route path="/login" element={<Login />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/view-collections" element={<ViewCollection/>}/>
+                        <Route path="/create-collections" element={<CreateCollection/>}/>
+                    </Route>
+                </Routes>
+            </CSSTransition>
+        </TransitionGroup>
     </div>
   );
 }
