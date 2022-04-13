@@ -4,6 +4,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Home from './app/pages/Home/Home';
 import ViewCollection from './app/pages/View-Collections/view-collections';
 import CreateCollection from './app/pages/Create-Collections/create-collections';
+import Preview from './app/pages/Preview/Preview';
 import  Login  from './app/pages/Login/Login';
 // import './App.css';
 import ProtectedRoute from './Route/ProtectedRoute'
@@ -19,6 +20,7 @@ function App() {
                     <Route element={<ProtectedRoute />}>
                         <Route path="/view-collections" element={<ViewCollection/>}/>
                         <Route path="/create-collections" element={<CreateCollection/>}/>
+                        <Route path="/preview-images" element={<Preview/>}/>
                     </Route>
                 </Routes>
             </CSSTransition>
