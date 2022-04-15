@@ -25,11 +25,9 @@ export default function Login(props){
     const navigate = useNavigate()
     async  function connectMetaMask(){
         if(!isAuthenticated) {
-            console.log("Connecting")
             setLoading(true);
             await authenticate({signingMessage: "Hello Mirza"});
             setLoading(false);
-            console.log("Connect")
             navigate('/view-collections');
         }
     }
