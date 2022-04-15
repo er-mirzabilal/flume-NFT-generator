@@ -10,7 +10,7 @@ export default function ProtectedRoute({ redirectUrl = '/login'}){
         isAuthenticated,
         user,
     } = useMoralis();
-    // return (isAuthenticated && user) ? <Outlet /> : navigate(redirectUrl)
-    return    <Outlet /> 
+    return (isAuthenticated && user) ? <Outlet /> : navigate(redirectUrl)
+    // return    <Outlet /> 
 
 }

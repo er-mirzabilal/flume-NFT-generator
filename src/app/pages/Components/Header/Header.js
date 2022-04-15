@@ -16,7 +16,7 @@ const Header = () => {
         return (
             <div className='m-16'>
             <Typography> Address</Typography>
-             <Typography>  {user?.attributes?.ethAddress || 'N/A'} </Typography>
+             <Typography >  {user?.attributes?.ethAddress || 'N/A'} </Typography>
             </div>
     )
     }
@@ -28,7 +28,7 @@ const Header = () => {
                     <img src={Logo} />
                   </a>
                   <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
-                    <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">Guide</a>
+                    <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank">Guide</a>
                     <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">
                       <img src={Vector} />
                     </a>

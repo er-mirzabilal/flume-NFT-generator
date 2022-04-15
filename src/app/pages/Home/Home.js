@@ -68,15 +68,13 @@ export default function ButtonAppBar() {
       <Header />
       <section class="text-gray-600 body-font">
         <div class="w-full flex flex-row">
-          <div class="ml-24 mx-auto my-auto">
-            <h1 class="title-font  text-6xl mb-4 font-medium text-gray-900">
-              Create NFT
-              <br class="hidden lg:inline-block" />
-              Collections Easily
-            </h1>
-            <p class="mb-8 leading-relaxed">
-              Create NFT collections, tradeable on Opensea & marketplaces
-              without writing a single line of code
+          <div class="ml-24  pl-24 pr-24 mx-auto my-auto">
+            <h2 class="title-font  text-6xl mb-4 font-medium text-gray-900">
+                Create and Deploy
+                NFT Collections without coding
+            </h2>
+            <p className="mb-8 leading-relaxed text-lg">
+                Generate, deploy, and trade NFT collections without writing any line of code. All in a matter of minutes!
             </p>
             <div class="flex">
               <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
@@ -104,22 +102,23 @@ export default function ButtonAppBar() {
 
           <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mt-6 lg:mt-0 text-left">
             <h2 class="text-sm title-font text-blue-800 tracking-widest mt-4">
-              Simple
+                Easy
             </h2>
             <hr class="w-5 mb-3 font-bold" />
             <h1 class="text-gray-900 text-3xl title-font font-small mb-3">
-              The easiest way to{" "}
-              <span class="text-cyan-500">create NFT collectibles</span> on the
+                The simplest way to  {' '}
+              <span class="text-cyan-500"> generate and deploy NFT collections</span> on the
               blockchain
             </h1>
 
             <p class="leading-relaxed mb-3">
-              Create 10,000+ NFT collections, by uploading the layers. Without
-              requiring code.
+                No coding required, at all. Create your layers, import your assets, click Generate and you are done!
             </p>
+              <a href="https://docs-flume.gitbook.io/flume/what-is-flume/general-flow" target="_blank">
             <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-              Learn More
+               Learn More
             </button>
+              </a>
           </div>
         </div>
       </section>
@@ -127,21 +126,24 @@ export default function ButtonAppBar() {
         <div class="lg:w-4/5 mx-auto flex flex-row">
           <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mx-auto my-auto text-left">
             <h2 class="text-sm title-font text-blue-800 tracking-widest mt-4">
-              Compatible
+                Integrated
             </h2>
             <hr class="w-6 mb-3 font-xl border-blue-800" />
             <h1 class="text-gray-900 text-3xl title-font font-small mb-3">
-              Sell your NFTs on marketplaces like{" "}
+                Trade your NFTs on famous marketplaces like {" "}
               <span class="text-cyan-500">OpenSea</span>
             </h1>
 
             <p class="leading-relaxed mb-3">
-              Once minted, NFTs can be traded on opensea and other
-              marketplaces.Since you own your contract, you keep the royalties.
+                Once minted, the NFTs will be instantly available in the most famous NFT marketplaces and ready for sale
             </p>
-            <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-              Learn More
-            </button>
+
+              <a href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/marketplaces-sync" target="_blank">
+                  <button
+                      className="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                      Learn More
+                  </button>
+              </a>
           </div>  
           <div class="lg:w-1/2 md:w1/2 w-full p-20 text-center">
             <img
@@ -168,17 +170,17 @@ export default function ButtonAppBar() {
             </h2>
             <hr class="w-6 mb-3 font-xl border-blue-800" />
             <h1 class="text-gray-900 text-3xl title-font font-small mb-3">
-              Configure Rarity, <span class="text-cyan-500">Mint Fees</span> and
-              more
+                Configure Rarity,  <span class="text-cyan-500">Mint Price and Deploy</span> to Blockchain
             </h1>
 
             <p class="leading-relaxed mb-3">
-              Configure how rare each layer of an NFT is. Add custom metadata.
-              Set your own minting fees, and perform air drops easily.
+                Configure certain attributes to be more rare than others, set the minting price and deploy your collection to the blockchain.
             </p>
+              <a href="https://docs-flume.gitbook.io/flume/guides/uploading-content" target="_blank">
             <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
               Learn More
             </button>
+              </a>
           </div>
         </div>
       </section>
@@ -186,21 +188,22 @@ export default function ButtonAppBar() {
         <div class="lg:w-4/5 mx-auto flex flex-row">
           <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mx-auto my-auto text-left">
             <h2 class="text-sm title-font text-pink-500 tracking-widest mt-4">
-              Fast
+                Customizable
             </h2>
             <hr class="w-6 mb-3 font-xl border-blue-800" />
             <h1 class="text-gray-900 text-3xl title-font font-small mb-3">
-              <span class="text-cyan-500">Ready-made </span> minting pages
+              <span class="text-cyan-500"> Pre built </span> Minting Button
             </h1>
 
             <p class="leading-relaxed mb-3">
-              Beautiful minting pages let people mint your NFTs. You can choose
-              from multiple minting strategies including random assignment, and
-              individual section.
+                Embed a minting button linked to your collection to any website. Customize it as you want and allow people to mint directly from there.
+
             </p>
-            <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-              Learn More
-            </button>
+              <a href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/embedding-into-your-website" target="_blank">
+                  <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                  Learn More
+                </button>
+              </a>
           </div>
           <div class="lg:w-1/2 md:w1/2 w-full lg:pl-0 text-center">
             <img
@@ -229,8 +232,7 @@ export default function ButtonAppBar() {
                </div>
                <div class="container">
                 <h3 class="font-bold text-md mb-3">Super Simple (no code)</h3>
-                <p class="text-sm">Create NFT collections with ease,
-                using the all-in-one generator</p>
+                <p class="text-sm">Quickly generate your NFT collection without coding</p>
                </div>
                <div class="-mr-7 -mb-7 h-16 bg-featured1 bg-no-repeat bg-right-bottom opacity-10">
 
@@ -262,9 +264,8 @@ export default function ButtonAppBar() {
                <img src={featured3img} />
                </div>
                <div class="container">
-                <h3 class="font-bold text-md mb-3">Set Layer Rarity</h3>
-                <p class="text-sm">Create NFT collections with ease,
-                using the all-in-one generator</p>
+                <h3 class="font-bold text-md mb-3">Set Traits Rarity</h3>
+                <p class="text-sm">Configure how rare each trait of your NFT should be</p>
                </div>
                <div class="-mr-7 -mb-7 h-16 bg-featured3 bg-no-repeat bg-right-bottom opacity-10">
 
@@ -296,9 +297,8 @@ export default function ButtonAppBar() {
                <img src={featured5img} />
                </div>
                <div class="container">
-                <h3 class="font-bold text-md mb-3">Add Custom Metadata</h3>
-                <p class="text-sm">Create NFT collections with ease,
-                using the all-in-one generator</p>
+                <h3 class="font-bold text-md mb-3">Generate Metadata</h3>
+                <p class="text-sm">Generate automatically metadata for your NFTs</p>
                </div>
                <div class="-mr-7 -mb-7 h-16 bg-featured5 bg-no-repeat bg-right-bottom opacity-10">
 
@@ -313,9 +313,9 @@ export default function ButtonAppBar() {
                <img src={featured6img} />
                </div>
                <div class="container">
-                <h3 class="font-bold text-md mb-3">Random Minting</h3>
-                <p class="text-sm">Create NFT collections with ease,
-                using the all-in-one generator</p>
+                <h3 class="font-bold text-md mb-3">Lazy Minting</h3>
+                <p class="text-sm">No upfront minting gas fee for you. Defer them to your buyers
+                </p>
                </div>
                <div class="-mr-7 -mb-7 h-16 bg-featured6 bg-no-repeat bg-right-bottom opacity-10">
 
@@ -330,9 +330,8 @@ export default function ButtonAppBar() {
                <img src={featured7img} />
                </div>
                <div class="container">
-                <h3 class="font-bold text-md mb-3">Prebuilt Minting Pages</h3>
-                <p class="text-sm">Create NFT collections with ease,
-                using the all-in-one generator</p>
+                <h3 class="font-bold text-md mb-3">Embeddable Minting Button</h3>
+                <p class="text-sm">Embed your minting button into any website by using our ready-made code snippet</p>
                </div>
                <div class="-mr-7 -mb-7 h-16 bg-featured7 bg-no-repeat bg-right-bottom opacity-10">
 
@@ -347,9 +346,9 @@ export default function ButtonAppBar() {
                <img src={featured8img} />
                </div>
                <div class="container">
-                <h3 class="font-bold text-md mb-3">Run Air Drops</h3>
-                <p class="text-sm">Create NFT collections with ease,
-                using the all-in-one generator</p>
+                <h3 class="font-bold text-md mb-3">Anonymous</h3>
+                <p class="text-sm">No email address, no names, no private info required
+                </p>
                </div>
                <div class="-mr-7 -mb-7 h-16 bg-featured8 bg-no-repeat bg-right-bottom opacity-10">
 
@@ -385,7 +384,7 @@ export default function ButtonAppBar() {
                 <ul class="list-disc text-lg">
                 <li class="list-item list-none	m-2"> <CheckCircleIcon fontSize='small'/> FREE (just pay gas)</li>
                 <li class="list-item list-none	m-2">  <CheckCircleIcon fontSize='small'/>10% Minting fee on the initial sale</li>
-                <li class="list-item list-none	m-2"> <CheckCircleIcon fontSize='small'/> 0 - 1% royalty</li>
+                <li class="list-item list-none	m-2"> <CheckCircleIcon fontSize='small'/> 1% royalty</li>
                 </ul>
                 </div>
               </div>
@@ -421,8 +420,8 @@ export default function ButtonAppBar() {
       <div class="md:w-4/5 px-5 flex flex-row py-24 mx-auto">
           <div class="md:w-1/2 m-4">
           <h2 class="text-4xl font-bold">Ready to get started?</h2>
-          <p class="text-md leading-8 mt-3">Start uploading and create the next big NFT collection 
-             for any further questions, please <span class="text-purple-700"><a class="hover:cursor-pointer">join the discard.</a></span></p>
+          <p class="text-md leading-8 mt-3">Get your NFT collections done and start trading </p>
+            <p> Any question? Just ping us on <span className="text-purple-700"><a className="hover:cursor-pointer"> Join Discord </a></span>. We'll be happy to help </p>
           </div>
           <div class="md:w-1/2 m-4 text-right">
           <button class="bg-cyan-500 text-white rounded-md p-5 w-60 text-lg">Connect Your Wallet</button>
@@ -433,8 +432,8 @@ export default function ButtonAppBar() {
       <div class="md:w-4/5 px-4 flex flex-row mx-auto">
           <div class="md:w-1/2 m-4">
           <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
-            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">Guide</a>
-            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">Terms & Legal</a>
+            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/" target="_blank">Guide</a>
+            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/flume/terms-of-service" target="_blank">Terms of Services</a>
             <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">
               <img src={Vector} />
             </a>
