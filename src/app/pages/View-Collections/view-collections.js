@@ -9,7 +9,7 @@ const ViewCollection = () => {
         <div>
          <Header />
          <section class="bg-gray-200">
-         <div class="w-4/5 flex flex-row mx-auto">
+         <div class="max-w-screen-2xl lg:w-11/12 flex flex-row mx-auto">
          <div class="w-1/2 mx-auto my-auto">
          <h1 class="text-purple-800 text-4xl font-bold">Create or Monitor</h1>
          <h1 class="text-3xl">NFT Collections</h1>
@@ -20,14 +20,14 @@ const ViewCollection = () => {
          </div>
          </section>
          <section>
-         <div class="w-4/5 mx-auto">
+         <div class="max-w-screen-2xl lg:w-11/12 mx-auto">
          <p class="text-md my-5">You have no project yet, create one to get started.</p>
          <a href="/create-collections"><button class="text-sm mb-6 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded">Create new NFT Collection</button></a>
          </div>
          </section>
-         <section>
-         <div class="w-4/5 flex felx-row mx-auto">
-         <div class="w-1/4 rounded-xl p-4 shadow-xl">
+         <section class="max-w-screen-2xl lg:w-11/12 mx-auto">
+         <div class=" flex felx-wrap justify-evenly">
+         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
          <div class="block">
          <img src={view1} />
          </div>
@@ -35,7 +35,7 @@ const ViewCollection = () => {
          <h3>Emoji Collections</h3><p class="bg-cyan-500 rounded-md text-white px-2 text-sm self-center">In progress</p>
          </div>
          </div>
-         <div class="w-1/4 rounded-xl p-4 shadow-xl">
+         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
          <div class="block">
          <img src={view2} />
          </div>
@@ -43,7 +43,7 @@ const ViewCollection = () => {
          <h3>Emoji Collections</h3><p class="bg-purple-800 rounded-md text-white px-2 text-sm self-center">Deployed</p>
          </div>
          </div>
-         <div class="w-1/4 rounded-xl p-4 shadow-xl">
+         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
          <div class="block">
          <img src={view3} />
          </div>
@@ -51,7 +51,7 @@ const ViewCollection = () => {
          <h3>Emoji Collections</h3><p class="bg-cyan-500 rounded-md text-white px-2 text-sm self-center">In progress</p>
          </div>
          </div>
-         <div class="w-1/4 rounded-xl p-4 shadow-xl">
+         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
          <div class="block">
          <img src={view4} />
          </div>
