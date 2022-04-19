@@ -67,13 +67,13 @@ export default function ButtonAppBar() {
 
       <Header />
       <section class="text-gray-600 body-font">
-        <div class="w-full flex flex-row">
-          <div class="ml-24  pl-24 pr-24 mx-auto my-auto">
+        <div class="max-w-screen-2xl mx-auto flex flex-row">
+          <div class="pl-16 mx-auto my-auto">
             <h2 class="title-font  text-6xl mb-4 font-medium text-gray-900">
                 Create and Deploy
                 NFT Collections without coding
             </h2>
-            <p className="mb-8 leading-relaxed text-lg">
+            <p className="mb-8 text-lg leading-relaxed">
                 Generate, deploy, and trade NFT collections without writing any line of code. All in a matter of minutes!
             </p>
             <div class="flex">
@@ -85,13 +85,13 @@ export default function ButtonAppBar() {
               </button></a>
             </div>
           </div>
-          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img class="w-full" alt="image" src={Section1img} />
+          <div class="w-full">
+            <img class="w-full items-stretch" alt="image" src={Section1img} />
           </div>
         </div>
       </section>
-      <section class="text-gray-600 bg-gray-200 body-font overflow-hidden">
-        <div class="lg:w-4/5 mx-auto flex flex-row">
+      <section class="text-gray-600 bg-gray-200 body-font">
+        <div class="max-w-screen-2xl lg:w-11/12 mx-auto flex flex-row">
           <div class="lg:w-1/2 w-full lg:pl-0 my-10 text-center">
             <img
               alt="ecommerce"
@@ -122,8 +122,8 @@ export default function ButtonAppBar() {
           </div>
         </div>
       </section>
-      <section class="text-gray-600 body-font overflow-hidden">
-        <div class="lg:w-4/5 mx-auto flex flex-row">
+      <section class="text-gray-600 body-font">
+        <div class="max-w-screen-2xl lg:w-11/12 mx-auto flex flex-row">
           <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mx-auto my-auto text-left">
             <h2 class="text-sm title-font text-blue-800 tracking-widest mt-4">
                 Integrated
@@ -140,7 +140,7 @@ export default function ButtonAppBar() {
 
               <a href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/marketplaces-sync" target="_blank">
                   <button
-                      className="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                      className="flex px-6 py-2 text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
                       Learn More
                   </button>
               </a>
@@ -154,8 +154,8 @@ export default function ButtonAppBar() {
           </div>
         </div>
       </section>
-      <section class="text-gray-600 body-font overflow-hidden">
-        <div class="lg:w-4/5 mx-auto flex flex-row">
+      <section class="text-gray-600 body-font">
+        <div class="max-w-screen-2xl lg:w-11/12 mx-auto flex flex-row">
           <div class="lg:w-1/2 md:w1/2 w-full lg:pl-0 text-center">
             <img
               alt="ecommerce"
@@ -184,8 +184,8 @@ export default function ButtonAppBar() {
           </div>
         </div>
       </section>
-      <section class="text-gray-600 body-font overflow-hidden">
-        <div class="lg:w-4/5 mx-auto flex flex-row">
+      <section class="text-gray-600 body-font">
+        <div class="max-w-screen-2xl lg:w-11/12 mx-auto flex flex-row">
           <div class="lg:w-1/2 w-full lg:pl-0 lg:py-6 mx-auto my-auto text-left">
             <h2 class="text-sm title-font text-pink-500 tracking-widest mt-4">
                 Customizable
@@ -214,7 +214,8 @@ export default function ButtonAppBar() {
           </div>
         </div>
       </section>
-      <section class="text-gray-600 bg-gray-200 body-font overflow-hidden">
+      <section class="text-gray-600 bg-gray-200 body-font">
+      <div class="max-w-screen-2xl lg:w-11/12 px-5 py-24 mx-auto">
         <h2 class="text-md title-font text-center text-blue-800 tracking-widest mt-4">
           Fully Featured
         </h2>
@@ -222,7 +223,7 @@ export default function ButtonAppBar() {
 
         <h2 class="text-center font-extrabold text-xl">Everything you need</h2>
 
-        <div class="md:w-4/5 px-5 py-24 mx-auto">
+        
           <div class="flex flex-wrap text-left">
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class="border-2 bg-white p-6 rounded-lg overflow-hidden">
@@ -359,14 +360,15 @@ export default function ButtonAppBar() {
           </div>
         </div>
       </section>
-      <section class="text-gray-600 body-font overflow-hidden">
+      <section class="text-gray-600 body-font">
+       <div class="max-w-screen-2xl lg:w-11/12 mx-auto my-20">
         <h2 class="text-md title-font text-center text-blue-800 tracking-widest mt-4">
           Pricing
         </h2>
         <hr class="w-10 my-2 text-xl mx-auto border-blue-800"></hr>
 
         <h2 class="text-center font-extrabold text-xl">Use for FREE</h2>
-        <div class="md:w-4/5 px-5 py-24 mx-auto flex flex-grow">
+          <div class="flex flex-row">
           <div class="md:w-1/2 m-4 shadow-lg">
             <div class="bg-purple-800 rounded-t-xl h-20 relative flex justify-center items-end">
             <div class="rounded-full bg-white h-16 w-16 p-3 -mb-8">
@@ -414,10 +416,11 @@ export default function ButtonAppBar() {
               </div>
             </div>
           </div>
+          </div>
         </div>
       </section>
-      <section class="text-gray-600 bg-gray-200 body-font overflow-hidden">
-      <div class="md:w-4/5 px-5 flex flex-row py-24 mx-auto">
+      <section class="text-gray-600 bg-gray-200 body-font">
+      <div class="max-w-screen-2xl lg:w-11/12 px-5 flex flex-row py-24 mx-auto">
           <div class="md:w-1/2 m-4">
           <h2 class="text-4xl font-bold">Ready to get started?</h2>
           <p class="text-md leading-8 mt-3">Get your NFT collections done and start trading </p>
@@ -428,8 +431,8 @@ export default function ButtonAppBar() {
           </div>
       </div>
       </section>
-      <section class="text-gray-600 body-font overflow-hidden">
-      <div class="md:w-4/5 px-4 flex flex-row mx-auto">
+      <section class=" text-gray-600 body-font">
+      <div class="max-w-screen-2xl lg:w-11/12 px-4 flex flex-row mx-auto">
           <div class="md:w-1/2 m-4">
           <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
             <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/" target="_blank">Guide</a>

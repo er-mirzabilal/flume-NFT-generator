@@ -22,8 +22,8 @@ const Header = () => {
     }
     return (
         <>
-                <header class="sticky top-0 z-10 text-gray-600 body-font shadow-lg md:px-5 bg-white">
-                <div class="container mx-auto flex flex-wrap p-5 sm:flex-row items-center">
+                <header class="sticky top-0 z-10 text-gray-600 body-font shadow-lg bg-white">
+                <div class="max-w-screen-2xl lg:w-11/12 mx-auto flex flex-wrap py-5 items-center">
                   <a href="/" class="flex title-font font-medium items-center text-gray-900 md:mb-0">
                     <img src={Logo} />
                   </a>
@@ -35,14 +35,14 @@ const Header = () => {
                   </nav>
                       {isAuthenticated ? (
                           <button
-                              className="inline-flex items-center text-white bg-cyan-500 border-0 py-1 px-3 focus:outline-none hover:bg-cyan-300 rounded text-base mt-4 sm:mt-0"
+                              className="inline-flex items-center px-3 py-1 mt-4 text-base text-white border-0 rounded bg-cyan-500 focus:outline-none hover:bg-cyan-300 sm:mt-0"
                           onClick={()=> setOpenWallet(true)}>
                              My Wallet
                           </button>
                       ):
                           (
                               <button
-                                  className="inline-flex items-center text-white bg-cyan-500 border-0 py-1 px-3 focus:outline-none hover:bg-cyan-300 rounded text-base mt-4 sm:mt-0"
+                                  className="inline-flex items-center px-3 py-1 mt-4 text-base text-white border-0 rounded bg-cyan-500 focus:outline-none hover:bg-cyan-300 sm:mt-0"
                               onClick={() => navigate('/login')}>
                                   Connect Wallet
                               </button>
