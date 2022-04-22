@@ -15,7 +15,9 @@ import {updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePrev
 import { useSelector, useDispatch } from 'react-redux'
 import CloseIcon from '@mui/icons-material/Close';
 import { useRef } from "react";
-
+import AddIcon from '@mui/icons-material/Add';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
 
 const CreateCollection = () => {
   const dispatch = useDispatch()
@@ -48,7 +50,7 @@ const CreateCollection = () => {
       <img src={imagePreview || Empty} class="w-full h-full" alt=""/>
       </div>
       <div class="flex flex-row justify-center py-5">
-      <button class="bg-cyan-500 p-2 rounded-lg mx-2 text-white">Randomize</button>
+      <button class="bg-cyan-500 py-2 px-5 rounded-lg mx-2 text-white"><ShuffleIcon/> Randomize</button>
       <a href="" class="self-center p-1 border border-black rounded-full"> i </a>
       </div>
       </div>
@@ -58,14 +60,14 @@ const CreateCollection = () => {
       <TextField  id="demo-helper-text-misaligned-no-helper" fullWidth  size="small" value={title} onChange={(e) => dispatch(updateTitle(e.target.value))}/>
       <lable class="text-md block my-2">Image Format:</lable>
       <div class="flex flex-row">
-      <TextField  id="demo-helper-text-misaligned-no-helper"  size="small" value={dimensionHeight} type="number" onChange={(e) => dispatch(updateDimensionHeight(e.target.value))}/>
+      <TextField  id="demo-helper-text-misaligned-no-helper"  placeholder='H' size="small"  type="number" onChange={(e) => dispatch(updateDimensionHeight(e.target.value))}/>
       <CloseIcon  class="self-center w-10"/>
-      <TextField  id="demo-helper-text-misaligned-no-helper"  size="small" value={dimensionWidth} type="number" onChange={(e) => dispatch(updateDimensionWidth(e.target.value))}/>
+      <TextField  id="demo-helper-text-misaligned-no-helper"  size="small" placeholder='L'  type="number" onChange={(e) => dispatch(updateDimensionWidth(e.target.value))}/>
       </div>
       
       <lable class="text-md block my-2">Enter the number of NFT to mint:</lable>
       <TextField  id="demo-helper-text-misaligned-no-helper" fullWidth size="small" value={noOfNft} onChange={(e) => dispatch(updateNoOfNft(e.target.value))} />
-      <a href="/preview-images"><button class="block text-sm mt-2 mb-5 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded">Generate Collections</button></a>
+      <a href="/preview-images"><button class="block text-sm mt-2 mb-5 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"> <AutorenewIcon />Generate Collections</button></a>
       </form>
       </div>
       </div>
@@ -101,8 +103,10 @@ const CreateCollection = () => {
       <div className="flex my-3">
               <div class="w-96 h-auto self-center relative m-2">
               <img class="w-full h-full" src={blankimg} />
-              <button class=" absolute -bottom-3 left-2/4 -translate-x-2/4 w-fit text-sm text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded" onClick={()=> imageInputRef.current.click()}>Add Image</button>
-              <TextField type='file' id='file'  style={{display: 'none'}} ref={imageInputRef} onChange={(e)=> uploadImage(e, index)}/>
+              <button class=" absolute -bottom-3 left-2/4 -translate-x-2/4 w-fit text-sm text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded" onClick={()=> {
+                imageInputRef.current.click()}
+                }><AddIcon/> Add Image</button>
+              <input type="file" ref={imageInputRef} style={{display: 'none'}} onChange={(e)=> uploadImage(e, index)}  />
               </div>
               <div class="w-full m-2 flex flex-col justify-between text-sm">
               <p>Lorem jkj kddk  kldk dl k lkflfdk d dfkdfkd dk fdf dk dkfdk dkfkdfkd k fdk fdkfldkdk </p>
@@ -162,7 +166,7 @@ const CreateCollection = () => {
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-wrap mx-auto my-5">
       {renderLayers()}
       <div class="w-1/3  m-2 p-3">
-      <button class="bg-cyan-500 text-lg p-2 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} >Add new Layer</button>
+      <button class="bg-cyan-500 text-lg py-2 px-5 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} > <AddIcon /> Add new Layer</button>
 
       </div>
       
