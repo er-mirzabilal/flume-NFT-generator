@@ -10,6 +10,8 @@ import {CircularProgress, Dialog, DialogContent, DialogTitle} from "@mui/materia
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import CloseIcon from '@mui/icons-material/Close';
+import {useWeb3React} from '@web3-react/core'
+import { connectors } from '../../utils/connectors';
 
 export default function Login(props){
     const {
@@ -21,16 +23,39 @@ export default function Login(props){
         enableWeb3,
         Moralis,
     } = useMoralis();
+    const {active, activate, deactivate, library} = useWeb3React();
+
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
-    async  function connectMetaMask(){
-        if(!isAuthenticated) {
+    // async  function connectMetaMask(){
+    //     if(!isAuthenticated) {
+    //         setLoading(true);
+    //         await authenticate({signingMessage: "Hello Mirza"});
+    //         setLoading(false);
+    //         navigate('/view-collections');
+    //     }
+    // }
+    async function connectMetaMask(){
+        console.log('is conntected', active);
+        if(!active) {
             setLoading(true);
-            await authenticate({signingMessage: "Hello Mirza"});
+            await activate(connectors.injected);
+            console.log('---', library);
             setLoading(false);
-            navigate('/view-collections');
         }
+        
     }
+    async function signMessage(signer){
+        const message = signer.signingMessage('hello');
+        console.log('singer',signer, message);
+    }
+    useEffect(  ()=>{
+        if(library){
+            const signer = library.getSigner();
+            signMessage(signer);
+          
+        }
+    },[library])
     async function authWalletConnect() {
         const user =  await authenticate({
             provider: "walletconnect",
@@ -102,7 +127,7 @@ export default function Login(props){
             <div class="flex-grow px-5"><h4 class="font-bold text-lg">Metamask</h4><p class="font-light">Connect your browser wallet</p></div>
             <div class="flex item-center"><button> <ArrowForwardIosIcon  /></button></div>
             </div>
-            <div class="container flex flex-row p-7 m-1 border-2 border-gray-200 cursor-pointer" onClick={() => authWalletConnect()}>
+            <div class="container flex flex-row p-7 m-1 border-2 border-gray-200 cursor-pointer" onClick={()=>{}}>
             <div class="w-fit"><img src={login2img} /></div>
             <div class="flex-grow px-5"><h4 class="font-bold text-lg">Connect Wallet</h4><p class="font-light">Connect your browser wallet</p></div>
                 <div className="flex item-center">
