@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    title: '',
+    title: 'Untitled',
     dimensionHeight: 500,
     dimensionWidth: 500,
     noOfNft: 10,
-    imagePreview: null,
     layers: []
 }
 
@@ -77,8 +76,10 @@ export const counterSlice = createSlice({
         }
     },
     addLayerItem: (state, action) => {
+        console.log('add layer item');
         var layers = [...state.layers];
-        const {index, imageUrl, imageSourse} = action.payload;
+        const {index, imageUrl} = action.payload;
+        console.log(index, imageUrl, '-------');
         if(layers[index]){
                  var targetLayer = layers[index];
                 targetLayer = {
@@ -86,14 +87,36 @@ export const counterSlice = createSlice({
                     items: [
                         ...targetLayer.items,
                         {
-                            imageName: '',
-                            rarity: null,
+                            name: '',
+                            rarity: 1,
                             imageUrl,
-                            imageSourse
                         }
                     ]
                 }
                 layers[index] = targetLayer;
+                state.layers = layers;
+            }
+    },
+
+    updateLayerItem: (state, action) => {
+        console.log('aaaaa');
+        var layers = [...state.layers];
+        const {layerIndex, index, key, value} = action.payload;
+        console.log('sda', layerIndex,index);
+        if(layers[layerIndex]){
+                 let targetLayer = layers[layerIndex];
+                 const targetLayerItem = targetLayer.items;
+                 console.log('targetLayerItem', targetLayerItem[index]);
+                 targetLayerItem[index] = {
+                    ...targetLayerItem[index],
+                    [key]: value
+                 }
+                 console.log(targetLayerItem, 'item');
+                targetLayer = {
+                    ...targetLayer,
+                    items:  targetLayerItem
+                }
+                layers[layerIndex] = targetLayer;
                 state.layers = layers;
             }
     },
@@ -102,6 +125,6 @@ export const counterSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,updateNoOfNft, updateLayers, addLayer, deleteLayer,updateLayerName, moveLayer, addLayerItem, reset } = counterSlice.actions
+export const { updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,updateNoOfNft, updateLayers, addLayer, deleteLayer,updateLayerName, moveLayer, addLayerItem ,updateLayerItem, reset } = counterSlice.actions
 
 export default counterSlice.reducer
