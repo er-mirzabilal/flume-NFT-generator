@@ -1,14 +1,13 @@
 import Logo from "../../../../assets/images/Logo.png";
 import Vector from "../../../../assets/images/Vector.svg";
-import {useMoralis} from "react-moralis";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import CustomizedDialogs from "../Model/CustomizedDialogs";
 import Typography from "@mui/material/Typography";
-import {Logout} from "@mui/icons-material";
+import { useWeb3React } from "@web3-react/core";
 
 const Header = () => {
-    const {isAuthenticated, user, logout} = useMoralis()
+    const {active, deactivate, account} = useWeb3React()
     const navigate = useNavigate();
     const [openWallet, setOpenWallet] = useState(false);
 
@@ -16,7 +15,7 @@ const Header = () => {
         return (
             <div className='m-16'>
             <Typography> Address</Typography>
-             <Typography >  {user?.attributes?.ethAddress || 'N/A'} </Typography>
+             <Typography >  {account|| 'N/A'} </Typography>
             </div>
     )
     }
@@ -28,12 +27,12 @@ const Header = () => {
                     <img src={Logo} />
                   </a>
                   <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
-                    <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank">Guide</a>
+                    <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank" rel="noreferrer">Guide</a>
                     <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">
                       <img src={Vector} />
                     </a>
                   </nav>
-                      {isAuthenticated ? (
+                      {active ? (
                           <button
                               className="inline-flex items-center px-3 py-1 mt-4 text-base text-white border-0 rounded bg-cyan-500 focus:outline-none hover:bg-cyan-300 sm:mt-0"
                           onClick={()=> setOpenWallet(true)}>
@@ -51,9 +50,9 @@ const Header = () => {
 
                 </div>
               </header>
-            {isAuthenticated && (
+            {active && (
                 <CustomizedDialogs open={openWallet} handleClose={()=> setOpenWallet(false)} title='My wallet' content={renderWalletContent()} primaryLabel= 'Logout' primaryAction={()=> {
-                    logout();
+                    deactivate();
                     navigate('/');
                 }} />
             )}

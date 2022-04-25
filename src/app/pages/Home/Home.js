@@ -1,18 +1,6 @@
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import { useMoralis } from "react-moralis";
-import Header from '../Components/Header/Header';
-import Vector from "../../../assets/images/Vector.svg";
-import Section1img from "../../../assets/images/Section1-img.png";
-import Section2img from "../../../assets/images/Section2-img.png";
-import Section3img from "../../../assets/images/Section3-img.png";
-import Section4img from "../../../assets/images/Section4-img.png";
-import Section5img from "../../../assets/images/Section5-img.png";
+import Ethereum from '../../../assets/images/ethereum.png';
 import featured1img from "../../../assets/images/featured-icons/featured1-img.png";
 import featured2img from "../../../assets/images/featured-icons/featured2-img.png";
 import featured3img from "../../../assets/images/featured-icons/featured3-img.png";
@@ -21,49 +9,19 @@ import featured5img from "../../../assets/images/featured-icons/featured5-img.pn
 import featured6img from "../../../assets/images/featured-icons/featured6-img.png";
 import featured7img from "../../../assets/images/featured-icons/featured7-img.png";
 import featured8img from "../../../assets/images/featured-icons/featured8-img.png";
-import Ethereum from '../../../assets/images/ethereum.png';
 import Polygon from '../../../assets/images/polygon-matic-logo.png';
+import Section1img from "../../../assets/images/Section1-img.png";
+import Section2img from "../../../assets/images/Section2-img.png";
+import Section3img from "../../../assets/images/Section3-img.png";
+import Section4img from "../../../assets/images/Section4-img.png";
+import Section5img from "../../../assets/images/Section5-img.png";
+import Vector from "../../../assets/images/Vector.svg";
+import Header from '../Components/Header/Header';
 import "./Home.css";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 export default function ButtonAppBar() {
-  const {
-    authenticate,
-    isAuthenticated,
-    isAuthenticating,
-    user,
-    account,
-    logout,
-  } = useMoralis();
-  const login = async () => {
-    console.log("login");
-    if (
-      typeof window.ethereum === "undefined" ||
-      typeof window.web3 === "undefined"
-    ) {
-      // Web3 browser user detected. You can now use the provider.
-      console.log("sada");
-      window.alert("Please install metamast");
-    }
-    if (!isAuthenticated) {
-      await authenticate({ signingMessage: "Log in using Moralis" })
-        .then(function (user) {
-          console.log("logged in user:", user);
-          console.log(user.get("ethAddress"));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  };
-  const logOut = async () => {
-    await logout();
-    console.log("logged out");
-  };
 
   return (
     <div>
-      {/*<button onClick={login}>Moralis Metamask Login</button>*/}
-      {/*<button onClick={logOut} disabled={isAuthenticating}>Logout</button>*/}
 
       <Header />
       <section class="text-gray-600 body-font">
@@ -114,7 +72,7 @@ export default function ButtonAppBar() {
             <p class="leading-relaxed mb-3">
                 No coding required, at all. Create your layers, import your assets, click Generate and you are done!
             </p>
-              <a href="https://docs-flume.gitbook.io/flume/what-is-flume/general-flow" target="_blank">
+              <a href="https://docs-flume.gitbook.io/flume/what-is-flume/general-flow" target="_blank" rel="noreferrer">
             <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                Learn More
             </button>
@@ -138,7 +96,7 @@ export default function ButtonAppBar() {
                 Once minted, the NFTs will be instantly available in the most famous NFT marketplaces and ready for sale
             </p>
 
-              <a href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/marketplaces-sync" target="_blank">
+              <a href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/marketplaces-sync" target="_blank" rel="noreferrer">
                   <button
                       className="flex px-6 py-2 text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">
                       Learn More
@@ -176,7 +134,7 @@ export default function ButtonAppBar() {
             <p class="leading-relaxed mb-3">
                 Configure certain attributes to be more rare than others, set the minting price and deploy your collection to the blockchain.
             </p>
-              <a href="https://docs-flume.gitbook.io/flume/guides/uploading-content" target="_blank">
+              <a href="https://docs-flume.gitbook.io/flume/guides/uploading-content" target="_blank" rel="noreferrer">
             <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
               Learn More
             </button>
@@ -199,7 +157,7 @@ export default function ButtonAppBar() {
                 Embed a minting button linked to your collection to any website. Customize it as you want and allow people to mint directly from there.
 
             </p>
-              <a href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/embedding-into-your-website" target="_blank">
+              <a href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/embedding-into-your-website" target="_blank" rel="noreferrer">
                   <button class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                   Learn More
                 </button>
@@ -435,8 +393,8 @@ export default function ButtonAppBar() {
       <div class="max-w-screen-2xl lg:w-11/12 px-4 flex flex-row mx-auto">
           <div class="md:w-1/2 m-4">
           <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
-            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/" target="_blank">Guide</a>
-            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/flume/terms-of-service" target="_blank">Terms of Services</a>
+            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/" target="_blank" rel="noreferrer">Guide</a>
+            <a class="mr-5 hover:text-gray-900 hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/flume/terms-of-service" target="_blank" rel="noreferrer">Terms of Services</a>
             <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">
               <img src={Vector} />
             </a>

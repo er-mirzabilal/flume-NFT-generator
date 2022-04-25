@@ -1,16 +1,11 @@
-
-import { useMoralis } from "react-moralis";
 import {Outlet, useNavigate} from "react-router-dom";
-import Login from "../app/pages/Login/Login";
-
+import {useWeb3React} from '@web3-react/core'
 
 export default function ProtectedRoute({ redirectUrl = '/login'}){
+    const {active}  = useWeb3React()
     let navigate  = useNavigate();
-    const {
-        isAuthenticated,
-        user,
-    } = useMoralis();
-    return (isAuthenticated && user) ? <Outlet /> : navigate(redirectUrl)
+    
+    return (active) ? <Outlet /> : navigate(redirectUrl)
     // return    <Outlet /> 
 
 }

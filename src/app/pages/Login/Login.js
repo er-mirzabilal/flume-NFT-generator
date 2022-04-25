@@ -1,64 +1,43 @@
-import React, {useEffect, useState} from 'react'
-import { useMoralis } from "react-moralis";
-import Logo from "../../../assets/images/Logo.png";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CloseIcon from '@mui/icons-material/Close';
+import { CircularProgress, Dialog, DialogContent, DialogTitle } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import { useWeb3React } from '@web3-react/core';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import login1img from "../../../assets/images/login/login1-img.png";
 import login2img from "../../../assets/images/login/login2-img.png";
 import login3img from "../../../assets/images/login/login3-img.png";
-import {useNavigate} from "react-router-dom";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {CircularProgress, Dialog, DialogContent, DialogTitle} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
-import CloseIcon from '@mui/icons-material/Close';
+import Logo from "../../../assets/images/Logo.png";
+import { connectors } from '../../utils/connectors';
 
 export default function Login(props){
-    const {
-        authenticate,
-        isWeb3Enabled,
-        isAuthenticated,
-        logout,
-        user,
-        enableWeb3,
-        Moralis,
-    } = useMoralis();
+
+    const {active, activate, deactivate, library} = useWeb3React();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
-    async  function connectMetaMask(){
-        if(!isAuthenticated) {
-            setLoading(true);
-            await authenticate({signingMessage: "Hello Mirza"});
-            setLoading(false);
-            navigate('/view-collections');
-        }
-    }
-    async function authWalletConnect() {
-        const user =  await authenticate({
-            provider: "walletconnect",
-            mobileLinks: [
-              "metamask",
-              "trust",
-              // "rainbow",
-              // "argent",
-              // "imtoken",
-              // "pillar",
-            ],
-            signingMessage: "Welcome!",
-        });
-        console.log('user', user);
-        navigate('/view-collections');
-    }
-    useEffect(() => {
-        if (!isWeb3Enabled && isAuthenticated) {
-            enableWeb3({ provider: "walletconnect"});
-            console.log("web3 activated");
-        }
-    }, [isWeb3Enabled, isAuthenticated, enableWeb3]);
 
-    document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "hidden") {
-            window.localStorage.removeItem("WALLETCONNECT_DEEPLINK_CHOICE");
+    async function signMessage (signer){
+        await signer.signMessage('hello');
+        setLoading(false);
+        navigate('/view-collections')
+    }
+
+    useEffect( ()=>{
+        if(library){
+            const signer = library.getSigner();
+            signMessage(signer);
         }
-    });
+    },[library])
+
+
+    async function connectMetaMask(){
+        if(!active) {
+            setLoading(true);
+            await activate(connectors.injected);
+        }
+        
+    }
     const renderLoginConfirmation = () => {
         return (
                 <Dialog onClose={()=>setLoading(false)} open={loading}>
@@ -102,7 +81,7 @@ export default function Login(props){
             <div class="flex-grow px-5"><h4 class="font-bold text-lg">Metamask</h4><p class="font-light">Connect your browser wallet</p></div>
             <div class="flex item-center"><button> <ArrowForwardIosIcon  /></button></div>
             </div>
-            <div class="container flex flex-row p-7 m-1 border-2 border-gray-200 cursor-pointer" onClick={() => authWalletConnect()}>
+            <div class="container flex flex-row p-7 m-1 border-2 border-gray-200 cursor-pointer" onClick={()=>{}}>
             <div class="w-fit"><img src={login2img} /></div>
             <div class="flex-grow px-5"><h4 class="font-bold text-lg">Connect Wallet</h4><p class="font-light">Connect your browser wallet</p></div>
                 <div className="flex item-center">
