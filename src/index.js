@@ -11,7 +11,6 @@ import {ethers} from 'ethers';
 import {Web3ReactProvider} from '@web3-react/core'
 
 const getLibrary = (provider) => {
-  console.log('library', provider);
   return new ethers.providers.Web3Provider(provider);
 }
 ReactDOM.render(

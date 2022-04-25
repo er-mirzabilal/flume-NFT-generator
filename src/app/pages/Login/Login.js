@@ -39,19 +39,26 @@ export default function Login(props){
         console.log('is conntected', active);
         if(!active) {
             setLoading(true);
-            await activate(connectors.injected);
-            console.log('---', library);
+           const data = await activate(connectors.injected);
+            console.log('---', library, data);
             setLoading(false);
         }
         
     }
-    async function signMessage(signer){
-        const message = signer.signingMessage('hello');
-        console.log('singer',signer, message);
+    async function signMessage (signer){
+        const message = await signer.signMessage('hello');
+        console.log('signature', message);
     }
-    useEffect(  ()=>{
+    const getSigner = async (library) => {
+        return new Promise((resolve, reject) => {
+            
+        })
+    }
+    useEffect( ()=>{
+        console.log('library useffect', library);
         if(library){
             const signer = library.getSigner();
+            console.log('signer', signer);
             signMessage(signer);
           
         }
