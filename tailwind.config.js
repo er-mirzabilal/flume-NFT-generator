@@ -3,6 +3,17 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    colors: {
+      'primary': '#7C2AE8',
+      'secondary': '#00C4CC',
+      'third': '#183B56',
+      'white': '#FFFFFF',
+      'gray': '#ECF1F9',
+    },
+    fontFamily: {
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+    },
     extend: {
       backgroundImage: {
         'featured1': "url('/src/assets/images/featured-icons/featured1-img.png')",
