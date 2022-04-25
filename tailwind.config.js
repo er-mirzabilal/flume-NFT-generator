@@ -3,18 +3,18 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    colors: {
-      'primary': '#7C2AE8',
-      'secondary': '#00C4CC',
-      'third': '#183B56',
-      'white': '#FFFFFF',
-      'gray': '#ECF1F9',
-    },
-    fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
-    },
+    
     extend: {
+      colors: {
+        'primary': '#7C2AE8',
+        'secondary': '#00C4CC',
+        'third': '#183B56',
+        'white': '#FFFFFF',
+        'gray': '#ECF1F9',
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+       },
       backgroundImage: {
         'featured1': "url('/src/assets/images/featured-icons/featured1-img.png')",
         'featured2': "url('/src/assets/images/featured-icons/featured2-img.png')",
@@ -24,7 +24,7 @@ module.exports = {
         'featured6': "url('/src/assets/images/featured-icons/featured6-img.png')",
         'featured7': "url('/src/assets/images/featured-icons/featured7-img.png')",
         'featured8': "url('/src/assets/images/featured-icons/featured8-img.png')",
-        'login1': "url('/src/assets/images/login/bg-2.png')"
+        'login1': "url('/src/assets/images/login/bg-2.png')",
       }
     },
   },

@@ -28,21 +28,21 @@ const Header = () => {
                     <img src={Logo} />
                   </a>
                   <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
-                    <a class="mr-5 text-third hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank">Guide</a>
-                    <a class="mr-5 text-third hover:cursor-pointer">
+                    <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank">Guide</a>
+                    <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer">
                       <img src={Vector} />
                     </a>
                   </nav>
                       {isAuthenticated ? (
                           <button
-                              className="inline-flex items-center px-3 py-1 text-base text-white border-0 rounded bg-secondary focus:outline-secondary"
+                              className="inline-flex items-center px-3 py-1 text-base font-semibold text-white border-0 rounded bg-secondary focus:outline-secondary"
                           onClick={()=> setOpenWallet(true)}>
                              My Wallet
                           </button>
                       ):
                           (
                               <button
-                                  className="inline-flex items-center px-3 py-1 text-base text-white border-0 rounded bg-secondary focus:outline-secondary sm:mt-0"
+                                  className="inline-flex items-center px-3 py-1 text-base font-semibold text-white border-0 rounded bg-secondary focus:outline-secondary sm:mt-0"
                               onClick={() => navigate('/login')}>
                                   Connect Wallet
                               </button>
