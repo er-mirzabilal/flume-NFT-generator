@@ -68,15 +68,14 @@ export default function ButtonAppBar() {
       <Header />
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl mx-auto flex sm:flex-nowrap flex-wrap">
-          <div class="pl-6 pr-6 sm:pr-10 md:pl-16 sm:py-0 py-10 self-center">
+          <div class="pl-6 sm:pl-10 pr-6 sm:pr-10 sm:py-0 py-10 self-center">
             <h2 class="xl:text-7xl lg:text-5xl md:text-4xl text-3xl lg:mb-4 mb-1 font-semibold text-third">
-              Create NFT
+            Create and Deploy<br></br> NFT Collections<br></br> without coding
             </h2>
-            <h2 class="xl:text-7xl lg:text-5xl md:text-4xl text-3xl lg:mb-4 mb-1 font-semibold text-third">
-            Collections Easily
-            </h2>
-            <p className="my-3 text-xl font-normal text-third sm:text-2xl md:my-10">
-            Create NFT collections, tradable on OpenSea & other marketplaces without writing a single line of code
+            
+            <p className="my-3 text-xl font-normal text-third sm:text-2xl lg:my-10">
+            Generate, deploy, and trade NFT collections without writing any line of code. 
+            <br></br>All in a matter of minutes!
             </p>
             <div class="flex no-wrap">
               <a href="#">
@@ -116,12 +115,12 @@ export default function ButtonAppBar() {
             <hr class="w-6 mb-3 text-2xl font-normal border-primary" />
             </div>
             <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
-            The easiest way to {" "}
+              The simplest way to {" "}
               <span class="text-secondary">
                 {" "}
-                create NFT collectibles
+                generate and deploy NFT
               </span>{" "}
-               on the blockchain
+              collections on the blockchain
             </h1>
 
             <p class="text-third font-normal text-xl md:text-2xl mb-3">
@@ -143,19 +142,19 @@ export default function ButtonAppBar() {
           <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-evenly">
           <div>
           <h2 class="text-2xl font-normal text-primary">
-              Compatible
+            Integrated
             </h2>
             <hr class="w-6 mb-3 text-2xl font-normal border-primary" />
           </div>
             
             <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
-            Sell your NFTs on marketplaces like{" "}
+            Trade your NFTs on famous marketplaces like{" "}
               <span class="text-secondary">OpenSea</span>
             </h1>
 
             <p class="text-third font-normal text-xl md:text-2xl mb-3">
-            Once minted, NFTs can be traded on opensea and other marketplaces.
-             Since you own your contract, you keep the royalties.
+            Once minted, the NFTs will be instantly available in the most
+            famous NFT marketplaces and ready for sale.
             </p>
 
             <a
@@ -195,13 +194,13 @@ export default function ButtonAppBar() {
           </div>
             
             <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
-              Configure Rarity,{" "}
-              <span class="text-secondary">Mint Fees</span>  and more
+            Configure Rarity,{" "}
+              <span class="text-secondary">Mint Price</span>  <br></br>and <span class="font-bold">Deploy</span> to Blockchain
             </h1>
 
             <p class="text-third font-normal text-xl md:text-2xl mb-3">
-            Configure how rare each layer of an NFT is. Add custom metadata. 
-            Set your own minting fees, and perform air drops easily.
+            Configure certain attributes to be more rare than others, 
+            set the minting price and deploy your collection to the blockchain.
             </p>
             <a
               href="https://docs-flume.gitbook.io/flume/guides/uploading-content"
@@ -219,19 +218,18 @@ export default function ButtonAppBar() {
           <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-evenly">
           <div>
           <h2 class="text-2xl font-normal text-primary">
-              Fast
+          Customizable
             </h2>
             <hr class="w-6 mb-3 text-2xl font-normal border-primary" />
           </div>
             
             <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
-              <span class="text-secondary"> Ready-made </span> minting pages
+              <span class="text-secondary"> Pre built </span>  Minting Button
             </h1>
 
             <p class="text-third font-normal text-xl md:text-2xl mb-3">
-            Beautiful minting pages let people mint your NFTs. 
-            You can choose from multiple minting strategies including random assignment, 
-            and individual selection.
+            Embed a minting button linked to your collection to any website.<br></br> 
+            Customize it as you want and allow people to mint<br></br> directly from there.
             </p>
             <a
               href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/embedding-into-your-website"
@@ -253,124 +251,123 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 bg-gray body-font">
         <div class="max-w-screen-2xl w-11/12 py-12 mx-auto">
-          <h2 class="text-md title-font text-center text-primary tracking-widest mt-4">
+          <h2 class="text-base font-normal title-font text-center text-primary tracking-widest mt-4">
             Fully Featured
           </h2>
-          <hr class="w-10 my-2 text-xl mx-auto border-primary"></hr>
+          <hr class="w-10 my-2 text-base mx-auto border-primary"></hr>
 
-          <h2 class="text-center text-third font-extrabold text-xl">
+          <h2 class="text-center text-third font-medium text-4xl mb-10">
             Everything you need
           </h2>
 
           <div class="flex flex-wrap text-left">
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
+              <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                <div class="max-h-10 max-w-fit">
                     <img src={featured1img} />
-                  </div>
-                  <div class="container">
+                    </div>
                     <h3 class="font-bold text-md mb-3 text-third">
                       Super Simple (no code)
                     </h3>
                     <p class="text-sm text-third">
                       Quickly generate your NFT collection without coding
                     </p>
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured1img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured1 bg-no-repeat bg-right-bottom opacity-10"></div>
                 </div>
               </div>
             </div>
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
+              <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                  <div class="max-h-10 max-w-fit">
                     <img src={featured2img} />
                   </div>
-                  <div class="container">
                     <h3 class="font-bold text-md mb-3 text-third">Own Your Contract</h3>
                     <p class="text-sm text-third">
                       Create NFT collections with ease, using the all-in-one
                       generator
                     </p>
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured2img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured2 bg-no-repeat bg-right-bottom opacity-10"></div>
                 </div>
               </div>
             </div>
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
+              <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                  <div class="">
                     <img src={featured3img} />
                   </div>
-                  <div class="container">
                     <h3 class="font-bold text-md mb-3 text-third">Set Traits Rarity</h3>
                     <p class="text-sm text-third">
                       Configure how rare each trait of your NFT should be
                     </p>
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured3img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured3 bg-no-repeat bg-right-bottom opacity-10"></div>
                 </div>
               </div>
             </div>
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
+              <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                  <div class="">
                     <img src={featured4img} />
                   </div>
-                  <div class="container">
                     <h3 class="font-bold text-md mb-3 text-third">IPFS File Hosting</h3>
                     <p class="text-sm text-third">
                       Create NFT collections with ease, using the all-in-one
                       generator
                     </p>
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured4img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured4 bg-no-repeat bg-right-bottom opacity-10"></div>
                 </div>
               </div>
             </div>
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
-                    <img src={featured5img} />
+              <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                  <div class="w-10">
+                    <img src={featured5img} class="w-full"/>
                   </div>
-                  <div class="container">
                     <h3 class="font-bold text-md mb-3 text-third">Generate Metadata</h3>
                     <p class="text-sm text-third">
                       Generate automatically metadata for your NFTs
                     </p>
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured5img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured5 bg-no-repeat bg-right-bottom opacity-10"></div>
                 </div>
               </div>
             </div>
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
-                    <img src={featured6img} />
+              <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                  <div class="w-10">
+                    <img src={featured6img} class="w-full"/>
                   </div>
-                  <div class="container">
                     <h3 class="font-bold text-md mb-3 text-third">Lazy Minting</h3>
                     <p class="text-sm text-third">
                       No upfront minting gas fee for you. Defer them to your
                       buyers
                     </p>
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured6img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured6 bg-no-repeat bg-right-bottom opacity-10"></div>
                 </div>
               </div>
             </div>
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
-                    <img src={featured7img} />
+              <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                  <div class="w-10">
+                    <img src={featured7img} class="w-full"/>
                   </div>
-                  <div class="container">
                     <h3 class="font-bold text-md mb-3 text-third">
                       Embeddable Minting Button
                     </h3>
@@ -378,25 +375,27 @@ export default function ButtonAppBar() {
                       Embed your minting button into any website by using our
                       ready-made code snippet
                     </p>
+                  
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured7img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured7 bg-no-repeat bg-right-bottom opacity-10"></div>
                 </div>
               </div>
             </div>
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
-              <div class=" bg-white p-6 rounded-lg overflow-hidden">
-                <div class="container">
-                  <div class="w-10 h-10 mb-4">
-                    <img src={featured8img} />
+              <div class="bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
+                <div class="flex flex-col justify-evenly">
+                  <div class="w-10">
+                    <img src={featured8img} class="w-full"/>
                   </div>
-                  <div class="container">
                     <h3 class="font-bold text-md mb-3 text-third">Anonymous</h3>
                     <p class="text-sm text-third">
                       No email address, no names, no private info required
                     </p>
+                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <img src={featured8img}></img>
                   </div>
-                  <div class="-mr-7 -mb-7 h-16 bg-featured8 bg-no-repeat bg-right-bottom opacity-10"></div>
-                </div>
+                  </div>
               </div>
             </div>
           </div>
@@ -404,12 +403,12 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl w-11/12 py-12 mx-auto">
-          <h2 class="text-md title-font text-center text-primary tracking-widest mt-4">
+          <h2 class="text-base font-normal text-center text-primary tracking-widest mt-4">
             Pricing
           </h2>
-          <hr class="w-10 my-2 text-xl mx-auto border-primary"></hr>
+          <hr class="w-10 my-2 text-base mx-auto border-primary"></hr>
 
-          <h2 class="text-center font-extrabold text-third text-xl">Use for FREE</h2>
+          <h2 class="text-center font-medium text-third text-4xl mb-10">Use for FREE</h2>
           <div class="flex flex-wrap sm:flex-nowrap justify-between">
             <div class="m-2 shadow-lg w-full">
               <div class="bg-primary rounded-t-xl h-20 relative flex justify-center items-end">
@@ -420,24 +419,26 @@ export default function ButtonAppBar() {
 
               <div class="bg-white rounded-b-xl py-5">
                 <div class="flex flex-row">
-                  <div class="p-5 self-center">
-                    <p class="text-third">Polygon</p>
-                    <h3 class="text-primary text-2xl">FREE</h3>
+                  <div class="p-5 font-semibold self-center">
+                    <p class="text-third text-2xl">Polygon</p>
+                    <h3 class="text-primary text-7xl">FREE</h3>
                   </div>
                   <div class="p-5 border-l-2 self-center">
-                    <ul class="list-disc text-lg">
-                      <li class="list-item list-none m-2 text-third">
+                    <ul class="list-disc font-normal text-lg">
+                      <li class=" list-none m-2 text-third flex">
                         {" "}
-                        <CheckCircleIcon fontSize="small" className="text-primary" /> FREE (just pay gas)
+                        <CheckCircleIcon fontSize="small" className="self-start m-1 text-primary" /> 
+                        <p class="ml-1">FREE (just pay gas)</p>
                       </li>
-                      <li class="list-item list-none m-2 text-third">
+                      <li class="flex list-none m-2 text-third">
                         {" "}
-                        <CheckCircleIcon fontSize="small" className="text-primary" />
-                        10% Minting fee on the initial sale
+                        <CheckCircleIcon fontSize="small" className="self-start m-1 text-primary" />
+                        <p class="ml-1">10% Minting fee on the initial sale</p>
                       </li>
-                      <li class="list-item list-none m-2 text-third">
+                      <li class="flex list-none m-2 text-third">
                         {" "}
-                        <CheckCircleIcon fontSize="small" className="text-primary" /> 1% royalty
+                        <CheckCircleIcon fontSize="small" className="self-start m-1 text-primary" /> 
+                        <p class="ml-1">1% royalty</p>
                       </li>
                     </ul>
                   </div>
@@ -452,22 +453,22 @@ export default function ButtonAppBar() {
               </div>
               <div class="bg-white rounded-b-xl py-5">
                 <div class="flex flex-row">
-                  <div class="p-5 self-center">
-                    <p class="text-third">Ethereum</p>
-                    <h3 class="text-secondary text-2xl m-0">0.02</h3>
-                    <h4 class="text-secondary text-base">ETH</h4>
+                  <div class="p-5 font-semibold self-center">
+                    <p class="text-third text-2xl">Ethereum</p>
+                    <h3 class="text-secondary text-6xl m-0">0.02</h3>
+                    <h4 class="text-secondary text-3xl">ETH</h4>
                   </div>
                   <div class="p-5 border-l-2 self-center">
-                    <ul class="list-disc text-lg">
-                      <li class="list-item list-none m-2 text-third">
+                    <ul class="list-disc font-normal text-lg">
+                      <li class="flex list-none m-2 text-third">
                         {" "}
-                        <CheckCircleIcon fontSize="small" className="text-secondary"/>
-                        0.02 ETH to add collection to blockchain + pay gas
+                        <CheckCircleIcon fontSize="small" className="self-start m-1 text-secondary"/>
+                        <p class="ml-1">0.02 ETH to add collection to blockchain + pay gas</p>
                       </li>
-                      <li class="list-item list-none m-2 text-third">
+                      <li class="flex list-none m-2 text-third">
                         {" "}
-                        <CheckCircleIcon fontSize="small" className="text-secondary" />
-                        9% Minting fee on the initial sale
+                        <CheckCircleIcon fontSize="small" className="self-start m-1 text-secondary" />
+                        <p class="ml-1">9% Minting fee on the initial sale</p>
                       </li>
                     </ul>
                   </div>
@@ -478,24 +479,24 @@ export default function ButtonAppBar() {
         </div>
       </section>
 
-      <section class=" bg-gray body-font">
-        <div class="max-w-screen-2xl w-11/12 mx-auto py-5 flex sm:justify-between justify-center sm:flex-nowrap flex-wrap">
-          <div class="m-2 text-third">
-            <h2 class="text-4xl font-bold">Ready to get started?</h2>
-            <p class="text-md leading-8 mt-3">
+      <section class="bg-gray body-font">
+        <div class="max-w-screen-2xl w-11/12 mx-auto py-14 flex sm:justify-between justify-center sm:flex-nowrap flex-wrap">
+          <div class="m-2 text-third sm:text-left text-center">
+            <h2 class="text-4xl md:text-6xl font-semibold">Ready to get started?</h2>
+            <p class="text-xl md:text-2xl leading-8 mt-3">
               Get your NFT collections done and start trading{" "}
             </p>
-            <p>
+            <p class="text-xl md:text-2xl leading-8">
               {" "}
               Any question? Just ping us on{" "}
-              <span className="text-purple-700">
+              <span className="text-primary">
                 <a className="hover:cursor-pointer"> Join Discord </a>
               </span>
               . We'll be happy to help{" "}
             </p>
           </div>
           <div class="m-2 flex">
-            <button class="bg-secondary text-white rounded-md p-5 w-60 text-lg self-center">
+            <button class="bg-secondary text-white rounded-md p-5 w-72 text-2xl font-semibold self-center">
               Connect Your Wallet
             </button>
           </div>
@@ -503,8 +504,8 @@ export default function ButtonAppBar() {
       </section>
       <section class=" text-third body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:justify-between justify-center sm:flex-nowrap flex-wrap">
-          <div class="m-2">
-            <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
+          <div class="m-2 text-xl font-semibold">
+            <nav class="ml-auto flex flex-wrap items-center justify-right">
               <a
                 class="mr-5 hover:text-gray-900 hover:cursor-pointer"
                 href="https://docs-flume.gitbook.io/flume/"
@@ -524,7 +525,7 @@ export default function ButtonAppBar() {
               </a>
             </nav>
           </div>
-          <div class="m-2">
+          <div class="m-2 text-xl font-semibold">
             <p>Copyright @ Flume 2022, All rights reserved.</p>
           </div>
         </div>
