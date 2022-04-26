@@ -47,13 +47,13 @@ const CreateCollection = () => {
 
   const renderNavigator = () => {
     return (
-      <section class="bg-gray-200">
+      <section class="bg-gray">
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-row py-5 mx-auto">
         <a href="/view-collections">
-          <button class="align-sub"> <ArrowBackIos /> </button>
+          <button class="align-sub"> <ArrowBackIos className="text-third" /> </button>
         </a>
-        <h2 class="text-2xl font-semibold">
-          <span class="text-purple-800 px-3">Create</span>
+        <h2 class="text-2xl font-semibold text-third">
+          <span class="text-purple-800 px-3 text-primary">Create</span>
           NFT Collectons
         </h2>
         
@@ -63,14 +63,14 @@ const CreateCollection = () => {
   }
   const renderCollection = () => {
     return (
-      <section>
+      <section class="text-third">
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-row mx-auto my-5">
       <div class="w-fit p-4 self-center">
       <div class="w-72 lg:w-60 md:w-52 sm:w-40 rounded-xl shadow-xl">
       <img src={imagePreview || Empty} class="w-full h-full" alt=""/>
       </div>
       <div class="flex flex-row justify-center py-5">
-      <button class="bg-cyan-500 py-2 px-5 rounded-lg mx-2 text-white"><ShuffleIcon/> Randomize</button>
+      <button class="bg-secondary p-2 rounded-lg mx-2 text-white">Randomize</button>
       <a href="" class="self-center p-1 border border-black rounded-full"> i </a>
       </div>
       </div>
@@ -98,6 +98,7 @@ const CreateCollection = () => {
       <lable class="text-md block my-2">Enter the number of NFT to mint:</lable>
       <TextField  id="demo-helper-text-misaligned-no-helper" fullWidth size="small" value={noOfNft} onChange={(e) => dispatch(updateNoOfNft(e.target.value))} />
       <a href="/preview-images"><button class="block text-sm mt-2 mb-5 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"> <AutorenewIcon />Generate Collections</button></a>
+      <a href="/preview-images"><button class="block text-sm mt-2 mb-5 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded">Generate Collections</button></a>
       </form>
       </div>
       </div>
