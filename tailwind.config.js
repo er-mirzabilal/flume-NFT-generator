@@ -25,6 +25,7 @@ module.exports = {
         'featured7': "url('/src/assets/images/featured-icons/featured7-img.png')",
         'featured8': "url('/src/assets/images/featured-icons/featured8-img.png')",
         'login1': "url('/src/assets/images/login/bg-2.png')",
+        'liveCollection1': "url('/src/assets/images/live/banner.png')",
       }
     },
   },
