@@ -3,6 +3,7 @@ import {  Route, Routes, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Home from './app/pages/Home/Home';
 import ViewCollection from './app/pages/View-Collections/view-collections';
+import LiveCollection from './app/pages/Live-Collection/live-collection';
 import CreateCollection from './app/pages/Create-Collections/create-collections';
 import Preview from './app/pages/Preview/Preview';
 import  Login  from './app/pages/Login/Login';
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/view-collections" element={<ViewCollection/>}/>
                         <Route path="/create-collections" element={<CreateCollection/>}/>
                         <Route path="/preview-images" element={<Preview/>}/>
+                        <Route path="/live-collection" element={<LiveCollection/>}/>
                     </Route>
                 </Routes>
             </CSSTransition>

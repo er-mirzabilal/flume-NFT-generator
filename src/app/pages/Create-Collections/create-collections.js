@@ -53,7 +53,7 @@ const CreateCollection = () => {
           <button class="align-sub"> <ArrowBackIos className="text-third" /> </button>
         </a>
         <h2 class="text-2xl font-semibold text-third">
-          <span class="text-purple-800 px-3 text-primary">Create</span>
+          <span class="px-3 text-primary">Create</span>
           NFT Collectons
         </h2>
         
