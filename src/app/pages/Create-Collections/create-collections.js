@@ -1,31 +1,26 @@
-import Header from "../Components/Header/Header";
-import Empty from "../../../assets/images/collections/empty.png";
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { TextField, DialogContent, Dialog, DialogTitle } from "@mui/material";
-import LayerToolBar from '../Components/Menu/Menu';
 import { ArrowBackIos } from "@mui/icons-material";
-import row1img from '../../../assets/images/collections/create/Layer1/image 25.png';
-import row1img2 from '../../../assets/images/collections/create/Layer1/Mask group-1.png';
-import deleteicon from '../../../assets/images/collections/create/Icon/delete.png';
-import blankimg from '../../../assets/images/collections/create/Layer1/Group 87.png';
-import {updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview, updateNoOfNft, addLayer,updateLayerName, moveLayer, deleteLayer, addLayerItem, updateLayerItem} from './store/createCollectionSlice'
-import { useSelector, useDispatch } from 'react-redux'
-import CloseIcon from '@mui/icons-material/Close';
-import { useRef } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
-import ShuffleIcon from '@mui/icons-material/Shuffle';
-import InputLabel from '@mui/material/InputLabel';
+import CloseIcon from '@mui/icons-material/Close';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
+import Collapse from '@mui/material/Collapse';
 import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
-import {useState} from 'react'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Collapse from '@mui/material/Collapse';
-import InputAdornment from '@mui/material/InputAdornment';
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import deleteicon from '../../../assets/images/collections/create/Icon/delete.png';
+import blankimg from '../../../assets/images/collections/create/Layer1/Group 87.png';
+import Empty from "../../../assets/images/collections/empty.png";
+import Header from "../Components/Header/Header";
+import LayerToolBar from '../Components/Menu/Menu';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
+import SaveIcon from '@mui/icons-material/Save';
+import { addLayer, addLayerItem, deleteLayer, moveLayer, updateDimensionHeight, updateDimensionWidth, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle } from './store/createCollectionSlice';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -47,13 +42,13 @@ const CreateCollection = () => {
 
   const renderNavigator = () => {
     return (
-      <section class="bg-gray-200">
+      <section class="bg-gray">
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-row py-5 mx-auto">
         <a href="/view-collections">
-          <button class="align-sub"> <ArrowBackIos /> </button>
+          <button class="align-sub"> <ArrowBackIos className="text-third" /> </button>
         </a>
-        <h2 class="text-2xl font-semibold">
-          <span class="text-purple-800 px-3">Create</span>
+        <h2 class="text-2xl font-semibold text-third">
+          <span class="text-purple-800 px-3 text-primary">Create</span>
           NFT Collectons
         </h2>
         
@@ -63,15 +58,14 @@ const CreateCollection = () => {
   }
   const renderCollection = () => {
     return (
-      <section>
+      <section class="text-third">
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-row mx-auto my-5">
       <div class="w-fit p-4 self-center">
       <div class="w-72 lg:w-60 md:w-52 sm:w-40 rounded-xl shadow-xl">
       <img src={imagePreview || Empty} class="w-full h-full" alt=""/>
       </div>
       <div class="flex flex-row justify-center py-5">
-      <button class="bg-cyan-500 py-2 px-5 rounded-lg mx-2 text-white"><ShuffleIcon/> Randomize</button>
-      <a href="" class="self-center p-1 border border-black rounded-full"> i </a>
+      <button class="bg-secondary p-2 rounded-lg mx-2 text-white"><ShuffleIcon /> Randomize</button>
       </div>
       </div>
       <div class="grow-1 p-4 align-baseline">
@@ -97,7 +91,10 @@ const CreateCollection = () => {
       
       <lable class="text-md block my-2">Enter the number of NFT to mint:</lable>
       <TextField  id="demo-helper-text-misaligned-no-helper" fullWidth size="small" value={noOfNft} onChange={(e) => dispatch(updateNoOfNft(e.target.value))} />
-      <a href="/preview-images"><button class="block text-sm mt-2 mb-5 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"> <AutorenewIcon />Generate Collections</button></a>
+      <div className="flex justify-end mt-8" >
+       <button class=" text-sm mt-2 mb-5 mx-5 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded"><AutorenewIcon />Generate</button>
+       <button class="text-sm mt-2 mb-5 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded"><SaveIcon /> Save</button>
+       </div>
       </form>
       </div>
       </div>
@@ -228,7 +225,7 @@ const CreateCollection = () => {
               <input type="file" ref={imageInputRef} style={{display: 'none'}} onChange={(e)=> uploadImage(e, layerIndex ,index)}  />
               </div>
               <div class="w-full m-2 flex flex-col justify-between text-sm">
-              <p>Lorem jkj kddk  kldk dl k lkflfdk d dfkdfkd dk fdf dk dkfdk dkfkdfkd k fdk fdkfldkdk </p>
+              <p>Upload multiple images for each layer. Give a name and a rarity level to each images. </p>
               <a href="">Need Help? <span class=" text-indigo-600 underline">Read our Guidelines</span></a>
               </div>
         </div>
@@ -294,10 +291,6 @@ const CreateCollection = () => {
       return layers.map((item, index) => renderLayer(item, index))
 
     }
-    return (
-      <div> No Layers Added yet</div>
-    )
-    
   }
   return (
     <div>
@@ -308,7 +301,7 @@ const CreateCollection = () => {
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-wrap mx-auto my-5">
       {renderLayers()}
       <div class="w-1/3  m-2 p-3">
-      <button class="bg-cyan-500 text-lg py-2 px-5 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} > <AddIcon /> Add new Layer</button>
+      <button class="bg-cyan-500 text-lg py-2 px-5 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} > <AddIcon /> Layer</button>
 
       </div>
       

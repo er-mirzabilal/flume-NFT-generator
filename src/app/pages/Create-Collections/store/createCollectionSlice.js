@@ -5,7 +5,8 @@ const initialState = {
     dimensionHeight: 500,
     dimensionWidth: 500,
     noOfNft: 10,
-    layers: []
+    layers: [],
+    error: {}
 }
 
 export const counterSlice = createSlice({
