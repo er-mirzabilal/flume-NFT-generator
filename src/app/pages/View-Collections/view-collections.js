@@ -5,19 +5,74 @@ import view2 from '../../../assets/images/collections/view/NFT/view2.png';
 import view3 from '../../../assets/images/collections/view/NFT/view3.png';
 import view4 from '../../../assets/images/collections/view/NFT/view4.png';
 import { useEffect, useState } from 'react';
-import { getColections } from '../../api/core';
+import { createCollection, getColections } from '../../api/core';
+import { CircularProgress, Typography } from '@mui/material';
+import  noPreviewImage from '../../../assets/images/collections/no-preview2.jpeg'
+import {useNavigate} from 'react-router-dom';
 const ViewCollection = () => {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
+    const [collections, setCollections] = useState([]);
 
     useEffect(() =>{
         getColections()
         .then((response) => {
-            console.log(response.data);
+            console.log(response.data, 'collection list');
+            setCollections(response.data);
+            setLoading(false);
         })
         .catch((error) => {
             console.error(error)
         })
-    })
+    },[])
+    const  createNewCollection  = () => {
+        const edition = 'Untitled_' + Math.random(100);
+        createCollection({edition, count: 0 })
+        .then(response => {
+            console.log(response.data, 'newCollection');
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+    const renderCollection = (collection) => {
+        console.log('colleciotn', collection);
+        return (
+            <div class="w-80 rounded-xl m-2 p-4 shadow-xl" onClick={() => navigate(`/create-collections/${collection.id}`)}>
+                <div class="block">
+                    <img src={collection.image_preview || noPreviewImage } alt="Collection preview image" />
+                    </div>
+                    <div class="flex flex-row pt-2 justify-between">
+                    <h3 class="text-third">{collection.edition}</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">In progress</p>
+                </div>
+            </div>
+        )
+    }
+    const renderCollections = () => {
+        if(loading) {
+            return (
+                <div className="text-center my-16 ">
+                    <CircularProgress />
+                </div>
+            )
+        }
+        if(collections && collections.length)
+            return (
+                <section>
+                    <div class="max-w-screen-2xl w-11/12 mx-auto">
+                        <div class="flex flex-wrap">
+                        {collections.map(collection => renderCollection(collection)) }
+                        </div>
+                    </div>
+                </section>
+            )
+        return (
+            <div>
+               <Typography> You have no project yet, create one to get started. </Typography>
+            </div>
+        )
+    }
+
     return (
         <div>
          <Header />
@@ -34,48 +89,13 @@ const ViewCollection = () => {
          </section>
          <section>
          <div class="max-w-screen-2xl w-11/12 mx-auto">
-         <p class="text-md text-third my-10 sm:my-6">You have no project yet, create one to get started.</p>
-         <a href="/create-collections"><button class="text-sm mb-6 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded">Create new NFT Collection</button></a>
+        <button class="text-sm mb-6 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded"
+                onClick={() => createNewCollection()}
+        >
+        Create new NFT Collection</button>
          </div>
          </section>
-         <section>
-         <div class="max-w-screen-2xl w-11/12 mx-auto">
-         <div class="flex flex-wrap">
-         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
-         <div class="block">
-         <img src={view1} />
-         </div>
-         <div class="flex flex-row pt-2 justify-between">
-         <h3 class="text-third">Emoji Collections</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">In progress</p>
-         </div>
-         </div>
-         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
-         <div class="block">
-         <img src={view2} />
-         </div>
-         <div class="flex flex-row pt-2 justify-between">
-         <h3 class="text-third">Emoji Collections</h3><p class="bg-primary rounded-md text-white px-2 text-sm self-center">Deployed</p>
-         </div>
-         </div>
-         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
-         <div class="block">
-         <img src={view3} />
-         </div>
-         <div class="flex flex-row pt-2 justify-between">
-         <h3 class="text-third">Emoji Collections</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">In progress</p>
-         </div>
-         </div>
-         <div class="w-80 rounded-xl m-2 p-4 shadow-xl">
-         <div class="block">
-         <img src={view4} />
-         </div>
-         <div class="flex flex-row pt-2 justify-between">
-         <h3 class="text-third">Emoji Collections</h3><p class="bg-primary rounded-md text-white px-2 text-sm self-center">Deployed</p>
-         </div>
-         </div>
-         </div>
-         </div>
-         </section>
+            {renderCollections()}
         </div>
     );
 }

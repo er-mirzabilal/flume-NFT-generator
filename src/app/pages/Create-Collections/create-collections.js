@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowBackIos } from "@mui/icons-material";
 import AddIcon from '@mui/icons-material/Add';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
@@ -20,8 +21,8 @@ import Header from "../Components/Header/Header";
 import LayerToolBar from '../Components/Menu/Menu';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import SaveIcon from '@mui/icons-material/Save';
-import { addLayer, addLayerItem, deleteLayer, moveLayer, updateDimensionHeight, updateDimensionWidth, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle } from './store/createCollectionSlice';
-
+import { addLayer, addLayerItem, deleteLayer, moveLayer, updateDimensionHeight, updateDimensionWidth, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle, fetchCollection, postCollection, uploadImageToServer } from './store/createCollectionSlice';
+import {useParams} from 'react-router-dom';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -34,12 +35,19 @@ const ExpandMore = styled((props) => {
 }));
 
 const CreateCollection = () => {
+  const params = useParams();
   const [expanded, setExpanded] = useState({});
   const [imageValidation, setImageValidation] = useState(null);
   const dispatch = useDispatch()
   const imageInputRef = useRef(null);  
   const {title, dimensionWidth, dimensionHeight, imagePreview, noOfNft, layers} = useSelector((state)=> state.createCollection);
 
+  useEffect(()=> {
+    if(params?.id){
+      dispatch(fetchCollection(params.id));
+    }
+
+  },[]);
   const renderNavigator = () => {
     return (
       <section class="bg-gray">
@@ -56,6 +64,7 @@ const CreateCollection = () => {
     </section>
     )
   }
+
   const renderCollection = () => {
     return (
       <section class="text-third">
@@ -69,7 +78,7 @@ const CreateCollection = () => {
       </div>
       </div>
       <div class="grow-1 p-4 align-baseline">
-      <form class="w-72">
+      <div class="w-72">
       <lable class="text-md block mb-2">NFT Collection Title:</lable>
       <TextField  id="demo-helper-text-misaligned-no-helper" fullWidth  size="small" value={title} onChange={(e) => dispatch(updateTitle(e.target.value))}/>
       <lable class="text-md block my-2">Image Format:</lable>
@@ -93,9 +102,9 @@ const CreateCollection = () => {
       <TextField  id="demo-helper-text-misaligned-no-helper" fullWidth size="small" value={noOfNft} onChange={(e) => dispatch(updateNoOfNft(e.target.value))} />
       <div className="flex justify-end mt-8" >
        <button class=" text-sm mt-2 mb-5 mx-5 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded"><AutorenewIcon />Generate</button>
-       <button class="text-sm mt-2 mb-5 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded"><SaveIcon /> Save</button>
+       <button class="text-sm mt-2 mb-5 text-white bg-primary border-0 py-2 px-5 " onClick={()=> dispatch(postCollection())}><SaveIcon  /> Save</button>
        </div>
-      </form>
+      </div>
       </div>
       </div>
       </section>
@@ -111,7 +120,7 @@ const CreateCollection = () => {
       </div>
       <div class="w-96 m-2">
       <lable class="text-md block my-1">Image Name:</lable>
-      <TextField  id="demo-helper-text-misaligned-no-helper"  onChange={(e) => dispatch(updateLayerItem({layerIndex, index, key:'name', value: e.target.value}))}/>
+      <TextField  id="demo-helper-text-misaligned-no-helper" value={data.name} onChange={(e) => dispatch(updateLayerItem({layerIndex, index, key:'name', value: e.target.value}))}/>
       <lable class="text-md block my-1">Rarity:</lable>
       {/* <TextField  id="demo-helper-text-misaligned-no-helper" onChange={(e) => dispatch(updateLayerItem({layerIndex, index, key:'rarity', value: e.target.value}))} /> */}
       <FormControl fullWidth>
@@ -135,11 +144,10 @@ const CreateCollection = () => {
   const validateImage =  (image) => {
     return new Promise((resolve, reject) => {
       var reader = new FileReader();
-
+      
       //Read the contents of Image File.
           reader.readAsDataURL(image);
           reader.onload = function (e) {
-      
             //Initiate the JavaScript Image object.
             var image = new Image();
       
@@ -165,7 +173,6 @@ const CreateCollection = () => {
   }
 
   const renderImageValidationWarning = () => {  
-    console.log('image validation', imageValidation);
     return (
             <Dialog onClose={()=>setImageValidation(null)} open={!!imageValidation}>
                 <DialogTitle>
@@ -193,22 +200,28 @@ const CreateCollection = () => {
     )
 }
   const testFunction = () => {
-    console.log('Testing');
   }
 
   const uploadImage =  (e,layerIndex, index) => {
-    console.log('Uploading image', e.target.files);
-
     if(e.target.files){
       //validate image 
-      validateImage(e.target.files[0])
+      const image =  e.target.files[0];
+      validateImage(image)
       .then(()=> {
-          dispatch(addLayerItem({index: layerIndex, imageUrl:  URL.createObjectURL(e.target.files[0])}))
+        const formData = new FormData();
+        formData.append('image',image);
+        const data = {
+          image: formData,
+          index: layerIndex,
+        }
+        dispatch(uploadImageToServer(data));
 
       })
       .catch((res)=> {
-        console.log(res, 'res');
         setImageValidation({h: res.height, w: res.width});
+      })
+      .finally(() => {
+        e.target.value = null;
       })
 
     }
@@ -222,7 +235,8 @@ const CreateCollection = () => {
               <button class=" absolute -bottom-3 left-2/4 -translate-x-2/4 w-fit text-sm text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded" onClick={()=> {
                 imageInputRef.current.click()}
                 }><AddIcon/> Add Image</button>
-              <input type="file" ref={imageInputRef} style={{display: 'none'}} onChange={(e)=> uploadImage(e, layerIndex ,index)}  />
+              <input type="file" ref={imageInputRef} style={{display: 'none'}} onChange={(e)=> uploadImage(e, layerIndex ,index)} onLoad={(e)=> {
+              }}  />
               </div>
               <div class="w-full m-2 flex flex-col justify-between text-sm">
               <p>Upload multiple images for each layer. Give a name and a rarity level to each images. </p>

@@ -20,7 +20,7 @@ function App() {
                  <Route path="/login" element={<Login />} />
                     <Route element={<ProtectedRoute />}>
                         <Route path="/view-collections" element={<ViewCollection/>}/>
-                        <Route path="/create-collections" element={<CreateCollection/>}/>
+                        <Route path="/create-collections/:id" element={<CreateCollection/>}/>
                         <Route path="/preview-images" element={<Preview/>}/>
                         <Route path="/live-collection" element={<LiveCollection/>}/>
                     </Route>

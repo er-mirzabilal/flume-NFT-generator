@@ -1,10 +1,94 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {authAxios} from '../../../api/core';
 
+export const getTransformedCollection = (data) => {
+   const transformedCollection = {
+    id: data.project.id,
+    projectHash: data.project.project_hash,
+    title: data.project.edition,
+    dimensionHeight: data.project.dim1? parseInt(data.project.dim1) : 500,
+    dimensionWidth: data.project.dim2 ? parseInt(data.project.dim2) : 500,
+    noOfNft: data.project.count ? parseInt(data.project.count) : 10,
+    layers: data.layers.map((layer, index) => {
+        return {
+            name: layer.layer_name,
+            order: layer.layer_order,
+            items: layer.layer_items.map(item => ({
+                imageUrl:  item.image_url,
+                name: item.image_name,
+                rarity: item.rarity 
+            }))
+        }
+    })
+   } 
+   return transformedCollection;
+}
+export const prepareDataForPost = (data) => {
+    const preparedData = {
+        project : {
+            id: data.id,
+            project_hash: data.projectHash,
+            edition: data.title,
+            dim1: data.dimensionHeight,
+            dim2: data.dimensionWidth,
+            count: data.noOfNft,
+        },
+        layers: data.layers.map((layer, index) => {
+            return {
+                layer_name: layer.name,
+                layer_order: index + 1,
+                layer_items : layer.items.map(item => ({
+                    image_url: item.imageUrl,
+                    image_name: item.name,
+                    rarity: item.rarity
+                }))
+            }
+        })
+    };
+    return preparedData;
+}
+export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  async (data, {dispatch})=> {
+    authAxios.get(`/collection/${data}`).then((response) => {
+        if(response?.data){
+            const transformedData = getTransformedCollection(response.data);
+            dispatch(updateCollectionData(transformedData));
+        }
+    })
+    .catch((err) => {
+        console.error(err)
+    })
+
+});
+export const postCollection = createAsyncThunk('/collection/save', async (data, {getState ,dispatch}) => {
+    const stateData = getState().createCollection;
+    const formattedData = prepareDataForPost(stateData);
+    authAxios.post(`/collection`,{...formattedData, generate: false})
+    .then((response) => {
+        console.log(response.data, 'suces');
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+});
+
+export const uploadImageToServer = createAsyncThunk('/collection/uploadImage', async (data, {dispatch}) => {
+    authAxios.post(`/upload`,data.image)
+    .then(response => {
+        dispatch(addLayerItem({index: data.index, imageUrl:  response.data.url[0]}));
+    })
+    .catch(error => {
+        console.error(error);
+    })
+
+
+});
 const initialState = {
-    title: 'Untitled',
-    dimensionHeight: 500,
-    dimensionWidth: 500,
-    noOfNft: 10,
+    id: null,
+    projectHash: null,
+    title: '',
+    dimensionHeight: '',
+    dimensionWidth: '',
+    noOfNft: '',
     layers: [],
     error: {}
 }
@@ -13,6 +97,10 @@ export const counterSlice = createSlice({
   name: 'createCollection',
   initialState,
   reducers: {
+    updateCollectionData: (state, action) => {
+        return {...action.payload};
+     
+    },
     updateTitle: (state, action) => {
         state.title = action.payload;
     }, 
@@ -77,10 +165,8 @@ export const counterSlice = createSlice({
         }
     },
     addLayerItem: (state, action) => {
-        console.log('add layer item');
         var layers = [...state.layers];
         const {index, imageUrl} = action.payload;
-        console.log(index, imageUrl, '-------');
         if(layers[index]){
                  var targetLayer = layers[index];
                 targetLayer = {
@@ -100,19 +186,15 @@ export const counterSlice = createSlice({
     },
 
     updateLayerItem: (state, action) => {
-        console.log('aaaaa');
         var layers = [...state.layers];
         const {layerIndex, index, key, value} = action.payload;
-        console.log('sda', layerIndex,index);
         if(layers[layerIndex]){
                  let targetLayer = layers[layerIndex];
                  const targetLayerItem = targetLayer.items;
-                 console.log('targetLayerItem', targetLayerItem[index]);
                  targetLayerItem[index] = {
                     ...targetLayerItem[index],
                     [key]: value
                  }
-                 console.log(targetLayerItem, 'item');
                 targetLayer = {
                     ...targetLayer,
                     items:  targetLayerItem
@@ -126,6 +208,8 @@ export const counterSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,updateNoOfNft, updateLayers, addLayer, deleteLayer,updateLayerName, moveLayer, addLayerItem ,updateLayerItem, reset } = counterSlice.actions
+export const { updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,
+    updateNoOfNft, updateLayers, addLayer, deleteLayer,updateLayerName, moveLayer,
+     addLayerItem ,updateLayerItem, reset, updateCollectionData, } = counterSlice.actions
 
 export default counterSlice.reducer
