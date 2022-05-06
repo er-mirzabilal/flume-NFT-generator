@@ -264,16 +264,16 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                <div class="max-h-10 max-w-fit">
-                    <img src={featured1img} />
+                <div class="h-10">
+                    <img src={featured1img} class="h-full" />
                     </div>
-                    <h3 class="font-bold text-md mb-3 text-third">
+                    <h3 class="font-bold text-md my-3 text-third">
                       Super Simple (no code)
                     </h3>
                     <p class="text-sm text-third">
                       Quickly generate your NFT collection without coding
                     </p>
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
                   <img src={featured1img}></img>
                   </div>
                 </div>
@@ -282,15 +282,15 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                  <div class="max-h-10 max-w-fit">
-                    <img src={featured2img} />
+                  <div class="h-10 flex">
+                    <img src={featured2img}  class="h-6 w-12 self-center"/>
                   </div>
-                    <h3 class="font-bold text-md mb-3 text-third">Own Your Contract</h3>
+                    <h3 class="font-bold text-md my-3 text-third">Own Your Contract</h3>
                     <p class="text-sm text-third">
                       Create NFT collections with ease, using the all-in-one
                       generator
                     </p>
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
                   <img src={featured2img}></img>
                   </div>
                 </div>
@@ -299,14 +299,14 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                  <div class="">
-                    <img src={featured3img} />
+                  <div class="h-10">
+                    <img src={featured3img} class="h-full"/>
                   </div>
-                    <h3 class="font-bold text-md mb-3 text-third">Set Traits Rarity</h3>
+                    <h3 class="font-bold text-md my-3 text-third">Set Traits Rarity</h3>
                     <p class="text-sm text-third">
                       Configure how rare each trait of your NFT should be
                     </p>
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
                   <img src={featured3img}></img>
                   </div>
                 </div>
@@ -315,15 +315,15 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                  <div class="">
-                    <img src={featured4img} />
+                  <div class="h-10">
+                    <img src={featured4img} class="h-full"/>
                   </div>
-                    <h3 class="font-bold text-md mb-3 text-third">IPFS File Hosting</h3>
+                    <h3 class="font-bold text-md my-3 text-third">IPFS File Hosting</h3>
                     <p class="text-sm text-third">
                       Create NFT collections with ease, using the all-in-one
                       generator
                     </p>
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
                   <img src={featured4img}></img>
                   </div>
                 </div>
@@ -332,14 +332,14 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                  <div class="w-10">
-                    <img src={featured5img} class="w-full"/>
+                  <div class="h-10">
+                    <img src={featured5img} class="h-full"/>
                   </div>
-                    <h3 class="font-bold text-md mb-3 text-third">Generate Metadata</h3>
+                    <h3 class="font-bold text-md my-3 text-third">Generate Metadata</h3>
                     <p class="text-sm text-third">
                       Generate automatically metadata for your NFTs
                     </p>
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
                   <img src={featured5img}></img>
                   </div>
                 </div>
@@ -348,15 +348,15 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                  <div class="w-10">
-                    <img src={featured6img} class="w-full"/>
+                  <div class="h-10">
+                    <img src={featured6img} class="h-full"/>
                   </div>
-                    <h3 class="font-bold text-md mb-3 text-third">Lazy Minting</h3>
+                    <h3 class="font-bold text-md my-3 text-third">Lazy Minting</h3>
                     <p class="text-sm text-third">
                       No upfront minting gas fee for you. Defer them to your
                       buyers
                     </p>
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
                   <img src={featured6img}></img>
                   </div>
                 </div>
@@ -365,10 +365,10 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                  <div class="w-10">
-                    <img src={featured7img} class="w-full"/>
+                  <div class="h-10">
+                    <img src={featured7img} class="h-full"/>
                   </div>
-                    <h3 class="font-bold text-md mb-3 text-third">
+                    <h3 class="font-bold text-md my-3 text-third">
                       Embeddable Minting Button
                     </h3>
                     <p class="text-sm text-third">
@@ -376,7 +376,7 @@ export default function ButtonAppBar() {
                       ready-made code snippet
                     </p>
                   
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
                   <img src={featured7img}></img>
                   </div>
                 </div>
@@ -385,15 +385,15 @@ export default function ButtonAppBar() {
             <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
               <div class="bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
-                  <div class="w-10">
-                    <img src={featured8img} class="w-full"/>
+                  <div class="h-10">
+                    <img src={featured8img} class="h-full"/>
                   </div>
-                    <h3 class="font-bold text-md mb-3 text-third">Anonymous</h3>
+                    <h3 class="font-bold text-md my-3 text-third">Anonymous</h3>
                     <p class="text-sm text-third">
                       No email address, no names, no private info required
                     </p>
-                  <div class="right-0 bottom-0 opacity-10 w-max absolute">
-                  <img src={featured8img}></img>
+                  <div class="-right-1 -bottom-1 opacity-10 w-max absolute">
+                  <img src={featured8img} ></img>
                   </div>
                   </div>
               </div>
@@ -409,7 +409,7 @@ export default function ButtonAppBar() {
           <hr class="w-10 my-2 text-base mx-auto border-primary"></hr>
 
           <h2 class="text-center font-medium text-third text-4xl mb-10">Use for FREE</h2>
-          <div class="flex flex-wrap sm:flex-nowrap justify-between">
+          <div class="flex flex-wrap md:flex-nowrap justify-between">
             <div class="m-2 shadow-lg w-full">
               <div class="bg-primary rounded-t-xl h-20 relative flex justify-center items-end">
                 <div class="rounded-full bg-white h-16 w-16 p-3 -mb-8">
