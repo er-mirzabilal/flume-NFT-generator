@@ -30,7 +30,7 @@ export default function Login(props){
                         
                         const token = response.data.token; 
                         localStorage.setItem('flume_auth_token', token)
-                        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+                        // axios.defaults.headers.common.Authorization = `Bearer ${token}`;
                            setLoading(false);
                         navigate('/view-collections')
                     }

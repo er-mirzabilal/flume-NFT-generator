@@ -1,10 +1,12 @@
-import { useEffect } from "react";
 import { ArrowBackIos } from "@mui/icons-material";
 import AddIcon from '@mui/icons-material/Add';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
+import SaveIcon from '@mui/icons-material/Save';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
+import { Dialog, DialogContent, DialogTitle, TextField, CircularProgress } from "@mui/material";
 import Collapse from '@mui/material/Collapse';
 import FormControl from '@mui/material/FormControl';
 import IconButton from '@mui/material/IconButton';
@@ -12,17 +14,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import deleteicon from '../../../assets/images/collections/create/Icon/delete.png';
+import { useParams } from 'react-router-dom';
 import blankimg from '../../../assets/images/collections/create/Layer1/Group 87.png';
 import Empty from "../../../assets/images/collections/empty.png";
 import Header from "../Components/Header/Header";
 import LayerToolBar from '../Components/Menu/Menu';
-import ShuffleIcon from '@mui/icons-material/Shuffle';
-import SaveIcon from '@mui/icons-material/Save';
-import { addLayer, addLayerItem, deleteLayer, moveLayer, updateDimensionHeight, updateDimensionWidth, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle, fetchCollection, postCollection, uploadImageToServer } from './store/createCollectionSlice';
-import {useParams} from 'react-router-dom';
+import {reset, addLayer, deleteLayer, fetchCollection, generateCollection, moveLayer, postCollection, updateDimensionHeight, updateDimensionWidth, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle, uploadImageToServer } from './store/createCollectionSlice';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -39,14 +38,13 @@ const CreateCollection = () => {
   const [expanded, setExpanded] = useState({});
   const [imageValidation, setImageValidation] = useState(null);
   const dispatch = useDispatch()
-  const imageInputRef = useRef(null);  
-  const {title, dimensionWidth, dimensionHeight, imagePreview, noOfNft, layers} = useSelector((state)=> state.createCollection);
-
+  const imageInputRef = useRef([]);  
+  const {title, dimensionWidth, dimensionHeight, imagePreview, noOfNft, layers, loading} = useSelector((state)=> state.createCollection);
   useEffect(()=> {
     if(params?.id){
       dispatch(fetchCollection(params.id));
     }
-
+    return ()=> dispatch(reset())
   },[]);
   const renderNavigator = () => {
     return (
@@ -101,7 +99,7 @@ const CreateCollection = () => {
       <lable class="text-md block my-2">Enter the number of NFT to mint:</lable>
       <TextField  id="demo-helper-text-misaligned-no-helper" fullWidth size="small" value={noOfNft} onChange={(e) => dispatch(updateNoOfNft(e.target.value))} />
       <div className="flex justify-end mt-8" >
-       <button class=" text-sm mt-2 mb-5 mx-5 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded"><AutorenewIcon />Generate</button>
+       <button class=" text-sm mt-2 mb-5 mx-5 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded" onClick={()=> dispatch(generateCollection())} ><AutorenewIcon />Generate</button>
        <button class="text-sm mt-2 mb-5 text-white bg-primary border-0 py-2 px-5 " onClick={()=> dispatch(postCollection())}><SaveIcon  /> Save</button>
        </div>
       </div>
@@ -116,7 +114,9 @@ const CreateCollection = () => {
       <div className="flex my-3">
       <div class="w-96 h-auto self-center relative m-2">
        <img class="w-full h-full" src={data.imageUrl} />
-       <a href="" class="absolute bottom-0" ><img src={deleteicon} /></a>
+       <IconButton className="absolute bottom-0" color="error">
+         <DeleteIcon />
+       </IconButton>
       </div>
       <div class="w-96 m-2">
       <lable class="text-md block my-1">Image Name:</lable>
@@ -191,9 +191,9 @@ const CreateCollection = () => {
                 </DialogTitle>
                 <DialogContent>
                     <div className="text-center p-16">
-                       <h2> Image Dimestion Executed!</h2>
-                        <p>Selected image is <span>{imageValidation?.h} <CloseIcon /> {imageValidation?.w} </span>
-                         but collection is <span>{dimensionHeight} <CloseIcon /> {dimensionWidth} </span></p>
+                       <h2> Image Dimension Exceeded!</h2>
+                        <p>Selected image is <span className="bg-gray	rounded-full">{imageValidation?.h} <CloseIcon /> {imageValidation?.w} </span>
+                         but collection is <span className="bg-gray	rounded-full">{dimensionHeight} <CloseIcon /> {dimensionWidth} </span></p>
                     </div>
                 </DialogContent>
             </Dialog>
@@ -228,15 +228,15 @@ const CreateCollection = () => {
   }
 
   const renderNewItem = (layerIndex, index) => {
+    console.log("renderNewItem", layerIndex, index);
     return (
       <div className="flex my-3">
               <div class="w-96 h-auto self-center relative m-2">
               <img class="w-full h-full" src={blankimg} />
               <button class=" absolute -bottom-3 left-2/4 -translate-x-2/4 w-fit text-sm text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded" onClick={()=> {
-                imageInputRef.current.click()}
+                imageInputRef.current[layerIndex].click()}
                 }><AddIcon/> Add Image</button>
-              <input type="file" ref={imageInputRef} style={{display: 'none'}} onChange={(e)=> uploadImage(e, layerIndex ,index)} onLoad={(e)=> {
-              }}  />
+              <input type="file" ref={(el) => {imageInputRef.current[layerIndex]= el}} style={{display: 'none'}} onChange={(e)=> uploadImage(e, layerIndex ,index)}  />
               </div>
               <div class="w-full m-2 flex flex-col justify-between text-sm">
               <p>Upload multiple images for each layer. Give a name and a rarity level to each images. </p>
@@ -275,6 +275,7 @@ const CreateCollection = () => {
   };
   
   const renderLayer = (data, layerIndex) => {
+    console.log(layerIndex, 'indexing');
     const layerItems = data?.items;
     const layerHeaderData = { name : data?.name, index: layerIndex };
     const shouldExpand = layerIndex in expanded ? expanded[layerIndex]: true;
@@ -306,22 +307,36 @@ const CreateCollection = () => {
 
     }
   }
+
+  const renderCollectionData = () => {
+    return (
+      <>
+        {renderCollection()}
+        <section>
+        <div class="max-w-screen-2xl lg:w-11/12 flex flex-wrap mx-auto my-5">
+        {renderLayers()}
+        <div class="w-1/3  m-2 p-3">
+        <button class="bg-cyan-500 text-lg py-2 px-5 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} > <AddIcon /> Layer</button>
+
+        </div>
+        
+        </div>
+        </section>
+        {renderImageValidationWarning()}
+    </>
+    )
+  }
   return (
     <div>
       <Header />
       {renderNavigator()}
-      {renderCollection()}
-      <section>
-      <div class="max-w-screen-2xl lg:w-11/12 flex flex-wrap mx-auto my-5">
-      {renderLayers()}
-      <div class="w-1/3  m-2 p-3">
-      <button class="bg-cyan-500 text-lg py-2 px-5 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} > <AddIcon /> Layer</button>
+      {loading ?  (
+        <div className="text-center my-24">
+          <CircularProgress />
+        </div>
+      ): renderCollectionData()
+      }
 
-      </div>
-      
-      </div>
-      </section>
-      {renderImageValidationWarning()}
     </div>
   );
 };

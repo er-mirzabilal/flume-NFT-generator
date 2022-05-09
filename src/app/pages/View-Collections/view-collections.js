@@ -6,13 +6,16 @@ import view3 from '../../../assets/images/collections/view/NFT/view3.png';
 import view4 from '../../../assets/images/collections/view/NFT/view4.png';
 import { useEffect, useState } from 'react';
 import { createCollection, getColections } from '../../api/core';
-import { CircularProgress, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 import  noPreviewImage from '../../../assets/images/collections/no-preview2.jpeg'
 import {useNavigate} from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
+
 const ViewCollection = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
+    const [creating, setCreating] = useState(false);
 
     useEffect(() =>{
         getColections()
@@ -26,14 +29,18 @@ const ViewCollection = () => {
         })
     },[])
     const  createNewCollection  = () => {
-        const edition = 'Untitled_' + Math.random(100);
+        setCreating(true);
+        const edition = 'Untitled_' + Math.floor((Math.random() * 100) + 1);
         createCollection({edition, count: 0 })
         .then(response => {
             console.log(response.data, 'newCollection');
+            const id = response?.data?.id;
+            if(id) navigate(`/create-collections/${id}`)
         })
         .catch(error => {
             console.error(error)
         })
+        
     }
     const renderCollection = (collection) => {
         console.log('colleciotn', collection);
@@ -43,7 +50,7 @@ const ViewCollection = () => {
                     <img src={collection.image_preview || noPreviewImage } alt="Collection preview image" />
                     </div>
                     <div class="flex flex-row pt-2 justify-between">
-                    <h3 class="text-third">{collection.edition}</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">In progress</p>
+                    <h3 class="text-third">{collection.edition}</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">{collection.status}</p>
                 </div>
             </div>
         )
@@ -88,11 +95,10 @@ const ViewCollection = () => {
          </div>
          </section>
          <section>
-         <div class="max-w-screen-2xl w-11/12 mx-auto">
-        <button class="text-sm mb-6 text-white bg-primary border-0 py-2 px-5 focus:outline-primary rounded"
-                onClick={() => createNewCollection()}
-        >
-        Create new NFT Collection</button>
+         <div class="max-w-screen-2xl w-11/12 mx-auto mt-8">
+             <Button color="primary" variant="contained"onClick={() => createNewCollection()} startIcon={creating? <CircularProgress size="1.4rem" color="secondary" /> : <AddIcon /> } disabled={creating}>
+             Create NFT Collection
+             </Button>
          </div>
          </section>
             {renderCollections()}

@@ -71,6 +71,17 @@ export const postCollection = createAsyncThunk('/collection/save', async (data, 
     })
 });
 
+export const generateCollection = createAsyncThunk('/collection/generate', async (data, {getState ,dispatch}) => {
+    const stateData = getState().createCollection;
+    const formattedData = prepareDataForPost(stateData);
+    authAxios.post(`/collection`,{...formattedData, generate: true})
+    .then((response) => {
+        console.log(response.data, 'suces');
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+});
 export const uploadImageToServer = createAsyncThunk('/collection/uploadImage', async (data, {dispatch}) => {
     authAxios.post(`/upload`,data.image)
     .then(response => {
@@ -83,6 +94,7 @@ export const uploadImageToServer = createAsyncThunk('/collection/uploadImage', a
 
 });
 const initialState = {
+    loading: true,
     id: null,
     projectHash: null,
     title: '',
@@ -97,8 +109,11 @@ export const counterSlice = createSlice({
   name: 'createCollection',
   initialState,
   reducers: {
+    updateLoading: (state, action) => {
+        state.loading = action.payload;
+    },
     updateCollectionData: (state, action) => {
-        return {...action.payload};
+        return {...action.payload, loading: false};
      
     },
     updateTitle: (state, action) => {
@@ -208,7 +223,7 @@ export const counterSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,
+export const {updateLoading, updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,
     updateNoOfNft, updateLayers, addLayer, deleteLayer,updateLayerName, moveLayer,
      addLayerItem ,updateLayerItem, reset, updateCollectionData, } = counterSlice.actions
 
