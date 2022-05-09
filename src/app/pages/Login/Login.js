@@ -28,8 +28,10 @@ export default function Login(props){
                     console.log(response.data, 'auth');
                     if(response?.data?.token){
                         
-                        const token = response.data.token; 
-                        localStorage.setItem('flume_auth_token', token)
+                        const token = response.data.token;
+                        const notifyToken = response.data.notif_token; 
+                        localStorage.setItem('flume_auth_token', token);
+                        localStorage.setItem('flume_notify_token', notifyToken);
                         // axios.defaults.headers.common.Authorization = `Bearer ${token}`;
                            setLoading(false);
                         navigate('/view-collections')

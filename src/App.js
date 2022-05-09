@@ -21,7 +21,7 @@ function App() {
                     <Route element={<ProtectedRoute />}>
                         <Route path="/view-collections" element={<ViewCollection/>}/>
                         <Route path="/create-collections/:id" element={<CreateCollection/>}/>
-                        <Route path="/preview-images" element={<Preview/>}/>
+                        <Route path="/preview-images/:id" element={<Preview/>}/>
                         <Route path="/live-collection" element={<LiveCollection/>}/>
                     </Route>
                 </Routes>

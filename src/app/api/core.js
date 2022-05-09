@@ -77,3 +77,14 @@ export const getCollection = (id) => {
         })
     })
 }
+
+export const getGeneratedCollection = (id) => {
+    return new Promise((resolve, reject) => {
+        authAxios.get(`collection-item/${id}`).then(response => {
+            resolve(response.data)
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+    })
+}

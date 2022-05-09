@@ -10,7 +10,7 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 import  noPreviewImage from '../../../assets/images/collections/no-preview2.jpeg'
 import {useNavigate} from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
-
+import { collectionStatus } from '../../utils/constants';
 const ViewCollection = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -42,10 +42,26 @@ const ViewCollection = () => {
         })
         
     }
+    const openCollection = (data) => {
+        switch(data.status) {
+            case collectionStatus.PENDING :
+                navigate(`/create-collections/${data.id}`);
+                break;
+            case collectionStatus.GENERETING :
+                navigate(`/preview-images/${data.id}`);
+                break;
+            case collectionStatus.GENERATED :
+                navigate(`/preview-images/${data.id}`);
+                break;
+            default :
+                navigate(`/create-collections/${data.id}`);
+        }
+      
+    }
     const renderCollection = (collection) => {
         console.log('colleciotn', collection);
         return (
-            <div class="w-80 rounded-xl m-2 p-4 shadow-xl" onClick={() => navigate(`/create-collections/${collection.id}`)}>
+            <div class="w-80 rounded-xl m-2 p-4 shadow-xl" onClick={() => openCollection(collection)}>
                 <div class="block">
                     <img src={collection.image_preview || noPreviewImage } alt="Collection preview image" />
                     </div>
