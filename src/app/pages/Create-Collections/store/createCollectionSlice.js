@@ -52,7 +52,7 @@ export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  
   const response =  await  authAxios.get(`/collection/${data}`);
     const transformedData = getTransformedCollection(response.data);
     dispatch(updateCollectionData(transformedData));
-    console.log('end', response.data);
+    if(transformedData.layers && !transformedData.layers.length) dispatch(addLayer());
     return response.data;
 
 });

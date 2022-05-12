@@ -5,12 +5,10 @@ import { initializeCollectionSocket } from "../app/pages/Create-Collections/stor
 import { initializeSocket } from "../app/pages/store/authSlice";
 
 export default function ProtectedRoute({ redirectUrl = '/login'}){
-    const {socket} = useSelector((state)=> state.auth);
+    const {isSocketInit} = useSelector((state)=> state.auth);
     const dispatch = useDispatch()
-    // const {active, account}  = useWeb3React()
-    // let navigate  = useNavigate();
-    // return (active) ? <Outlet /> : navigate(redirectUrl)
-    if(!socket) dispatch(initializeSocket());
+
+    if(!isSocketInit) dispatch(initializeSocket());
     return    <Outlet /> 
 
 }

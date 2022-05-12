@@ -16,7 +16,6 @@ const ViewCollection = () => {
     useEffect(() =>{
         getColections()
         .then((response) => {
-            console.log(response.data, 'collection list');
             setCollections(response.data);
             setLoading(false);
         })
@@ -55,7 +54,6 @@ const ViewCollection = () => {
       
     }
     const renderCollection = (collection) => {
-        console.log('colleciotn', collection);
         return (
             <div class="w-80 rounded-xl m-2 p-4 shadow-xl" onClick={() => openCollection(collection)}>
                 <div class="block">
