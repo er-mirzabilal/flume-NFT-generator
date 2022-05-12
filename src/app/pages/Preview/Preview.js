@@ -10,18 +10,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getGeneratedCollection } from '../../api/core';
+import { getCollection, getGeneratedCollection } from '../../api/core';
 import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
-import { fetchCollection, reset } from '../Create-Collections/store/createCollectionSlice';
+import { fetchCollection, getTransformedCollection, reset } from '../Create-Collections/store/createCollectionSlice';
 
 const Preview = () => {
    const {isImageGenerated} = useSelector((state)=> state.auth);
    const dispatch = useDispatch()
    const [open, setOpen] = useState(false);
-
    const navigate = useNavigate();
-   const [collection, setCollection] = useState([]);
+   const [images, setImages] = useState([]);
+   const [collection, setCollection] = useState(null);
    const [loading, setLoading] = useState(true)
    const params = useParams();
   
@@ -31,18 +31,19 @@ const Preview = () => {
 
     const initialize = async () => {
       setLoading(true);
-      const data = await dispatch(fetchCollection(params?.id));
-      const collectionData = data?.payload;
-      if(collectionData){
-         if(collectionData?.project?.status === collectionStatus.GENERATING){
-         } else if(collectionData?.project?.status === collectionStatus.GENERATED){
-            getGeneratedCollection(params.id).then(data => {
-               setCollection(data);
-               setLoading(false);
-            })
-         }
-      } 
-      
+      getCollection(params?.id).then((collectionData) =>{
+         const formattedCollection = getTransformedCollection(collectionData);
+         setCollection(formattedCollection);
+         const status = formattedCollection?.status;
+          if(status!== collectionStatus.GENERATING || status!== collectionStatus.PENDING){
+               getGeneratedCollection(params.id).then(data => {
+                  setImages(data);
+                  setLoading(false);
+               })
+            } 
+      }).catch(err => {
+         console.error(err);
+      })
    }
 
    useEffect(() => {
@@ -56,7 +57,7 @@ const Preview = () => {
       if(isImageGenerated){
         if(isImageGenerated?.status === 'success'){
          getGeneratedCollection(params.id).then(data => {
-            setCollection(data);
+            setImages(data);
             setLoading(false);
          })
         }
@@ -79,7 +80,7 @@ const Preview = () => {
       return (
          <section class="w-4/5 mx-auto">
          <div class="flex flex-wrap justify-center">
-         {collection.map(item =>  renderArt(item))}
+         {images.map(item =>  renderArt(item))}
          </div>
          </section>
       )

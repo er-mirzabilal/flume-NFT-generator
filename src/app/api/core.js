@@ -69,7 +69,7 @@ export const createCollection = (data) => {
 export const getCollection = (id) => {
     return new Promise((resolve, reject) => {
         authAxios.get(`/collection/${id}`).then((response) => {
-            resolve(response)
+            resolve(response.data)
         })
         .catch((err) => {
             reject(err)

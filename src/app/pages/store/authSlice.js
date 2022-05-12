@@ -27,7 +27,7 @@ const initialState = {
     isImageGenerated: null
 }
 export const authSlice = createSlice({
-    name: 'createCollection',
+    name: 'auth',
     initialState,
     reducers: {
         updateState(state, action) {

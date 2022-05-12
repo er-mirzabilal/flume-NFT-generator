@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authAxios } from '../../../api/core';
+import CustomizedSnackbar from '../../Components/CustomizedSnackbar';
 
 export const getTransformedCollection = (data) => {
    const transformedCollection = {
@@ -9,6 +10,7 @@ export const getTransformedCollection = (data) => {
     dimensionHeight: data.project.dim1? parseInt(data.project.dim1) : 500,
     dimensionWidth: data.project.dim2 ? parseInt(data.project.dim2) : 500,
     noOfNft: data.project.count ? parseInt(data.project.count) : 10,
+    status: data.project.status,
     layers: data.layers.map((layer, index) => {
         return {
             name: layer.layer_name,
@@ -49,11 +51,17 @@ export const prepareDataForPost = (data) => {
 }
 export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  async (data, {dispatch})=> {
     // return [];
-  const response =  await  authAxios.get(`/collection/${data}`);
-    const transformedData = getTransformedCollection(response.data);
-    dispatch(updateCollectionData(transformedData));
-    if(transformedData.layers && !transformedData.layers.length) dispatch(addLayer());
-    return response.data;
+    authAxios.get(`/collection/${data}`)
+    .then((response => {
+        const transformedData = getTransformedCollection(response.data);
+        dispatch(updateCollectionData(transformedData));
+        if(transformedData.layers && !transformedData.layers.length) dispatch(addLayer());
+        return response.data;
+    }))
+    .catch(err => {
+        console.error(err);
+    })
+  
 
 });
 export const postCollection = createAsyncThunk('/collection/save', async (data, {getState ,dispatch}) => {
@@ -97,9 +105,10 @@ const initialState = {
     projectHash: null,
     title: '',
     dimensionHeight: '',
-    dimensionWidth: '',
+    dimensionWidth: '', 
     noOfNft: '',
     layers: [],
+    status: null,
     error: {},
 }
 

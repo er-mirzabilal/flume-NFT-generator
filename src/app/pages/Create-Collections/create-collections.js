@@ -104,7 +104,7 @@ const CreateCollection = () => {
       else if(dimensionHeight && dimensionHeight > 1200) err.dimensionHeight = 'Height must <= 1200px';
       if (!dimensionWidth) err.dimensionWidth = 'Width is required';
       else if(dimensionWidth && dimensionWidth > 1200) err.dimensionWidth = 'Width must <= 1200px'; 
-      if(noOfNft < 10 || noOfNft > 10000) err.noOfNft = 'Number of  NFT must > 10 and < 10000';
+      if(noOfNft < 1 || noOfNft > 10000) err.noOfNft = 'Number of  NFT must >= 1 and <= 10000';
       
       if(Object.keys(err).length){
         updateError(err);
@@ -133,9 +133,17 @@ const CreateCollection = () => {
    
   }
   const generate = async () => {
-    setGenerating(true);
-    dispatch(generateCollection());
-    navigate(`/preview-images/${params.id}`);
+    validate()
+    .then(async() => {
+      if(error && Object.keys(error).length) dispatch(updateError({}));
+      setGenerating(true);
+      dispatch(generateCollection());
+      navigate(`/preview-images/${params.id}`);
+    })
+    .catch(err => {
+      dispatch(updateError(err));
+    })
+  
   }
   const renderCollection = () => {
   
