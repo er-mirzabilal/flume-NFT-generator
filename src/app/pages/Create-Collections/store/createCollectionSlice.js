@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {authAxios} from '../../../api/core';
+import { authAxios } from '../../../api/core';
 
 export const getTransformedCollection = (data) => {
    const transformedCollection = {
@@ -48,21 +48,18 @@ export const prepareDataForPost = (data) => {
     return preparedData;
 }
 export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  async (data, {dispatch})=> {
-    authAxios.get(`/collection/${data}`).then((response) => {
-        if(response?.data){
-            const transformedData = getTransformedCollection(response.data);
-            dispatch(updateCollectionData(transformedData));
-        }
-    })
-    .catch((err) => {
-        console.error(err)
-    })
+    // return [];
+  const response =  await  authAxios.get(`/collection/${data}`);
+    const transformedData = getTransformedCollection(response.data);
+    dispatch(updateCollectionData(transformedData));
+    console.log('end', response.data);
+    return response.data;
 
 });
 export const postCollection = createAsyncThunk('/collection/save', async (data, {getState ,dispatch}) => {
     const stateData = getState().createCollection;
     const formattedData = prepareDataForPost(stateData);
-    authAxios.post(`/collection`,{...formattedData, generate: false})
+   await authAxios.post(`/collection`,{...formattedData, generate: false})
     .then((response) => {
         console.log(response.data, 'suces');
     })
@@ -74,7 +71,7 @@ export const postCollection = createAsyncThunk('/collection/save', async (data, 
 export const generateCollection = createAsyncThunk('/collection/generate', async (data, {getState ,dispatch}) => {
     const stateData = getState().createCollection;
     const formattedData = prepareDataForPost(stateData);
-    authAxios.post(`/collection`,{...formattedData, generate: true})
+    await authAxios.post(`/collection`,{...formattedData, generate: true})
     .then((response) => {
         console.log(response.data, 'suces');
     })
@@ -93,6 +90,7 @@ export const uploadImageToServer = createAsyncThunk('/collection/uploadImage', a
 
 
 });
+
 const initialState = {
     loading: true,
     id: null,
@@ -102,18 +100,30 @@ const initialState = {
     dimensionWidth: '',
     noOfNft: '',
     layers: [],
-    error: {}
+    error: {},
 }
 
 export const counterSlice = createSlice({
   name: 'createCollection',
   initialState,
   reducers: {
+    updateState: (state, action) =>{
+        return {...action.payload};
+    },
+    updateStateAttr: (state, action) => {
+        const {attr, data} = action.payload
+        if(attr){
+            state[attr] = data;
+        }
+    },
+    updateError: (state, action) => {
+        state.error = action.payload;
+    },
     updateLoading: (state, action) => {
         state.loading = action.payload;
     },
     updateCollectionData: (state, action) => {
-        return {...action.payload, loading: false};
+        return {...state, loading: false, ...action.payload};
      
     },
     updateTitle: (state, action) => {
@@ -225,6 +235,6 @@ export const counterSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {updateLoading, updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,
     updateNoOfNft, updateLayers, addLayer, deleteLayer,updateLayerName, moveLayer,
-     addLayerItem ,updateLayerItem, reset, updateCollectionData, } = counterSlice.actions
+     addLayerItem ,updateLayerItem, reset, updateCollectionData, updateError, updateStateAttr, updateState} = counterSlice.actions
 
 export default counterSlice.reducer

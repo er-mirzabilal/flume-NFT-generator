@@ -1,5 +1,5 @@
 export const collectionStatus = {
     PENDING: 'PENDING',
-    GENERETING: 'GENERETING',
+    GENERATING: 'GENERATING',
     GENERATED: 'GENERATED',
 }

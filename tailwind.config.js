@@ -9,8 +9,8 @@ module.exports = {
         'primary': '#7C2AE8',
         'secondary': '#00C4CC',
         'third': '#183B56',
-        'white': '#FFFFFF',
-        'gray': '#ECF1F9',
+        // 'white': '#FFFFFF',
+        // 'gray': '#ECF1F9',
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
@@ -24,7 +24,7 @@ module.exports = {
         'featured6': "url('/src/assets/images/featured-icons/featured6-img.png')",
         'featured7': "url('/src/assets/images/featured-icons/featured7-img.png')",
         'featured8': "url('/src/assets/images/featured-icons/featured8-img.png')",
-        'login1': "url('/src/assets/images/login/bg-2.png')",
+        'login1': "url('/src/assets/images/login/bg-1.png')",
         'liveCollection1': "url('/src/assets/images/live/banner.png')",
       }
     },

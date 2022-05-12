@@ -3,7 +3,6 @@ export const  BASEURL = 'http://localhost:8000/api';
 
 const access_token  = localStorage.getItem('flume_auth_token');
 // axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
-console.log(access_token, 'token');
 export const authAxios = axios.create({
     baseURL: BASEURL,
     headers: {

@@ -1,16 +1,12 @@
-import Header from '../Components/Header/Header';
-import  viewCollection1img from '../../../assets/images/collections/view/view-collection1-img.png';
-import view1 from '../../../assets/images/collections/view/NFT/view1.png';
-import view2 from '../../../assets/images/collections/view/NFT/view2.png';
-import view3 from '../../../assets/images/collections/view/NFT/view3.png';
-import view4 from '../../../assets/images/collections/view/NFT/view4.png';
-import { useEffect, useState } from 'react';
-import { createCollection, getColections } from '../../api/core';
-import { Button, CircularProgress, Typography } from '@mui/material';
-import  noPreviewImage from '../../../assets/images/collections/no-preview2.jpeg'
-import {useNavigate} from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
+import { Button, CircularProgress, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import noPreviewImage from '../../../assets/images/collections/no-preview2.jpeg';
+import viewCollection1img from '../../../assets/images/collections/view/view-collection1-img.png';
+import { createCollection, getColections } from '../../api/core';
 import { collectionStatus } from '../../utils/constants';
+import Header from '../Components/Header/Header';
 const ViewCollection = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -47,7 +43,7 @@ const ViewCollection = () => {
             case collectionStatus.PENDING :
                 navigate(`/create-collections/${data.id}`);
                 break;
-            case collectionStatus.GENERETING :
+            case collectionStatus.GENERATING :
                 navigate(`/preview-images/${data.id}`);
                 break;
             case collectionStatus.GENERATED :
