@@ -1,4 +1,5 @@
 import axios from 'axios';
+import http from './http';
 export const  BASEURL = 'http://localhost:8000/api';
 
 const access_token  = localStorage.getItem('flume_auth_token');
@@ -46,7 +47,7 @@ export const createColection = (data) => {
 
 export const getColections = () => { 
     return new Promise((resolve, reject) => {
-        authAxios.get(`/project`).then((response) => {
+        http.get(`/project`).then((response) => {
             resolve(response)
         })
         .catch((err) => {
@@ -77,13 +78,23 @@ export const getCollection = (id) => {
     })
 }
 
-export const getGeneratedCollection = (id) => {
+export const getGeneratedCollection = (id, params = {}) => {
     return new Promise((resolve, reject) => {
-        authAxios.get(`collection-item/${id}`).then(response => {
+        authAxios.get(`collection-item/${id}`, {params}).then(response => {
             resolve(response.data)
         })
         .catch((err) => {
             console.error(err);
+        })
+    })
+}
+export const postGenerateCollection = (data) => {
+    return new Promise((resolve, reject) => {
+        http.post(`/collection`,data).then((response) => {
+            resolve(response.data)
+        })
+        .catch((err) => {
+            return err;
         })
     })
 }

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authAxios } from '../../../api/core';
-import CustomizedSnackbar from '../../Components/CustomizedSnackbar';
+import CustomizedSnackbar from '../../Components/CustomizeStackBar.js/CustomizedSnackbar';
+import { showMessage } from '../../store/messageSlice';
 
 export const getTransformedCollection = (data) => {
    const transformedCollection = {
@@ -51,7 +52,7 @@ export const prepareDataForPost = (data) => {
 }
 export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  async (data, {dispatch})=> {
     // return [];
-    authAxios.get(`/collection/${data}`)
+   await authAxios.get(`/collection/${data}`)
     .then((response => {
         const transformedData = getTransformedCollection(response.data);
         dispatch(updateCollectionData(transformedData));
@@ -69,23 +70,25 @@ export const postCollection = createAsyncThunk('/collection/save', async (data, 
     const formattedData = prepareDataForPost(stateData);
    await authAxios.post(`/collection`,{...formattedData, generate: false})
     .then((response) => {
-        console.log(response.data, 'suces');
+        dispatch(showMessage({message: 'Collection successfully saved !', soverity: 'success'}));
     })
     .catch((err) => {
-        console.log(err)
+        showMessage({message: 'Something went wrong while saving !', soverity: 'error'})
     })
 });
 
 export const generateCollection = createAsyncThunk('/collection/generate', async (data, {getState ,dispatch}) => {
-    const stateData = getState().createCollection;
-    const formattedData = prepareDataForPost(stateData);
-    await authAxios.post(`/collection`,{...formattedData, generate: true})
-    .then((response) => {
-        console.log(response.data, 'suces');
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+    try{
+        const stateData = getState().createCollection;
+        const formattedData = prepareDataForPost(stateData);
+        const data = await authAxios.post(`/collection`,{...formattedData, generate: true})
+        return data.response;
+    
+    }
+    catch(err) {
+        showMessage({message: "Something went wrong while generating collection!", soverity: "error"});
+    }
+ 
 });
 export const uploadImageToServer = createAsyncThunk('/collection/uploadImage', async (data, {dispatch}) => {
     authAxios.post(`/upload`,data.image)
@@ -100,7 +103,6 @@ export const uploadImageToServer = createAsyncThunk('/collection/uploadImage', a
 });
 
 const initialState = {
-    loading: true,
     id: null,
     projectHash: null,
     title: '',
@@ -132,7 +134,7 @@ export const counterSlice = createSlice({
         state.loading = action.payload;
     },
     updateCollectionData: (state, action) => {
-        return {...state, loading: false, ...action.payload};
+        return {...state, ...action.payload};
      
     },
     updateTitle: (state, action) => {

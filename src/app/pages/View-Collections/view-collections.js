@@ -28,7 +28,6 @@ const ViewCollection = () => {
         const edition = 'Untitled_' + Math.floor((Math.random() * 100) + 1);
         createCollection({edition, count: 0 })
         .then(response => {
-            console.log(response.data, 'newCollection');
             const id = response?.data?.id;
             if(id) navigate(`/create-collections/${id}`)
         })

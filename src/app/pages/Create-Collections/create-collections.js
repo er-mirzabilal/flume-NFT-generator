@@ -60,14 +60,20 @@ const CreateCollection = () => {
   const [open, setOpen] = useState(false);
   const imageInputRef = useRef([]);  
   const {title, dimensionWidth, dimensionHeight, imagePreview,
-     noOfNft, layers, loading, error} = useSelector((state)=> state.createCollection);
+     noOfNft, layers, error} = useSelector((state)=> state.createCollection);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=> {
+  const initialize  = async () => {
     if(params?.id){
-      dispatch(fetchCollection(params.id));
+      setLoading(true);
+     await dispatch(fetchCollection(params.id));
+     setLoading(false);
     }
+  }
+  useEffect(()=> {
+    initialize();
     return () => dispatch(reset())
-  },[dispatch, params?.id]);
+  },[params?.id]);
 
   const renderNavigator = () => {
     return (
@@ -104,7 +110,7 @@ const CreateCollection = () => {
       else if(dimensionHeight && dimensionHeight > 1200) err.dimensionHeight = 'Height must <= 1200px';
       if (!dimensionWidth) err.dimensionWidth = 'Width is required';
       else if(dimensionWidth && dimensionWidth > 1200) err.dimensionWidth = 'Width must <= 1200px'; 
-      if(noOfNft < 1 || noOfNft > 10000) err.noOfNft = 'Number of  NFT must >= 1 and <= 10000';
+      // if(noOfNft < 1 || noOfNft > 10000) err.noOfNft = 'Number of  NFT must >= 1 and <= 10000';
       
       if(Object.keys(err).length){
         updateError(err);
@@ -125,7 +131,7 @@ const CreateCollection = () => {
       setSaving(true);
       await dispatch(postCollection());
       setSaving(false);
-      setOpen(true);
+      // setOpen(true);
     })
     .catch(err => {
       dispatch(updateError(err));
@@ -137,8 +143,8 @@ const CreateCollection = () => {
     .then(async() => {
       if(error && Object.keys(error).length) dispatch(updateError({}));
       setGenerating(true);
-      dispatch(generateCollection());
-      navigate(`/preview-images/${params.id}`);
+      const data = await dispatch(generateCollection());
+      if(data) navigate(`/preview-images/${params.id}`);
     })
     .catch(err => {
       dispatch(updateError(err));
@@ -194,7 +200,7 @@ const CreateCollection = () => {
       </div>
       <FormControl>
         <lable class="text-md block my-2">Enter the number of NFT to mint:</lable>
-        <TextField error={error && error.noOfNft} id="demo-helper-text-misaligned-no-helper" fullWidth size="small" value={noOfNft} onChange={(e) => {
+        <TextField type="number" error={error && error.noOfNft} id="demo-helper-text-misaligned-no-helper" fullWidth size="small" value={noOfNft} onChange={(e) => {
             if(error && error.noOfNft) removeError('noOfNft');
           dispatch(updateNoOfNft(e.target.value))}} />
         {error && error.noOfNft ? (<FormHelperText error> {error.noOfNft}</FormHelperText>): ''}

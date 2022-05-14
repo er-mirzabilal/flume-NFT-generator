@@ -7,6 +7,7 @@ import LiveCollection from './app/pages/Live-Collection/live-collection';
 import CreateCollection from './app/pages/Create-Collections/create-collections';
 import Preview from './app/pages/Preview/Preview';
 import  Login  from './app/pages/Login/Login';
+import CustomizedSnackbar from './app/pages/Components/CustomizeStackBar.js/CustomizedSnackbar';
 // import './App.css';
 import ProtectedRoute from './Route/ProtectedRoute'
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 </Routes>
             </CSSTransition>
         </TransitionGroup>
+        <CustomizedSnackbar />
     </div>
   );
 }
