@@ -12,6 +12,7 @@ export const getTransformedCollection = (data) => {
     dimensionWidth: data.project.dim2 ? parseInt(data.project.dim2) : 500,
     noOfNft: data.project.count ? parseInt(data.project.count) : 10,
     status: data.project.status,
+    displayImage: data?.project?.display_image,
     layers: data.layers.map((layer, index) => {
         return {
             name: layer.layer_name,
@@ -35,6 +36,7 @@ export const prepareDataForPost = (data) => {
             dim1: data.dimensionHeight,
             dim2: data.dimensionWidth,
             count: data.noOfNft,
+            display_image: data.displayImage
         },
         layers: data.layers.map((layer, index) => {
             return {
@@ -112,6 +114,7 @@ const initialState = {
     layers: [],
     status: null,
     error: {},
+    displayImage: null
 }
 
 export const counterSlice = createSlice({

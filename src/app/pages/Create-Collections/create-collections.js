@@ -25,10 +25,11 @@ import blankimg from '../../../assets/images/collections/create/Layer1/Group 87.
 import Empty from "../../../assets/images/collections/empty.png";
 import Header from "../Components/Header/Header";
 import LayerToolBar from '../Components/Menu/Menu';
+import ImagePreview from './ImagePreview';
 
 import {
   addLayer, deleteLayer, fetchCollection, generateCollection, moveLayer, postCollection, reset, updateDimensionHeight,
-  updateDimensionWidth, updateError, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle, uploadImageToServer
+  updateDimensionWidth, updateError, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle, uploadImageToServer, updateStateAttr
 } from './store/createCollectionSlice';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -59,7 +60,7 @@ const CreateCollection = () => {
   const [generating, setGenerating] = useState(false);
   const [open, setOpen] = useState(false);
   const imageInputRef = useRef([]);  
-  const {title, dimensionWidth, dimensionHeight, imagePreview,
+  const {title, dimensionWidth, dimensionHeight, displayImage,
      noOfNft, layers, error} = useSelector((state)=> state.createCollection);
   const [loading, setLoading] = useState(true);
 
@@ -151,17 +152,32 @@ const CreateCollection = () => {
     })
   
   }
+
+  const randomizeLayersImages = () => {
+    const url = layers.map((layer)=> {
+        if(layer?.items?.length){
+          const index = Math.floor(Math.random() * layer.items.length);
+          return layer?.items[index].imageUrl
+        }
+    })
+    return url;
+  }
+  const randomizePreview = () => {
+    const images = randomizeLayersImages();
+    dispatch(updateStateAttr({attr: 'displayImage', data: images}))
+  }
   const renderCollection = () => {
   
     return (
       <section class="text-third">
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-row mx-auto my-5">
       <div class="w-fit p-4 self-center">
-      <div class="w-72 lg:w-60 md:w-52 sm:w-40 rounded-xl shadow-xl">
-      <img src={imagePreview || Empty} class="w-full h-full" alt=""/>
-      </div>
+        <ImagePreview images = {displayImage}/>
+      
       <div class="flex flex-row justify-center py-5">
-      <button class="bg-secondary p-2 rounded-lg mx-2 text-white"><ShuffleIcon /> Randomize</button>
+      <button class="bg-secondary p-2 rounded-lg mx-2 text-white"
+        onClick={()=> randomizePreview()}
+      ><ShuffleIcon /> Randomize</button>
       </div>
       </div>
       <div class="grow-1 p-4 align-baseline">
@@ -429,7 +445,7 @@ const CreateCollection = () => {
       <>
         {renderCollection()}
         <section>
-        <div class="max-w-screen-2xl lg:w-11/12 flex flex-wrap mx-auto my-5">
+        <div class="max-w-screen-2xl lg:w-11/12 flex items-start flex-wrap mx-auto my-5">
         {renderLayers()}
         <div class="w-1/3  m-2 p-3">
         <button class="bg-cyan-500 text-lg py-2 px-5 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} > <AddIcon /> Layer</button>

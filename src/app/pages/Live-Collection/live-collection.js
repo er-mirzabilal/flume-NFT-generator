@@ -7,7 +7,6 @@ import { ArrowRight } from "@mui/icons-material";
 import ViewCollection1img from "../../../assets/images/live/Etherscan.png";
 import ViewCollection2img from "../../../assets/images/live/Opensea.png";
 const LiveCollection = () => {
-  console.log("in");
   return (
     <div>
       <Header />
