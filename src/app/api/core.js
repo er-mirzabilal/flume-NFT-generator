@@ -1,20 +1,11 @@
 import axios from 'axios';
 import http from './http';
-export const  BASEURL = 'http://localhost:8000/api';
 
-const access_token  = localStorage.getItem('flume_auth_token');
-// axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
-export const authAxios = axios.create({
-    baseURL: BASEURL,
-    headers: {
-        Authorization: 'Bearer ' + access_token
-    }
-})
 
 export const getNonce = (data) => { 
     return new Promise((resolve, reject) => {
     
-        http.post(`${BASEURL}/nonce`, data).then((response) => {
+        http.post(`/nonce`, data).then((response) => {
             resolve(response)
         })
         .catch((err) => {
@@ -25,7 +16,7 @@ export const getNonce = (data) => {
 
 export const authenticate = (data) => { 
     return new Promise((resolve, reject) => {
-        http.post(`${BASEURL}/auth`, data).then((response) => {
+        http.post(`/auth`, data).then((response) => {
             resolve(response)
         })
         .catch((err) => {
