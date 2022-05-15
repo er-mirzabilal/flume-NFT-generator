@@ -2,7 +2,6 @@ import Empty from "../../../assets/images/collections/empty.png";
 
 
 export default function ImagePreview({images}){
-    console.log(images, 'images');
     if(images && images.length){
         return (
             
