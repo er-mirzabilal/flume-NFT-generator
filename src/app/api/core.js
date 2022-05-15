@@ -14,7 +14,7 @@ export const authAxios = axios.create({
 export const getNonce = (data) => { 
     return new Promise((resolve, reject) => {
     
-        axios.post(`${BASEURL}/nonce`, data).then((response) => {
+        http.post(`${BASEURL}/nonce`, data).then((response) => {
             resolve(response)
         })
         .catch((err) => {
@@ -25,7 +25,7 @@ export const getNonce = (data) => {
 
 export const authenticate = (data) => { 
     return new Promise((resolve, reject) => {
-        axios.post(`${BASEURL}/auth`, data).then((response) => {
+        http.post(`${BASEURL}/auth`, data).then((response) => {
             resolve(response)
         })
         .catch((err) => {
@@ -36,7 +36,7 @@ export const authenticate = (data) => {
 
 export const createColection = (data) => { 
     return new Promise((resolve, reject) => {
-        authAxios.post(`/project`, data).then((response) => {
+        http.post(`/project`, data).then((response) => {
             resolve(response)
         })
         .catch((err) => {
@@ -58,7 +58,7 @@ export const getColections = () => {
 
 export const createCollection = (data) => {
     return new Promise((resolve, reject) => {
-        authAxios.post(`/project`, data).then((response) => {
+        http.post(`/project`, data).then((response) => {
             resolve(response)
         })
         .catch((err) => {
@@ -69,7 +69,7 @@ export const createCollection = (data) => {
 
 export const getCollection = (id) => {
     return new Promise((resolve, reject) => {
-        authAxios.get(`/collection/${id}`).then((response) => {
+        http.get(`/collection/${id}`).then((response) => {
             resolve(response.data)
         })
         .catch((err) => {
@@ -80,7 +80,7 @@ export const getCollection = (id) => {
 
 export const getGeneratedCollection = (id, params = {}) => {
     return new Promise((resolve, reject) => {
-        authAxios.get(`collection-item/${id}`, {params}).then(response => {
+        http.get(`collection-item/${id}`, {params}).then(response => {
             resolve(response.data)
         })
         .catch((err) => {
@@ -97,4 +97,10 @@ export const postGenerateCollection = (data) => {
             return err;
         })
     })
+}
+
+export const removeAuthLocalStorage = () => {
+    localStorage.removeItem('flume_auth_token');
+    localStorage.removeItem('flume_notify_token');
+    return true;
 }

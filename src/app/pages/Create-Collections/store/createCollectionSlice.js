@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authAxios } from '../../../api/core';
-import CustomizedSnackbar from '../../Components/CustomizeStackBar.js/CustomizedSnackbar';
+import http from '../../../api/http';
 import { showMessage } from '../../store/messageSlice';
 
 export const getTransformedCollection = (data) => {
@@ -54,7 +53,7 @@ export const prepareDataForPost = (data) => {
 }
 export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  async (data, {dispatch})=> {
     // return [];
-   await authAxios.get(`/collection/${data}`)
+   await http.get(`/collection/${data}`)
     .then((response => {
         const transformedData = getTransformedCollection(response.data);
         dispatch(updateCollectionData(transformedData));
@@ -70,7 +69,7 @@ export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  
 export const postCollection = createAsyncThunk('/collection/save', async (data, {getState ,dispatch}) => {
     const stateData = getState().createCollection;
     const formattedData = prepareDataForPost(stateData);
-   await authAxios.post(`/collection`,{...formattedData, generate: false})
+   await http.post(`/collection`,{...formattedData, generate: false})
     .then((response) => {
         dispatch(showMessage({message: 'Collection successfully saved !', soverity: 'success'}));
     })
@@ -83,7 +82,7 @@ export const generateCollection = createAsyncThunk('/collection/generate', async
     try{
         const stateData = getState().createCollection;
         const formattedData = prepareDataForPost(stateData);
-        const data = await authAxios.post(`/collection`,{...formattedData, generate: true})
+        const data = await http.post(`/collection`,{...formattedData, generate: true})
         return data.response;
     
     }
@@ -93,7 +92,7 @@ export const generateCollection = createAsyncThunk('/collection/generate', async
  
 });
 export const uploadImageToServer = createAsyncThunk('/collection/uploadImage', async (data, {dispatch}) => {
-    authAxios.post(`/upload`,data.image)
+    http.post(`/upload`,data.image)
     .then(response => {
         dispatch(addLayerItem({index: data.index, imageUrl:  response.data.url[0]}));
     })

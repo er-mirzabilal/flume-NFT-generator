@@ -53,11 +53,12 @@ const Preview = () => {
    }
 
    useEffect(() => {
+      console.log('useEffect')
       if(params?.id){
          initialize();
          return () => dispatch(updateStateAttr({attr: "isImageGenerated", data: null}))
       }    
-   },[params?.id]);
+   },[]);
    
    useEffect(() => {
       if(isImageGenerated){
@@ -145,6 +146,7 @@ const Preview = () => {
    ): (
       <>
          <section class="w-4/5 mx-auto my-4">
+            <Button onClick={()=> navigate('/test')}> Test</Button>
             <Button startIcon={<EditIcon /> } color="secondary" variant="contained" sx={{marginRight: 2}}><p style={{color: "white"}}
                onClick={()=> setOpen(true)}
             >Back to Edit</p></Button>

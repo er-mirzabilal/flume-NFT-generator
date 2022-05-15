@@ -5,7 +5,7 @@ import {useState} from "react";
 import CustomizedDialogs from "../Model/CustomizedDialogs";
 import Typography from "@mui/material/Typography";
 import { useWeb3React } from "@web3-react/core";
-
+import { removeAuthLocalStorage } from "../../../api/core";
 const Header = () => {
     const {active, deactivate, account} = useWeb3React()
     const navigate = useNavigate();
@@ -19,6 +19,11 @@ const Header = () => {
             </div>
     )
     }
+    const logoutAccount = async () => {
+        deactivate();
+        removeAuthLocalStorage();
+        navigate('/');
+    };
     return (
         <>
                 <header class="sticky top-0 z-10 body-font shadow-lg bg-white">
@@ -27,7 +32,7 @@ const Header = () => {
                     <img src={Logo} />
                   </a>
                   <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
-                    <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank">Guide</a>
+                    <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank" rel="noreferrer">Guide</a>
                     <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer">
                       <img src={Vector} />
                     </a>
@@ -51,10 +56,7 @@ const Header = () => {
                 </div>
               </header>
             {active && (
-                <CustomizedDialogs open={openWallet} handleClose={()=> setOpenWallet(false)} title='My wallet' content={renderWalletContent()} primaryLabel= 'Logout' primaryAction={()=> {
-                    deactivate();
-                    navigate('/');
-                }} />
+                <CustomizedDialogs open={openWallet} handleClose={()=> setOpenWallet(false)} title='My wallet' content={renderWalletContent()} primaryLabel= 'Logout' primaryAction={()=> logoutAccount()} />
             )}
 
         </>

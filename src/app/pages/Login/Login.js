@@ -6,12 +6,9 @@ import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import login1img from "../../../assets/images/login/login1-img.png";
-import login2img from "../../../assets/images/login/login2-img.png";
-import login3img from "../../../assets/images/login/login3-img.png";
 import Logo from "../../../assets/images/Logo.png";
 import { authenticate, getNonce } from '../../api/core';
 import { connectors } from '../../utils/connectors';
-import axios from 'axios';
 export default function Login(props){
 
     const {active, activate, deactivate, library, account} = useWeb3React();

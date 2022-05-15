@@ -11,6 +11,13 @@ import CustomizedSnackbar from './app/pages/Components/CustomizeStackBar.js/Cust
 
 // import './App.css';
 import ProtectedRoute from './Route/ProtectedRoute'
+
+const Test = () => {
+  console.log('test');
+  return (
+    <div> Test</div>
+  )
+}
 function App() {
     const location = useLocation();
   return (
@@ -25,6 +32,8 @@ function App() {
                         <Route path="/create-collections/:id" element={<CreateCollection/>}/>
                         <Route path="/preview-images/:id" element={<Preview/>}/>
                         <Route path="/live-collection" element={<LiveCollection/>}/>
+                        <Route path="/test" element={<Test />}/>
+
                     </Route>
                 </Routes>
             </CSSTransition>
