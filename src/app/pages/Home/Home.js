@@ -27,7 +27,7 @@ export default function ButtonAppBar() {
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl mx-auto flex sm:flex-nowrap flex-wrap">
           <div class="pl-6 sm:pl-10 pr-6 sm:pr-10 sm:py-0 py-10 self-center">
-            <h2 class="xl:text-7xl lg:text-5xl md:text-4xl text-3xl lg:mb-4 mb-1 font-semibold text-third">
+            <h2 class="lg:text-5xl md:text-4xl text-3xl lg:mb-4 mb-1 font-semibold text-third">
             Create and Deploy<br></br> NFT Collections<br></br> without coding
             </h2>
             
@@ -37,12 +37,12 @@ export default function ButtonAppBar() {
             </p>
             <div class="flex no-wrap">
               <a href="#">
-                <button class="m-1 text-white bg-primary border-0 py-2 sm:px-6 px-2 focus:outline-primary rounded font-semibold sm:text-lg text-md">
+                <button class="m-1 text-white bg-primary border-0 py-2 sm:px-6 px-2 focus:outline-primary rounded font-semibold text-md lg:text-lg">
                   Join the Discord
                 </button>
               </a>
               <a href="/create-collections">
-                <button class="m-1 text-white bg-secondary border-0 py-2 sm:px-6 px-2 focus:outline-secondary rounded font-semibold sm:text-lg text-md">
+                <button class="m-1 text-white bg-secondary border-0 py-2 sm:px-6 px-2 focus:outline-secondary rounded font-semibold text-md lg:text-lg">
                   Generate Collection
                 </button>
               </a>
@@ -57,7 +57,7 @@ export default function ButtonAppBar() {
           </div>
         </div>
       </section>
-      <section class="text-gray-600 bg-gray body-font">
+      <section class="text-gray-600 bg-gray-200 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap-reverse">
           <div class="my-10 mr-0 ml-auto shrink-0">
             <img
@@ -67,12 +67,12 @@ export default function ButtonAppBar() {
             />
           </div>
 
-          <div class="my-6 md:my-10 pl-0 sm:pl-6 text-left flex flex-col justify-evenly">
+          <div class="my-6 md:my-10 pl-0 sm:pl-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
             <div>
-            <h2 class="text-2xl font-normal text-primary">Easy</h2>
-            <hr class="w-6 mb-3 text-2xl font-normal border-primary" />
+            <h2 class="lg:text-2xl text-lg font-normal text-primary">Easy</h2>
+            <hr class="w-6 mb-3 lg:text-2xl text-lg font-normal border-primary" />
             </div>
-            <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
+            <h1 class="text-third font-medium lg:text-5xl text-3xl mb-3">
               The simplest way to {" "}
               <span class="text-secondary">
                 {" "}
@@ -81,14 +81,14 @@ export default function ButtonAppBar() {
               collections on the blockchain
             </h1>
 
-            <p class="text-third font-normal text-xl md:text-2xl mb-3">
+            <p class="text-third font-normal lg:2xl text-xl mb-3">
             Create 10,000+ NFT collections, by uploading the layers. Without requiring code
             </p>
             <a
               href="https://docs-flume.gitbook.io/flume/what-is-flume/general-flow"
               target="_blank" rel="noreferrer"
             >
-              <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-sm md:text-lg sm:px-6 px-2">
+              <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-md lg:text-lg sm:px-6 px-2">
                 Learn More
               </button>
             </a>
@@ -97,20 +97,20 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap">
-          <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-evenly">
+          <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
           <div>
-          <h2 class="text-2xl font-normal text-primary">
+          <h2 class="lg:text-2xl text-lg font-normal text-primary">
             Integrated
             </h2>
-            <hr class="w-6 mb-3 text-2xl font-normal border-primary" />
+            <hr class="w-6 mb-3 lg:text-2xl text-lg font-normal border-primary" />
           </div>
             
-            <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
+            <h1 class="text-third font-medium lg:text-5xl text-3xl mb-3">
             Trade your NFTs on famous marketplaces like{" "}
               <span class="text-secondary">OpenSea</span>
             </h1>
 
-            <p class="text-third font-normal text-xl md:text-2xl mb-3">
+            <p class="text-third font-normal lg:2xl text-xl mb-3">
             Once minted, the NFTs will be instantly available in the most
             famous NFT marketplaces and ready for sale.
             </p>
@@ -119,7 +119,7 @@ export default function ButtonAppBar() {
               href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/marketplaces-sync"
               target="_blank" rel="noreferrer"
             >
-              <button className="flex px-2 py-2 text-sm font-semibold text-white border-0 rounded bg-primary focus:outline-primary md:text-lg sm:px-6">
+              <button className="flex px-2 py-2 font-semibold text-white border-0 rounded bg-primary focus:outline-primary text-md lg:text-lg sm:px-6">
                 Learn More
               </button>
             </a>
@@ -143,20 +143,20 @@ export default function ButtonAppBar() {
             />
           </div>
 
-          <div class="mt-6 lg:mt-0 pl-0 sm:pl-6 text-left flex flex-col justify-evenly">
+          <div class="mt-6 lg:mt-0 pl-0 sm:pl-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
           <div>
-          <h2 class="text-2xl font-normal text-primary">
+          <h2 class="lg:text-2xl text-lg font-normal text-primary">
               Powerful
             </h2>
-            <hr class="w-6 mb-3 text-2xl font-normal border-primary" />
+            <hr class="w-6 mb-3 lg:text-2xl text-lg font-normal border-primary" />
           </div>
             
-            <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
+            <h1 class="text-third font-medium lg:text-5xl text-3xl mb-3">
             Configure Rarity,{" "}
               <span class="text-secondary">Mint Price</span>  <br></br>and <span class="font-bold">Deploy</span> to Blockchain
             </h1>
 
-            <p class="text-third font-normal text-xl md:text-2xl mb-3">
+            <p class="text-third font-normal lg:2xl text-xl mb-3">
             Configure certain attributes to be more rare than others, 
             set the minting price and deploy your collection to the blockchain.
             </p>
@@ -164,7 +164,7 @@ export default function ButtonAppBar() {
               href="https://docs-flume.gitbook.io/flume/guides/uploading-content"
               target="_blank" rel="noreferrer"
             >
-            <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-sm md:text-lg sm:px-6 px-2">
+            <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-md lg:text-lg sm:px-6 px-2">
             Learn More
           </button>
             </a>
@@ -173,19 +173,19 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap">
-          <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-evenly">
+          <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
           <div>
-          <h2 class="text-2xl font-normal text-primary">
+          <h2 class="lg:text-2xl text-lg font-normal text-primary">
           Customizable
             </h2>
-            <hr class="w-6 mb-3 text-2xl font-normal border-primary" />
+            <hr class="w-6 mb-3 lg:text-2xl text-lg font-normal border-primary" />
           </div>
             
-            <h1 class="text-third font-medium xl:text-5xl md:text-4xl text-3xl mb-3">
+            <h1 class="text-third font-medium lg:text-5xl text-3xl mb-3">
               <span class="text-secondary"> Pre built </span>  Minting Button
             </h1>
 
-            <p class="text-third font-normal text-xl md:text-2xl mb-3">
+            <p class="text-third font-normal lg:2xl text-xl mb-3">
             Embed a minting button linked to your collection to any website.<br></br> 
             Customize it as you want and allow people to mint<br></br> directly from there.
             </p>
@@ -193,7 +193,7 @@ export default function ButtonAppBar() {
               href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/embedding-into-your-website"
               target="_blank" rel="noreferrer"
             >
-              <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-sm md:text-lg sm:px-6 px-2">
+              <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-md lg:text-lg sm:px-6 px-2">
                 Learn More
               </button>
             </a>
@@ -207,7 +207,7 @@ export default function ButtonAppBar() {
           </div>
         </div>
       </section>
-      <section class="text-gray-600 bg-gray body-font">
+      <section class="text-gray-600 bg-gray-200 body-font">
         <div class="max-w-screen-2xl w-11/12 py-12 mx-auto">
           <h2 class="text-base font-normal title-font text-center text-primary tracking-widest mt-4">
             Fully Featured
@@ -219,7 +219,7 @@ export default function ButtonAppBar() {
           </h2>
 
           <div class="flex flex-wrap text-left">
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                 <div class="h-10">
@@ -237,7 +237,7 @@ export default function ButtonAppBar() {
                 </div>
               </div>
             </div>
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                   <div class="h-10 flex">
@@ -254,7 +254,7 @@ export default function ButtonAppBar() {
                 </div>
               </div>
             </div>
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                   <div class="h-10">
@@ -270,7 +270,7 @@ export default function ButtonAppBar() {
                 </div>
               </div>
             </div>
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                   <div class="h-10">
@@ -287,7 +287,7 @@ export default function ButtonAppBar() {
                 </div>
               </div>
             </div>
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                   <div class="h-10">
@@ -303,7 +303,7 @@ export default function ButtonAppBar() {
                 </div>
               </div>
             </div>
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                   <div class="h-10">
@@ -320,7 +320,7 @@ export default function ButtonAppBar() {
                 </div>
               </div>
             </div>
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class=" bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                   <div class="h-10">
@@ -340,7 +340,7 @@ export default function ButtonAppBar() {
                 </div>
               </div>
             </div>
-            <div class="p-1 md:w-1/4 sm:w-1/2 w-full">
+            <div class="p-1 lg:w-1/4 sm:w-1/2 w-full">
               <div class="bg-white p-6 rounded-lg h-full overflow-hidden relative flex flex-col">
                 <div class="flex flex-col justify-evenly">
                   <div class="h-10">
@@ -378,8 +378,8 @@ export default function ButtonAppBar() {
               <div class="bg-white rounded-b-xl py-5">
                 <div class="flex flex-row">
                   <div class="p-5 font-semibold self-center">
-                    <p class="text-third text-2xl">Polygon</p>
-                    <h3 class="text-primary text-7xl">FREE</h3>
+                    <p class="text-third sm:text-2xl text-lg">Polygon</p>
+                    <h3 class="text-primary lg:text-7xl md:text-5xl sm:text-4xl text-2xl">FREE</h3>
                   </div>
                   <div class="p-5 border-l-2 self-center">
                     <ul class="list-disc font-normal text-lg">
@@ -412,9 +412,9 @@ export default function ButtonAppBar() {
               <div class="bg-white rounded-b-xl py-5">
                 <div class="flex flex-row">
                   <div class="p-5 font-semibold self-center">
-                    <p class="text-third text-2xl">Ethereum</p>
-                    <h3 class="text-secondary text-6xl m-0">0.02</h3>
-                    <h4 class="text-secondary text-3xl">ETH</h4>
+                    <p class="text-third sm:text-2xl text-lg">Ethereum</p>
+                    <h3 class="text-secondary lg:text-7xl md:text-5xl sm:text-4xl text-2xl m-0">0.02</h3>
+                    <h4 class="text-secondary md:text-3xl text-xl">ETH</h4>
                   </div>
                   <div class="p-5 border-l-2 self-center">
                     <ul class="list-disc font-normal text-lg">
@@ -437,14 +437,14 @@ export default function ButtonAppBar() {
         </div>
       </section>
 
-      <section class="bg-gray body-font">
+      <section class="bg-gray-200 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto py-14 flex sm:justify-between justify-center sm:flex-nowrap flex-wrap">
           <div class="m-2 text-third sm:text-left text-center">
-            <h2 class="text-4xl md:text-6xl font-semibold">Ready to get started?</h2>
-            <p class="text-xl md:text-2xl leading-8 mt-3">
+            <h2 class="text-4xl lg:text-6xl font-semibold">Ready to get started?</h2>
+            <p class="text-xl lg:text-2xl leading-8 mt-3">
               Get your NFT collections done and start trading{" "}
             </p>
-            <p class="text-xl md:text-2xl leading-8">
+            <p class="text-xl lg:text-2xl leading-8">
               {" "}
               Any question? Just ping us on{" "}
               <span className="text-primary">
@@ -454,7 +454,7 @@ export default function ButtonAppBar() {
             </p>
           </div>
           <div class="m-2 flex">
-            <button class="bg-secondary text-white rounded-md p-5 w-72 text-2xl font-semibold self-center">
+            <button class="bg-secondary text-white rounded-md p-5 w-72 md:text-lg text-md font-semibold self-center">
               Connect Your Wallet
             </button>
           </div>
@@ -462,7 +462,7 @@ export default function ButtonAppBar() {
       </section>
       <section class=" text-third body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:justify-between justify-center sm:flex-nowrap flex-wrap">
-          <div class="m-2 text-xl font-semibold">
+          <div class="m-2 lg:text-xl text-md font-semibold">
             <nav class="ml-auto flex flex-wrap items-center justify-right">
               <a
                 class="mr-5 hover:text-gray-900 hover:cursor-pointer"
@@ -483,7 +483,7 @@ export default function ButtonAppBar() {
               </a>
             </nav>
           </div>
-          <div class="m-2 text-xl font-semibold">
+          <div class="m-2 lg:text-xl text-md font-semibold">
             <p>Copyright @ Flume 2022, All rights reserved.</p>
           </div>
         </div>
