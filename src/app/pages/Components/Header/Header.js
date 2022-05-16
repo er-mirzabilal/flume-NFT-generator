@@ -6,6 +6,7 @@ import CustomizedDialogs from "../Model/CustomizedDialogs";
 import Typography from "@mui/material/Typography";
 import { useWeb3React } from "@web3-react/core";
 import { removeAuthLocalStorage } from "../../../api/core";
+import { Button } from "@mui/material";
 const Header = () => {
     const {active, deactivate, account} = useWeb3React()
     const navigate = useNavigate();
@@ -38,18 +39,13 @@ const Header = () => {
                     </a>
                   </nav>
                       {active ? (
-                          <button
-                              className="inline-flex items-center px-3 py-1 text-base font-semibold text-white border-0 rounded bg-secondary focus:outline-secondary"
-                          onClick={()=> setOpenWallet(true)}>
-                             My Wallet
-                          </button>
+                          <Button variant="contained" color="secondary"  onClick={()=> setOpenWallet(true)}><p className="text-white font-semibold " >My Wallet</p> </Button>
+            
                       ):
                           (
-                              <button
-                                  className="inline-flex items-center px-3 py-1 text-base font-semibold text-white border-0 rounded bg-secondary focus:outline-secondary sm:mt-0"
-                              onClick={() => navigate('/login')}>
-                                  Connect Wallet
-                              </button>
+                              <Button variant="contained" color="secondary"  onClick={() => navigate('/login')} >
+                                <p className="text-white font-semibold ">  Connect Wallet </p>
+                              </Button>
                           )
                       }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {  Route, Routes, useLocation } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Home from './app/pages/Home/Home';
@@ -9,6 +9,7 @@ import Preview from './app/pages/Preview/Preview';
 import  Login  from './app/pages/Login/Login';
 import CustomizedSnackbar from './app/pages/Components/CustomizeStackBar.js/CustomizedSnackbar';
 
+
 // import './App.css';
 import ProtectedRoute from './Route/ProtectedRoute'
 
@@ -18,8 +19,30 @@ const Test = () => {
     <div> Test</div>
   )
 }
+
+
 function App() {
     const location = useLocation();
+
+    // useEffect(() => {
+    //   if(window.ethereum){
+    //     window.ethereum.on('accountsChanged', updateAccount)
+    //     window.ethereum.on('networkChanged', updateNetwork)
+    //     window.ethereum.on("chainChanged", updateChain)
+    //   }
+    //   // initWeb3()
+    // }, [window.ethereum])
+    
+    // const updateAccount = (data) => {
+    //   console.log('on updateAccount', data);
+    // }
+    // const updateNetwork = (data) => {
+    //   console.log('on updateNetwork', data);
+    // }
+    // const updateChain = (data) => {
+    //   console.log('on updateChain', data);
+    // }
+    
   return (
     <div className="App min-w-[435px] font-poppins">
         <TransitionGroup component={null}>

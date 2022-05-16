@@ -7,6 +7,7 @@ import viewCollection1img from '../../../assets/images/collections/view/view-col
 import { createCollection, getColections } from '../../api/core';
 import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
+import ImagePreview from '../Create-Collections/ImagePreview';
 const ViewCollection = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -53,10 +54,11 @@ const ViewCollection = () => {
       
     }
     const renderCollection = (collection) => {
+        // console.log('col',collection.display_image, collection);
         return (
-            <div class="w-80 rounded-xl m-2 p-4 shadow-xl" onClick={() => openCollection(collection)}>
+            <div class="w-80 rounded-xl m-2 p-4 shadow-lg cursor-pointer hover:shadow-2xl" onClick={() => openCollection(collection)}>
                 <div class="block">
-                    <img src={collection.image_preview || noPreviewImage } alt="Collection preview image" />
+                    <ImagePreview images={collection.display_image} />
                     </div>
                     <div class="flex flex-row pt-2 justify-between">
                     <h3 class="text-third">{collection.edition}</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">{collection.status}</p>
@@ -83,8 +85,8 @@ const ViewCollection = () => {
                 </section>
             )
         return (
-            <div>
-               <Typography> You have no project yet, create one to get started. </Typography>
+            <div className="text-center py-16">
+               <p> You have no project yet, create one to get started. </p>
             </div>
         )
     }
@@ -92,7 +94,7 @@ const ViewCollection = () => {
     return (
         <div>
          <Header />
-         <section class="bg-gray">
+         <section class="bg-gray-100">
          <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap">
          <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left self-center">
          <h1 class="text-primary xl:text-6xl lg:text-5xl md:text-4xl text-3xl mb-3">Create or Monitor</h1>
@@ -104,9 +106,9 @@ const ViewCollection = () => {
          </div>
          </section>
          <section>
-         <div class="max-w-screen-2xl w-11/12 mx-auto mt-8">
+         <div class="max-w-screen-2xl w-11/12 mx-auto mt-8 mb-4">
              <Button color="primary" variant="contained"onClick={() => createNewCollection()} startIcon={creating? <CircularProgress size="1.4rem" color="secondary" /> : <AddIcon /> } disabled={creating}>
-             Create NFT Collection
+             <p  className="text-white font-semibold " >Create NFT Collection </p>
              </Button>
          </div>
          </section>

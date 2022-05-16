@@ -106,11 +106,12 @@ export default function Login(props){
             </div>
             
             <div class="w-full text-center">
-            <p class="mx-auto text-sm pt-5">Don't have a wallet? <span class="text-pink-700"><a href="">Download here</a></span></p>
+            <p class="mx-auto text-sm pt-5">Don't have a wallet? <span class="text-primary"><a href="https://metamask.io/" target="_blank" rel="noreferrer">Download here</a></span></p>
             </div>
             </div>
             <div class="text-center py-8">
-            <p class="tex-sm mx-auto w-fit">By using this app you are accepting these <span class="text-pink-700 underline">terms</span></p>
+            <p class="tex-sm mx-auto w-fit">By using this app you are accepting these <span class="text-primary underline">
+                <a href="https://docs-flume.gitbook.io/flume/flume/terms-of-service" target="_blank" rel="noreferrer" >terms</a></span></p>
             </div>
             </section>
             </div>
