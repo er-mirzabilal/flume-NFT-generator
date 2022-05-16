@@ -147,10 +147,10 @@ const Preview = () => {
       <>
          <section class="w-4/5 mx-auto my-4">
             <Button onClick={()=> navigate('/test')}> Test</Button>
-            <Button startIcon={<EditIcon /> } color="secondary" variant="contained" sx={{marginRight: 2}}><p style={{color: "white"}}
+            <Button startIcon={<EditIcon sx={{color: 'white'}} /> } color="secondary" variant="contained" sx={{marginRight: 2}}><p style={{color: "white"}}
                onClick={()=> setOpen(true)}
             >Back to Edit</p></Button>
-            <Button startIcon={<AutorenewIcon />} color="secondary" variant="contained"
+            <Button startIcon={<AutorenewIcon sx={{color: 'white'}}/>} color="secondary" variant="contained"
               sx={{marginRight: 2}}> <p style={{color: "white"}}
               onClick={()=> generateImage()}
               >

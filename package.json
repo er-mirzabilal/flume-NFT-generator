@@ -17,7 +17,6 @@
     "ethers": "^5.6.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-layered-image": "^2.0.6",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",

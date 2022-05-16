@@ -86,7 +86,7 @@ export default function ButtonAppBar() {
             </p>
             <a
               href="https://docs-flume.gitbook.io/flume/what-is-flume/general-flow"
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-sm md:text-lg sm:px-6 px-2">
                 Learn More
@@ -117,7 +117,7 @@ export default function ButtonAppBar() {
 
             <a
               href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/marketplaces-sync"
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               <button className="flex px-2 py-2 text-sm font-semibold text-white border-0 rounded bg-primary focus:outline-primary md:text-lg sm:px-6">
                 Learn More
@@ -162,7 +162,7 @@ export default function ButtonAppBar() {
             </p>
             <a
               href="https://docs-flume.gitbook.io/flume/guides/uploading-content"
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
             <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-sm md:text-lg sm:px-6 px-2">
             Learn More
@@ -191,7 +191,7 @@ export default function ButtonAppBar() {
             </p>
             <a
               href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/embedding-into-your-website"
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-sm md:text-lg sm:px-6 px-2">
                 Learn More
@@ -467,14 +467,14 @@ export default function ButtonAppBar() {
               <a
                 class="mr-5 hover:text-gray-900 hover:cursor-pointer"
                 href="https://docs-flume.gitbook.io/flume/"
-                target="_blank"
+                target="_blank" rel="noreferrer"
               >
                 Guide
               </a>
               <a
                 class="mr-5 hover:text-gray-900 hover:cursor-pointer"
                 href="https://docs-flume.gitbook.io/flume/flume/terms-of-service"
-                target="_blank"
+                target="_blank" rel="noreferrer"
               >
                 Terms of Services
               </a>
