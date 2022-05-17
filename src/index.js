@@ -26,6 +26,7 @@ const getLibrary = (provider) => {
   return new ethers.providers.Web3Provider(provider);
 }
 ReactDOM.render(
+  <React.StrictMode>
      <ThemeProvider theme={theme}>
         <Provider store={store}>
             <BrowserRouter>
@@ -34,7 +35,8 @@ ReactDOM.render(
                 </Web3ReactProvider>
             </BrowserRouter>
         </Provider>
-    </ThemeProvider>,
+    </ThemeProvider>
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

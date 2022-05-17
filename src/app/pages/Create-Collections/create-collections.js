@@ -20,7 +20,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { styled } from '@mui/material/styles';
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import blankimg from '../../../assets/images/collections/create/Layer1/Group 87.png';
 import Empty from "../../../assets/images/collections/empty.png";
 import Header from "../Components/Header/Header";
@@ -51,7 +51,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 // const socketUrl = `ws://127.0.0.1:8000/ws/notify/${notifyToken}/`;
 const CreateCollection = () => {
   // const [socket, setSockets] = useState(new WebSocket(socketUrl))
-  const navigate = useNavigate()
+  const navigate = useHistory()
   const params = useParams();
   const [expanded, setExpanded] = useState({});
   const [imageValidation, setImageValidation] = useState(null);
@@ -145,7 +145,7 @@ const CreateCollection = () => {
       if(error && Object.keys(error).length) dispatch(updateError({}));
       setGenerating(true);
       const data = await dispatch(generateCollection());
-      if(data) navigate(`/preview-images/${params.id}`);
+      if(data) navigate.push(`/preview-images/${params.id}`);
     })
     .catch(err => {
       dispatch(updateError(err));
@@ -171,7 +171,7 @@ const CreateCollection = () => {
     return (
       <section class="text-third">
       <div class="max-w-screen-2xl lg:w-11/12 flex flex-row mx-auto my-5">
-      <div class="w-fit p-4 self-center">
+      <div class="w-80 p-4 self-center">
         <ImagePreview images = {displayImage}/>
       
       <div class="flex flex-row justify-center py-5">

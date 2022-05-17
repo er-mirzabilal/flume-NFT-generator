@@ -1,6 +1,6 @@
 import Logo from "../../../../assets/images/Logo.png";
 import Vector from "../../../../assets/images/Vector.svg";
-import {useNavigate} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {useState} from "react";
 import CustomizedDialogs from "../Model/CustomizedDialogs";
 import Typography from "@mui/material/Typography";
@@ -9,7 +9,7 @@ import { removeAuthLocalStorage } from "../../../api/core";
 import { Button } from "@mui/material";
 const Header = () => {
     const {active, deactivate, account} = useWeb3React()
-    const navigate = useNavigate();
+    const navigate= useHistory();
     const [openWallet, setOpenWallet] = useState(false);
 
     const renderWalletContent = () => {
@@ -23,7 +23,7 @@ const Header = () => {
     const logoutAccount = async () => {
         deactivate();
         removeAuthLocalStorage();
-        navigate('/');
+        navigate.push('/');
     };
     return (
         <>
@@ -43,7 +43,7 @@ const Header = () => {
             
                       ):
                           (
-                              <Button variant="contained" color="secondary"  onClick={() => navigate('/login')} >
+                              <Button variant="contained" color="secondary"  onClick={() => navigate.push('/login')} >
                                 <p className="text-white font-semibold ">  Connect Wallet </p>
                               </Button>
                           )

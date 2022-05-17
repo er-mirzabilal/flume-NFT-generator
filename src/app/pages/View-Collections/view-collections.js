@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Button, CircularProgress, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import noPreviewImage from '../../../assets/images/collections/no-preview2.jpeg';
 import viewCollection1img from '../../../assets/images/collections/view/view-collection1-img.png';
 import { createCollection, getColections } from '../../api/core';
@@ -9,7 +9,7 @@ import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
 import ImagePreview from '../Create-Collections/ImagePreview';
 const ViewCollection = () => {
-    const navigate = useNavigate();
+    const navigate = useHistory();
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
     const [creating, setCreating] = useState(false);
@@ -30,7 +30,7 @@ const ViewCollection = () => {
         createCollection({edition, count: 0 })
         .then(response => {
             const id = response?.data?.id;
-            if(id) navigate(`/create-collections/${id}`)
+            if(id) navigate.push(`/create-collections/${id}`)
         })
         .catch(error => {
             console.error(error)
@@ -40,16 +40,16 @@ const ViewCollection = () => {
     const openCollection = (data) => {
         switch(data.status) {
             case collectionStatus.PENDING :
-                navigate(`/create-collections/${data.id}`);
+                navigate.push(`/create-collections/${data.id}`);
                 break;
             case collectionStatus.GENERATING :
-                navigate(`/preview-images/${data.id}`);
+                navigate.push(`/preview-images/${data.id}`);
                 break;
             case collectionStatus.GENERATED :
-                navigate(`/preview-images/${data.id}`);
+                navigate.push(`/preview-images/${data.id}`);
                 break;
             default :
-                navigate(`/create-collections/${data.id}`);
+                navigate.push(`/create-collections/${data.id}`);
         }
       
     }
@@ -57,9 +57,7 @@ const ViewCollection = () => {
         // console.log('col',collection.display_image, collection);
         return (
             <div class="w-80 rounded-xl m-2 p-4 shadow-lg cursor-pointer hover:shadow-2xl" onClick={() => openCollection(collection)}>
-                <div class="block">
                     <ImagePreview images={collection.display_image} />
-                    </div>
                     <div class="flex flex-row pt-2 justify-between">
                     <h3 class="text-third">{collection.edition}</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">{collection.status}</p>
                 </div>
