@@ -17,16 +17,18 @@ import Section4img from "../../../assets/images/Section4-img.png";
 import Section5img from "../../../assets/images/Section5-img.png";
 import Vector from "../../../assets/images/Vector.svg";
 import Header from "../Components/Header/Header";
+import { Button } from "@mui/material";
+import {useHistory} from "react-router-dom";
 import "./Home.css";
 export default function ButtonAppBar() {
-
+  const navigate= useHistory();
   return (
     <div>
 
       <Header />
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl mx-auto flex sm:flex-nowrap flex-wrap">
-          <div class="pl-6 sm:pl-10 pr-6 sm:pr-10 sm:py-0 py-10 self-center">
+          <div class="pl-6 sm:pl-10 sm:w-1/2 w-full pr-6 sm:pr-10 sm:py-0 py-10 self-center">
             <h2 class="lg:text-5xl md:text-4xl text-3xl lg:mb-4 mb-1 font-semibold text-third">
             Create and Deploy<br></br> NFT Collections<br></br> without coding
             </h2>
@@ -36,21 +38,19 @@ export default function ButtonAppBar() {
             <br></br>All in a matter of minutes!
             </p>
             <div class="flex no-wrap">
-              <a href="#">
-                <button class="m-1 text-white bg-primary border-0 py-2 sm:px-6 px-2 focus:outline-primary rounded font-semibold text-md lg:text-lg">
-                  Join the Discord
-                </button>
-              </a>
-              <a href="/create-collections">
-                <button class="m-1 text-white bg-secondary border-0 py-2 sm:px-6 px-2 focus:outline-secondary rounded font-semibold text-md lg:text-lg">
-                  Generate Collection
-                </button>
-              </a>
+              
+                <Button sx={{ fontWeight: 600,margin:'4px'}} color="primary" variant="contained"
+             >Join the Discord</Button>
+            
+                <Button onClick={() => navigate.push('/view-collections')}
+                  sx={{ color:'white',fontWeight: 600,margin:'4px'}} color="secondary" variant="contained"
+                  >Generate Collection</Button>
+              
             </div>
           </div>
-          <div class="px-6 sm:px-0 mr-0 ml-auto shrink-0">
+          <div class="px-6 sm:w-1/2 w-full sm:pr-0 lg:pl-28 sm:pl-12 mr-0 ml-auto shrink-0">
             <img
-              class="w-96 h-96 xl:w-full xl:h-auto rounded"
+              class="w-full sm:h-full h-auto rounded"
               alt="image"
               src={Section1img}
             />
@@ -59,22 +59,22 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 bg-gray-200 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap-reverse">
-          <div class="my-10 mr-0 ml-auto shrink-0">
+          <div class="my-10 mr-0 lg:pr-28 sm:pr-12 sm:w-1/2 w-full ml-auto shrink-0">
             <img
               alt="ecommerce"
-              class="w-96 h-96 xl:w-full xl:h-auto rounded"
+              class="w-full sm:h-full h-auto rounded"
               src={Section2img}
             />
           </div>
 
-          <div class="my-6 md:my-10 pl-0 sm:pl-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
+          <div class="my-6 md:my-10 pl-0 sm:w-1/2 w-full sm:pl-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
             <div>
             <h2 class="lg:text-2xl text-lg font-normal text-primary">Easy</h2>
             <hr class="w-6 mb-3 lg:text-2xl text-lg font-normal border-primary" />
             </div>
-            <h1 class="text-third font-medium lg:text-5xl text-3xl mb-3">
+            <h1 class="text-third font-medium leading-tight lg:text-5xl md:text-4xl text-3xl mb-3">
               The simplest way to {" "}
-              <span class="text-secondary">
+              <span class="text-secondary leading-tight">
                 {" "}
                 generate and deploy NFT
               </span>{" "}
@@ -88,18 +88,18 @@ export default function ButtonAppBar() {
               href="https://docs-flume.gitbook.io/flume/what-is-flume/general-flow"
               target="_blank" rel="noreferrer"
             >
-              <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-md lg:text-lg sm:px-6 px-2">
-                Learn More
-              </button>
+              <Button 
+                  sx={{ fontWeight: 600,margin:'4px'}} color="primary" variant="contained"
+                  >Learn More</Button>
             </a>
           </div>
         </div>
       </section>
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap">
-          <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
+          <div class="my-6 md:my-10 sm:w-1/2 w-full pr-0 sm:pr-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
           <div>
-          <h2 class="lg:text-2xl text-lg font-normal text-primary">
+          <h2 class="w-full h-fulllg:text-2xl text-lg font-normal text-primary">
             Integrated
             </h2>
             <hr class="w-6 mb-3 lg:text-2xl text-lg font-normal border-primary" />
@@ -119,15 +119,15 @@ export default function ButtonAppBar() {
               href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/marketplaces-sync"
               target="_blank" rel="noreferrer"
             >
-              <button className="flex px-2 py-2 font-semibold text-white border-0 rounded bg-primary focus:outline-primary text-md lg:text-lg sm:px-6">
-                Learn More
-              </button>
+            <Button 
+            sx={{ fontWeight: 600,margin:'4px'}} color="primary" variant="contained"
+            >Learn More</Button>
             </a>
           </div>
-          <div class="my-10 mr-0 ml-auto shrink-0">
+          <div class="my-10 sm:w-1/2 w-full lg:pl-28 sm:pl-12 mr-0 ml-auto shrink-0">
             <img
               alt="ecommerce"
-              class="w-96 h-96 xl:w-full xl:h-auto rounded"
+              class="w-full sm:h-full h-auto rounded"
               src={Section3img}
             />
           </div>
@@ -135,15 +135,15 @@ export default function ButtonAppBar() {
       </section>
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap-reverse">
-          <div class="my-10 sm:mr-auto mr-0 ml-auto shrink-0">
+          <div class="my-10 sm:w-1/2 w-full basis:pr-20 sm:pr-10 sm:mr-auto mr-0 ml-auto shrink-0">
             <img
               alt="ecommerce"
-              class="w-96 h-96 xl:w-full xl:h-auto rounded"
+              class="w-full sm:h-full h-auto rounded"
               src={Section4img}
             />
           </div>
 
-          <div class="mt-6 lg:mt-0 pl-0 sm:pl-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
+          <div class="mt-6 sm:w-1/2 w-full lg:mt-0 pl-0 sm:pl-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
           <div>
           <h2 class="lg:text-2xl text-lg font-normal text-primary">
               Powerful
@@ -164,16 +164,16 @@ export default function ButtonAppBar() {
               href="https://docs-flume.gitbook.io/flume/guides/uploading-content"
               target="_blank" rel="noreferrer"
             >
-            <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-md lg:text-lg sm:px-6 px-2">
-            Learn More
-          </button>
+            <Button 
+                  sx={{ fontWeight: 600,margin:'4px'}} color="primary" variant="contained"
+                  >Learn More</Button>
             </a>
           </div>
         </div>
       </section>
       <section class="text-gray-600 body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:flex-nowrap flex-wrap">
-          <div class="mt-6 lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
+          <div class="mt-6 sm:w-1/2 w-full lg:mt-0 pr-0 sm:pr-6 text-left flex flex-col justify-center lg:gap-5 gap-2">
           <div>
           <h2 class="lg:text-2xl text-lg font-normal text-primary">
           Customizable
@@ -193,15 +193,15 @@ export default function ButtonAppBar() {
               href="https://docs-flume.gitbook.io/flume/guides/sharing-your-nfts/embedding-into-your-website"
               target="_blank" rel="noreferrer"
             >
-              <button class="flex text-white font-semibold bg-primary border-0 py-2 focus:outline-primary rounded text-md lg:text-lg sm:px-6 px-2">
-                Learn More
-              </button>
+            <Button 
+            sx={{ fontWeight: 600,margin:'4px'}} color="primary" variant="contained"
+            >Learn More</Button>
             </a>
           </div>
-          <div class="my-10 mr-0 ml-auto shrink-0">
+          <div class="my-10 sm:w-1/2 w-full mr-0 ml-auto shrink-0">
             <img
               alt="ecommerce"
-              class="w-96 h-96 xl:w-full xl:h-auto rounded"
+              class="w-full sm:h-full h-auto rounded"
               src={Section5img}
             />
           </div>
@@ -438,13 +438,13 @@ export default function ButtonAppBar() {
       </section>
 
       <section class="bg-gray-200 body-font">
-        <div class="max-w-screen-2xl w-11/12 mx-auto py-14 flex sm:justify-between justify-center sm:flex-nowrap flex-wrap">
+        <div class="max-w-screen-2xl w-11/12 mx-auto py-14 flex sm:justify-between justify-center items-center sm:flex-nowrap flex-wrap">
           <div class="m-2 text-third sm:text-left text-center">
-            <h2 class="text-4xl lg:text-6xl font-semibold">Ready to get started?</h2>
-            <p class="text-xl lg:text-2xl leading-8 mt-3">
+            <h2 class="text-3xl lg:text-5xl font-medium">Ready to get started?</h2>
+            <p class="text-lg lg:text-xl leading-8 mt-3">
               Get your NFT collections done and start trading{" "}
             </p>
-            <p class="text-xl lg:text-2xl leading-8">
+            <p class="text-lg lg:text-xl leading-8">
               {" "}
               Any question? Just ping us on{" "}
               <span className="text-primary">
@@ -453,16 +453,16 @@ export default function ButtonAppBar() {
               . We'll be happy to help{" "}
             </p>
           </div>
-          <div class="m-2 flex">
-            <button class="bg-secondary text-white rounded-md p-5 w-72 md:text-lg text-md font-semibold self-center">
-              Connect Your Wallet
-            </button>
-          </div>
+          
+            <Button variant="contained" size="large" color="secondary" sx={{ color:'white',fontWeight:'600',margin:'8px'}}  onClick={() => navigate.push('/login')} >
+            Connect Your Wallet
+            </Button>
+          
         </div>
       </section>
       <section class=" text-third body-font">
         <div class="max-w-screen-2xl w-11/12 mx-auto flex sm:justify-between justify-center sm:flex-nowrap flex-wrap">
-          <div class="m-2 lg:text-xl text-md font-semibold">
+          <div class="m-2 lg:text-lg text-md font-medium">
             <nav class="ml-auto flex flex-wrap items-center justify-right">
               <a
                 class="mr-5 hover:text-gray-900 hover:cursor-pointer"
@@ -483,7 +483,7 @@ export default function ButtonAppBar() {
               </a>
             </nav>
           </div>
-          <div class="m-2 lg:text-xl text-md font-semibold">
+          <div class="m-2 lg:text-lg text-md font-medium">
             <p>Copyright @ Flume 2022, All rights reserved.</p>
           </div>
         </div>

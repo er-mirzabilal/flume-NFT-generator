@@ -28,9 +28,9 @@ const Header = () => {
     return (
         <>
                 <header class="sticky top-0 z-10 body-font shadow-lg bg-white">
-                <div class="max-w-screen-2xl min-w-fit w-11/12  mx-auto flex flex-wrap py-5 items-center">
+                <div class="max-w-screen-2xl min-w-fit w-11/12  mx-auto flex flex-wrap py-3 items-center">
                   <a href="/" class="flex title-font font-medium items-center text-gray-900 md:mb-0">
-                    <img src={Logo} />
+                    <img className="w-28 sm:w-full sm:h-auto" src={Logo} />
                   </a>
                   <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
                     <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank" rel="noreferrer">Guide</a>
@@ -39,12 +39,12 @@ const Header = () => {
                     </a>
                   </nav>
                       {active ? (
-                          <Button variant="contained" color="secondary"  onClick={()=> setOpenWallet(true)}><p className="text-white font-semibold " >My Wallet</p> </Button>
+                          <Button variant="contained" color="secondary"  onClick={()=> setOpenWallet(true)}><p className="font-semibold text-white " >My Wallet</p> </Button>
             
                       ):
                           (
                               <Button variant="contained" color="secondary"  onClick={() => navigate.push('/login')} >
-                                <p className="text-white font-semibold ">  Connect Wallet </p>
+                                <p className="font-semibold text-white ">  Connect Wallet </p>
                               </Button>
                           )
                       }
