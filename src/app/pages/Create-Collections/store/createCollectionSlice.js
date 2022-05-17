@@ -82,12 +82,13 @@ export const generateCollection = createAsyncThunk('/collection/generate', async
     try{
         const stateData = getState().createCollection;
         const formattedData = prepareDataForPost(stateData);
-        const data = await http.post(`/collection`,{...formattedData, generate: true})
+        const data = await http.post(`/collection`,{...formattedData, generate: true, edit: true})
         return data.response;
     
     }
     catch(err) {
         showMessage({message: "Something went wrong while generating collection!", soverity: "error"});
+        return false;
     }
  
 });

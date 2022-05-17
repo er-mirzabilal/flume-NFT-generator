@@ -28,7 +28,7 @@ http.interceptors.response.use((response) => {
         localStorage.removeItem('flume_auth_token');
         localStorage.removeItem('flume_notify_token');
         showMessage({message: "Token has expired or invalid.", soverity: "error"});
-        window.location.reload();
+        // window.location.reload();
     }
 }
 )

@@ -1,5 +1,10 @@
 import React, {useEffect} from 'react';
-import {  Route, Routes, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Home from './app/pages/Home/Home';
 import ViewCollection from './app/pages/View-Collections/view-collections';
@@ -22,11 +27,11 @@ const Test = () => {
 
 
 function App() {
-    const location = useLocation();
+    // const location = useLocation();
 
     // useEffect(() => {
     //   if(window.ethereum){
-    //     window.ethereum.on('accountsChanged', updateAccount)
+    //     console.log('ethereum');333333333untsChanged', updateAccount)
     //     window.ethereum.on('networkChanged', updateNetwork)
     //     window.ethereum.on("chainChanged", updateChain)
     //   }
@@ -45,22 +50,29 @@ function App() {
     
   return (
     <div className="App min-w-[435px] font-poppins">
-        <TransitionGroup component={null}>
-            <CSSTransition key={location.key} classNames="fade" timeout={300}>
-                <Routes>
-                  <Route path="/" element={<Home/>}/>
-                 <Route path="/login" element={<Login />} />
-                    <Route element={<ProtectedRoute />}>
-                        <Route path="/view-collections" element={<ViewCollection/>}/>
-                        <Route path="/create-collections/:id" element={<CreateCollection/>}/>
-                        <Route path="/preview-images/:id" element={<Preview/>}/>
-                        <Route path="/live-collection" element={<LiveCollection/>}/>
-                        <Route path="/test" element={<Test />}/>
-
-                    </Route>
-                </Routes>
-            </CSSTransition>
-        </TransitionGroup>
+                <Router>
+                  <Switch>
+                  <Route exact path="/" >
+                    <Home/>
+                  </Route>
+                  <Route path="/login" >
+                    <Login />
+                  </Route>
+                  <ProtectedRoute path="/view-collections">
+                    <ViewCollection/>
+                  </ProtectedRoute>
+                  <ProtectedRoute path="/create-collections/:id" >
+                    <CreateCollection/>
+                  </ProtectedRoute>
+                  <ProtectedRoute path="/preview-images/:id" >
+                    <Preview/>
+                  </ProtectedRoute>
+                  <ProtectedRoute path="/live-collection" >
+                   <LiveCollection/>
+                  </ProtectedRoute>
+                 
+                </Switch>
+                </Router>
         <CustomizedSnackbar />
     </div>
   );

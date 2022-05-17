@@ -4,7 +4,7 @@ import { CircularProgress, Dialog, DialogContent, DialogTitle } from "@mui/mater
 import IconButton from "@mui/material/IconButton";
 import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import login1img from "../../../assets/images/login/login1-img.png";
 import Logo from "../../../assets/images/Logo.png";
 import { authenticate, getNonce } from '../../api/core';
@@ -13,7 +13,7 @@ export default function Login(props){
 
     const {active, activate, deactivate, library, account} = useWeb3React();
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useHistory()
 
     async function signMessage (signer){
         getNonce({public_key: account})
@@ -31,7 +31,7 @@ export default function Login(props){
                         localStorage.setItem('flume_notify_token', notifyToken);
                         // axios.defaults.headers.common.Authorization = `Bearer ${token}`;
                            setLoading(false);
-                        navigate('/view-collections')
+                        navigate.push('/view-collections')
                     }
                 })
                 .catch(err => {

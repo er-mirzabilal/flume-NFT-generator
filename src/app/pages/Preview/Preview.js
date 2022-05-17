@@ -9,7 +9,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getCollection, getGeneratedCollection, postGenerateCollection } from '../../api/core';
 import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
@@ -22,7 +22,7 @@ const Preview = () => {
    const {isImageGenerated} = useSelector((state)=> state.auth);
    const dispatch = useDispatch()
    const [open, setOpen] = useState(false);
-   const navigate = useNavigate();
+   const navigate = useHistory();
    const [images, setImages] = useState([]);
    const [collection, setCollection] = useState(null);
    const [loading, setLoading] = useState(true)
@@ -74,7 +74,7 @@ const Preview = () => {
     const generateImage = async() => {
        dispatch(updateStateAttr({attr: 'isImageGenerated', data: null}));
        setLoading(true);
-       postGenerateCollection({...collection, generate: true}).then(() => {
+       postGenerateCollection({...collection, generate: true, edit: false}).then(() => {
          initialize();
        })
        .catch(() => {
@@ -146,17 +146,18 @@ const Preview = () => {
    ): (
       <>
          <section class="w-4/5 mx-auto my-4">
-            <Button onClick={()=> navigate('/test')}> Test</Button>
-            <Button startIcon={<EditIcon sx={{color: 'white'}} /> } color="secondary" variant="contained" sx={{marginRight: 2}}><p style={{color: "white"}}
-               onClick={()=> setOpen(true)}
-            >Back to Edit</p></Button>
-            <Button startIcon={<AutorenewIcon sx={{color: 'white'}}/>} color="secondary" variant="contained"
-              sx={{marginRight: 2}}> <p style={{color: "white"}}
-              onClick={()=> generateImage()}
-              >
-                  Regenerate Images </p>
+            <Button sx={{color: 'white', fontWeight: 600,marginRight: 2}} startIcon={<EditIcon sx={{color: 'white'}} /> }
+             color="secondary" variant="contained"
+             onClick={()=> setOpen(true)}
+             >
+            Back to Edit</Button>
+            <Button startIcon={<AutorenewIcon/>} color="secondary" variant="contained"
+             sx={{color: 'white', fontWeight: 600,marginRight: 2}}
+             onClick={()=> generateImage()}
+              > 
+            Regenerate Images 
             </Button>
-            <Button startIcon={<CheckCircleIcon />} color="primary" variant="contained" sx={{marginRight: 2}} ><p style={{color: "white"}}>  Add Collection to Blockchain </p></Button>
+            <Button startIcon={<CheckCircleIcon />} color="primary" variant="contained" sx={{marginRight: 2}} ><p>  Add Collection to Blockchain </p></Button>
          </section>
          {renderCollection()}
       </>
@@ -178,7 +179,7 @@ const Preview = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cacnel</Button>
-          <Button onClick={()=> navigate(`/create-collections/${params.id}`)} autoFocus>
+          <Button onClick={()=> navigate.push(`/create-collections/${params.id}`)} autoFocus>
             Edit
           </Button>
         </DialogActions>
