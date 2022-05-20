@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initializeCollectionSocket } from "../app/pages/Create-Collections/store/createCollectionSlice";
 import { initializeSocket } from "../app/pages/store/authSlice";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
+import { connectors } from '../app/utils/connectors';
 const isAuthorized = () => {
     const token = localStorage.getItem('flume_auth_token');
     const notifyToken  = localStorage.getItem('flume_notify_token');
@@ -20,7 +21,7 @@ export default function ProtectedRoute(props){
     const dispatch = useDispatch()
     if(isAuthorized()){
         console.log(active,)
-        // if(!active) activate();
+        if(!active) activate(connectors.injected);
         if(!isSocketInit) dispatch(initializeSocket());
         return <Route {...props} />
     }

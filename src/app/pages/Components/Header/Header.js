@@ -21,8 +21,8 @@ const Header = () => {
     )
     }
     const logoutAccount = async () => {
-        deactivate();
         removeAuthLocalStorage();
+        deactivate();
         navigate.push('/');
     };
     return (

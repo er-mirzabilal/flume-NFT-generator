@@ -6,7 +6,11 @@ import { Button } from "@mui/material";
 import { ArrowRight } from "@mui/icons-material";
 import ViewCollection1img from "../../../assets/images/live/Etherscan.png";
 import ViewCollection2img from "../../../assets/images/live/Opensea.png";
+import { useParams } from 'react-router-dom';
 const LiveCollection = () => {
+  const params = useParams();
+
+  
   return (
     <div>
       <Header />

@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { getCollection, getGeneratedCollection, postGenerateCollection } from '../../api/core';
+import { getCollection, getGeneratedCollection, postDeployCollection, postGenerateCollection } from '../../api/core';
 import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
 import { fetchCollection, generateCollection, getTransformedCollection, reset } from '../Create-Collections/store/createCollectionSlice';
@@ -26,6 +26,7 @@ const Preview = () => {
    const [images, setImages] = useState([]);
    const [collection, setCollection] = useState(null);
    const [loading, setLoading] = useState(true)
+   const [deploying, setDeploying] = useState(false);
    const [moreLoading, setMoreLoading] = useState(false);
    const params = useParams();
    const [filterParams, setFilterParams] = useState({
@@ -93,6 +94,23 @@ const Preview = () => {
             setMoreLoading(false)
          })
     }
+    const deployCollection = () => {
+       if(params.id){
+          const data = {
+             project: params.id
+          }
+          setDeploying(true);
+         postDeployCollection(data)
+          .then((response)=> {
+             console.log('deploy Collection request is generated', response);
+          })
+          .catch((error) => {
+             console.log('Something went wrong while Deploying!');
+             dispatch(showMessage({message: 'Something went wrong while deploying !', soverity: 'error'}))
+          })
+          .finally(() => setDeploying(false))
+       }
+    }
    const renderArt = (data) => { 
       return(
       <div class="flex-initial m-2 rounded-xl p-4 shadow-xl">
@@ -120,8 +138,8 @@ const Preview = () => {
          )
       }
       return (
-         <section class="w-4/5 mx-auto">
-            <div className="tex-center my-16"> No image(s) available </div>
+         <section class="mx-auto text-center my-16">
+            No image(s) available
          </section>
       )
    }
@@ -157,7 +175,11 @@ const Preview = () => {
               > 
             Regenerate Images 
             </Button>
-            <Button startIcon={<CheckCircleIcon />} color="primary" variant="contained" sx={{marginRight: 2}} ><p>  Add Collection to Blockchain </p></Button>
+            <Button startIcon={<CheckCircleIcon />} color="primary" variant="contained" sx={{marginRight: 2}}
+               // onClick={()=>deployCollection()}
+            >
+               <p>  Add Collection to Blockchain </p>
+            </Button>
          </section>
          {renderCollection()}
       </>

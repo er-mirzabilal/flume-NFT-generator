@@ -89,6 +89,16 @@ export const postGenerateCollection = (data) => {
         })
     })
 }
+export const postDeployCollection = (data) => {
+    return new Promise((resolve, reject) => {
+        http.post(`/finalize-collection-v2`,data).then((response) => {
+            resolve(response.data)
+        })
+        .catch((err) => {
+            return err;
+        })
+    })
+}
 
 export const removeAuthLocalStorage = () => {
     localStorage.removeItem('flume_auth_token');

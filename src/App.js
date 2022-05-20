@@ -29,24 +29,24 @@ const Test = () => {
 function App() {
     // const location = useLocation();
 
-    // useEffect(() => {
-    //   if(window.ethereum){
-    //     console.log('ethereum');333333333untsChanged', updateAccount)
-    //     window.ethereum.on('networkChanged', updateNetwork)
-    //     window.ethereum.on("chainChanged", updateChain)
-    //   }
-    //   // initWeb3()
-    // }, [window.ethereum])
+    useEffect(() => {
+      if(window.ethereum){
+        // console.log('ethereum');333333333untsChanged', updateAccount)
+        window.ethereum.on('accountsChanged', updateAccount)
+        window.ethereum.on('networkChanged', updateNetwork)
+        window.ethereum.on("chainChanged", updateChain)
+      }
+    }, [])
     
-    // const updateAccount = (data) => {
-    //   console.log('on updateAccount', data);
-    // }
-    // const updateNetwork = (data) => {
-    //   console.log('on updateNetwork', data);
-    // }
-    // const updateChain = (data) => {
-    //   console.log('on updateChain', data);
-    // }
+    const updateAccount = (data) => {
+      console.log('on updateAccount', data);
+    }
+    const updateNetwork = (data) => {
+      console.log('on updateNetwork', data);
+    }
+    const updateChain = (data) => {
+      console.log('on updateChain', data);
+    }
     
   return (
     <div className="App min-w-[435px] font-poppins">
@@ -67,7 +67,7 @@ function App() {
                   <ProtectedRoute path="/preview-images/:id" >
                     <Preview/>
                   </ProtectedRoute>
-                  <ProtectedRoute path="/live-collection" >
+                  <ProtectedRoute path="/live-collection/:id" >
                    <LiveCollection/>
                   </ProtectedRoute>
                  
