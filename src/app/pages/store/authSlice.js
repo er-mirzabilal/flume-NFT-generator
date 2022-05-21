@@ -13,6 +13,7 @@ export const initializeSocket = createAsyncThunk('/auth/setSocket', async (data,
         dispatch(updateState({...state, isSocketInit: true}));
         socket.onmessage = (event) => {
             const data = event?.data ?  JSON.parse(event.data) : null;
+            console.log('onMessage', data);
             if(data)  dispatch(updateState({...state, isImageGenerated: data}))
         }
     }

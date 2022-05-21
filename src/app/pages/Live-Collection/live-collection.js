@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import { FormControl, TextField } from "@mui/material";
 import { Select } from "@mui/material";
@@ -7,10 +8,37 @@ import { ArrowRight } from "@mui/icons-material";
 import ViewCollection1img from "../../../assets/images/live/Etherscan.png";
 import ViewCollection2img from "../../../assets/images/live/Opensea.png";
 import { useParams } from 'react-router-dom';
+import { getCollection, getGeneratedCollection } from "../../api/core";
+import { updateStateAttr } from "../store/authSlice";
+import { useDispatch } from "react-redux";
+import { collectionStatus } from "../../utils/constants";
 const LiveCollection = () => {
   const params = useParams();
+  const [loading, setLoading] = useState(true)
+  const [collection, setCollection] = useState(null);
+  const dispatch = useDispatch();
+  const initialize = async () => {
+    setLoading(true);
+    getCollection(params?.id).then((collectionData) =>{
+       setCollection(collectionData);
+       const status = collectionData?.project?.status;
+        if(status!== collectionStatus.FINALIZED){
+            //  getGeneratedCollection(params.id,filterParams).then(data => {
+            //     setImages([...images, ...data]);
+            //     setLoading(false);
+            //  })
+          } 
+    }).catch(err => {
+       console.error(err);
+    })
+ }
 
-  
+ useEffect(() => {
+    if(params?.id){
+       initialize();
+       return () => dispatch(updateStateAttr({attr: "isImageGenerated", data: null}))
+    }    
+ },[]);
   return (
     <div>
       <Header />

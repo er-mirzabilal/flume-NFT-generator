@@ -38,7 +38,7 @@ const Preview = () => {
     };
 
     const initialize = async () => {
-       setLoading(true);
+      setLoading(true);
       getCollection(params?.id).then((collectionData) =>{
          setCollection(collectionData);
          const status = collectionData?.project?.status;
@@ -54,7 +54,6 @@ const Preview = () => {
    }
 
    useEffect(() => {
-      console.log('useEffect')
       if(params?.id){
          initialize();
          return () => dispatch(updateStateAttr({attr: "isImageGenerated", data: null}))

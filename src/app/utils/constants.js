@@ -2,4 +2,6 @@ export const collectionStatus = {
     PENDING: 'PENDING',
     GENERATING: 'GENERATING',
     GENERATED: 'GENERATED',
+    FINILIZING: 'FINILIZING',
+    FINALIZED: 'FINALIZED',
 }
