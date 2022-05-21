@@ -1,7 +1,7 @@
 import axios from "axios";
 import { showMessage } from "../pages/store/messageSlice";
 
-export const  BASEURL = 'http://164.92.157.140/api';
+export const  BASEURL = 'http://164.92.157.140:8000/api';
 
 const http = axios.create({
     baseURL: BASEURL,

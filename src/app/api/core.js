@@ -85,7 +85,7 @@ export const postGenerateCollection = (data) => {
             resolve(response.data)
         })
         .catch((err) => {
-            return err;
+            reject(err)
         })
     })
 }
@@ -95,7 +95,7 @@ export const postDeployCollection = (data) => {
             resolve(response.data)
         })
         .catch((err) => {
-            return err;
+            reject(err);
         })
     })
 }

@@ -8,7 +8,7 @@ export const initializeSocket = createAsyncThunk('/auth/setSocket', async (data,
     const socketState = state.isSocketInit;
     if(!socketState) {
         const notifyToken = localStorage.getItem('flume_notify_token');
-        const socketUrl = `ws://164.92.157.140/ws/notify/${notifyToken}/`;
+        const socketUrl = `ws://164.92.157.140:8000/ws/notify/${notifyToken}/`;
         const socket = new WebSocket(socketUrl);
         dispatch(updateState({...state, isSocketInit: true}));
         socket.onmessage = (event) => {

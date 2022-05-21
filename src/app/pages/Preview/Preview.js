@@ -99,10 +99,10 @@ const Preview = () => {
           const data = {
              project: params.id
           }
-          setDeploying(true);
+         setDeploying(true);
          postDeployCollection(data)
           .then((response)=> {
-             console.log('deploy Collection request is generated', response);
+             console.log('deploy Collection request is generated', response.data);
           })
           .catch((error) => {
              console.log('Something went wrong while Deploying!');
@@ -176,7 +176,7 @@ const Preview = () => {
             Regenerate Images 
             </Button>
             <Button startIcon={<CheckCircleIcon />} color="primary" variant="contained" sx={{marginRight: 2}}
-               // onClick={()=>deployCollection()}
+               onClick={()=>deployCollection()}
             >
                <p>  Add Collection to Blockchain </p>
             </Button>
