@@ -13,10 +13,13 @@ import CreateCollection from './app/pages/Create-Collections/create-collections'
 import Preview from './app/pages/Preview/Preview';
 import  Login  from './app/pages/Login/Login';
 import CustomizedSnackbar from './app/pages/Components/CustomizeStackBar.js/CustomizedSnackbar';
+import {useWeb3React} from '@web3-react/core'
 
 
 // import './App.css';
 import ProtectedRoute from './Route/ProtectedRoute'
+import { removeAuthLocalStorage } from './app/api/core';
+import { useHistory } from 'react-router-dom';
 
 const Test = () => {
   console.log('test');
@@ -27,11 +30,12 @@ const Test = () => {
 
 
 function App() {
+  const {deactivate} = useWeb3React();
+  const history = useHistory()
     // const location = useLocation();
 
     useEffect(() => {
       if(window.ethereum){
-        // console.log('ethereum');333333333untsChanged', updateAccount)
         window.ethereum.on('accountsChanged', updateAccount)
         window.ethereum.on('networkChanged', updateNetwork)
         window.ethereum.on("chainChanged", updateChain)
@@ -39,6 +43,11 @@ function App() {
     }, [])
     
     const updateAccount = (data) => {
+      if(!data || (data && !data.length)){
+        deactivate();
+        removeAuthLocalStorage();
+        history.push('/')
+      }
       console.log('on updateAccount', data);
     }
     const updateNetwork = (data) => {

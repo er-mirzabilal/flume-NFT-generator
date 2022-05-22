@@ -250,6 +250,17 @@ export const counterSlice = createSlice({
                 state.layers = layers;
             }
     },
+    deleteItem: (state, action) => {
+        var layers = [...state.layers];
+        const {layerIndex, index} = action.payload;
+        if(layers[layerIndex]){
+            let targetLayer = layers[layerIndex];
+            const targetLayerItem = targetLayer.items;
+            if(targetLayerItem[index]){ 
+                delete targetLayerItem[index];}
+
+        }
+    },
     reset: () => initialState
   },
 })

@@ -29,6 +29,7 @@ const Preview = () => {
    const [deploying, setDeploying] = useState(false);
    const [moreLoading, setMoreLoading] = useState(false);
    const params = useParams();
+   const history = useHistory();
    const [filterParams, setFilterParams] = useState({
       item_no__gte: 1,
       item_no__lte: filterSize
@@ -102,6 +103,7 @@ const Preview = () => {
          postDeployCollection(data)
           .then((response)=> {
              console.log('deploy Collection request is generated', response.data);
+             history.push(`/live-collection/${params.id}`);
           })
           .catch((error) => {
              console.log('Something went wrong while Deploying!');

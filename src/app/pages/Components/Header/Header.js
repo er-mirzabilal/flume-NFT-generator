@@ -25,6 +25,7 @@ const Header = () => {
         deactivate();
         navigate.push('/');
     };
+    console.log('active', active);
     return (
         <>
                 <header class="sticky top-0 z-10 body-font shadow-lg bg-white">

@@ -243,9 +243,9 @@ const CreateCollection = () => {
   const renderLayerItem = (data, index, layerIndex) => {
     return (
       <div className="flex my-3">
-      <div class="w-96 h-auto self-center relative m-2">
+      <div class="w-96 h-auto self-center m-2 relative ">
        <img class="w-full h-full" src={data.imageUrl} />
-       <IconButton className="absolute bottom-0" color="error">
+       <IconButton  sx={{position:'absolute', top:0, right:0}} color="error">
          <DeleteIcon />
        </IconButton>
       </div>
