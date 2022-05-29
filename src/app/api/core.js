@@ -50,9 +50,13 @@ export const getColections = () => {
 export const createCollection = (data) => {
     return new Promise((resolve, reject) => {
         http.post(`/project`, data).then((response) => {
-            resolve(response)
+            console.log(response, 'success');
+            if(response)
+                    resolve(response)
+            reject(response)
         })
         .catch((err) => {
+            console.log(err, 'err')
             reject(err)
         })
     })

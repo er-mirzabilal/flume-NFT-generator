@@ -22,7 +22,6 @@ export default function Login(props){
              const signature = await signer.signMessage(`I am going to sign in to flume: ${res.data.nonce}`);
                 authenticate({public_key: account, signature })
                 .then(response => {
-                    console.log(response.data, 'auth');
                     if(response?.data?.token){
                         
                         const token = response.data.token;

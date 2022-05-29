@@ -47,20 +47,13 @@ const LiveCollection = () => {
  },[]);
 
 useEffect(() => {
-    console.log('is Image Generated', isImageGenerated);
       if(isImageGenerated){
            getCollection(params?.id).then((collectionData) =>{
              setCollection(collectionData);
            })
       }
     },[isImageGenerated])
-  // if(loading){
-  //   return (
-  //     <div className="w-full h-full text-center ">
-  //       <CircularProgress size="1.4rem" />
-  //     </div>
-  //   )
-  // }
+
   const doTransection = ()=> {
     console.log('trans', library)
     const contract = new ethers.Contract(contractAddress[4], abi, library.getSigner() );

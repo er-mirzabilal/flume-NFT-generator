@@ -222,7 +222,7 @@ export const counterSlice = createSlice({
                         ...targetLayer.items,
                         {
                             name: '',
-                            rarity: 1,
+                            rarity: 100,
                             imageUrl,
                         }
                     ]

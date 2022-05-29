@@ -22,6 +22,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {useWeb3React} from '@web3-react/core'
 import {ethers} from 'ethers';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 const abi = require('../../../assets/blockchain/factory_abi.json');
 
 
@@ -47,6 +53,7 @@ const Preview = () => {
       item_no__gte: 1,
       item_no__lte: filterSize
    })
+   const [imageProperty, setImageProperty] = useState(null);
   const {library, account} = useWeb3React();
 
     const handleClose = () => {
@@ -197,14 +204,14 @@ const Preview = () => {
     }
    const renderArt = (data) => { 
       return(
-      <div class="flex-initial m-2 rounded-xl p-4 shadow-xl">
+      <div class="flex-initial m-2 rounded-xl p-4 shadow-xl cursor-pointer hover:shadow-2xl" onClick={() => (setImageProperty(data.trait_info))}>
          <div class="block w-64	h-64">
          <img src={data.image_url} className="w-full h-full" alt="item"/>
          </div>
          <div class="flex flex-row pt-2 justify-between">
          <h3>#{data.item_no}</h3>
          </div>
-    </div>
+      </div>
       )
    }
    const renderCollection = () => {
@@ -246,7 +253,7 @@ const Preview = () => {
                   </DialogTitle>
                   <DialogContent>
                       <div className="p-4">
-                        <h1 className="text-center font-samibold">Add NFT's to Blockchain</h1>
+                        <h1 className="text-center font-bold">Add NFT's to Blockchain</h1>
                         <div className="mt-4">
                            <div className="my-2">
                               <lable class="text-sm block mb-2 my-4">NFT Collection Title:</lable>
@@ -292,6 +299,59 @@ const Preview = () => {
                   </DialogContent>
               </Dialog>
       )
+  }
+  const renderImagePropertyModal = () => {
+  
+   console.log(JSON.parse(imageProperty));
+   const data =  imageProperty ? JSON.parse(imageProperty) : null;
+   let rows = [];
+   if(data){
+      const propertyValue = Object.values(data);
+      rows = Object.keys(data).map((key, index) => ({name: key, value: propertyValue[index]}));
+   }
+   console.log(rows);
+   return (
+      <Dialog onClose={()=>setImageProperty(null)} open={imageProperty}>
+          <DialogTitle>
+              <IconButton
+                  aria-label="close"
+                  onClick={()=>setImageProperty(null)}
+                  sx={{
+                      position: 'absolute',
+                      right: 8,
+                      top: 8,
+                      color: (theme) => theme.palette.grey[500],
+                  }}
+              >
+                  <CloseIcon />
+              </IconButton>
+          </DialogTitle>
+          <DialogContent>
+              <div className="p-4">
+                <h1 className="text-center font-bold">Properties</h1>
+                <TableContainer >
+                  <Table sx={{ minWidth: 300 }} aria-label="simple table">
+                  <TableBody>
+                     { rows && rows.length ? rows.map((row) => (
+                        <TableRow
+                        key={row.name}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell component="th" scope="row">
+                           {row.name}
+                        </TableCell>
+                        <TableCell align="right">{row.value}</TableCell>
+                        </TableRow>
+                     )):
+                      (<div className="text-center"> <p> No property available</p> </div>)}
+                  </TableBody>
+                  </Table>
+               </TableContainer>
+                
+              </div>
+          </DialogContent>
+      </Dialog>
+)
   }
    
     return (
@@ -357,6 +417,7 @@ const Preview = () => {
         </DialogActions>
       </Dialog>
       {renderBlockChainModal()}
+      {renderImagePropertyModal()}
         </div>
         );
 };

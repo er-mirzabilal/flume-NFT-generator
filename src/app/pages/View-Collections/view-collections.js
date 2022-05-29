@@ -9,10 +9,12 @@ import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
 import ImagePreview from '../Create-Collections/ImagePreview';
 import { useWeb3React } from '@web3-react/core';
+import { showMessage } from '../store/messageSlice';
+import { useDispatch } from 'react-redux';
 
 const ViewCollection = () => {
     const context = useWeb3React();
-
+    const dispatch = useDispatch()
     const navigate = useHistory();
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
@@ -30,15 +32,18 @@ const ViewCollection = () => {
     },[])
     const  createNewCollection  = () => {
         setCreating(true);
-        const edition = 'Untitled_' + Math.floor((Math.random() * 100) + 1);
+        const edition = '';
         createCollection({edition, count: 0 })
         .then(response => {
+            console.log(response, 'sucess 2');
             const id = response?.data?.id;
             if(id) navigate.push(`/create-collections/${id}`)
         })
         .catch(error => {
-            console.error(error)
+            console.error(error);
+            dispatch(showMessage({message: 'Something went wrong while creating collection !', severity: 'error'}));
         })
+        .finally(() => setCreating(false));
         
     }
     const openCollection = (data) => {

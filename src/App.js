@@ -21,12 +21,7 @@ import ProtectedRoute from './Route/ProtectedRoute'
 import { removeAuthLocalStorage } from './app/api/core';
 import { useHistory } from 'react-router-dom';
 
-const Test = () => {
-  console.log('test');
-  return (
-    <div> Test</div>
-  )
-}
+
 
 
 function App() {
