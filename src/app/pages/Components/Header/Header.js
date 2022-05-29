@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useWeb3React } from "@web3-react/core";
 import { removeAuthLocalStorage } from "../../../api/core";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 const Header = () => {
     const {active, deactivate, account} = useWeb3React()
     const navigate= useHistory();
@@ -25,14 +26,15 @@ const Header = () => {
         deactivate();
         navigate.push('/');
     };
-    console.log('active', active);
     return (
         <>
                 <header class="sticky top-0 z-10 body-font shadow-lg bg-white">
                 <div class="max-w-screen-2xl min-w-fit w-11/12  mx-auto flex flex-wrap py-3 items-center">
-                  <a href="/" class="flex title-font font-medium items-center text-gray-900 md:mb-0">
+                  <Link to="/">
+                  <div class="flex title-font font-medium items-center text-gray-900 md:mb-0">
                     <img className="w-28 sm:w-full sm:h-auto" src={Logo} />
-                  </a>
+                  </div>
+                  </Link>
                   <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
                     <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank" rel="noreferrer">Guide</a>
                     <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer">

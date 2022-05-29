@@ -8,7 +8,11 @@ import { createCollection, getColections } from '../../api/core';
 import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
 import ImagePreview from '../Create-Collections/ImagePreview';
+import { useWeb3React } from '@web3-react/core';
+
 const ViewCollection = () => {
+    const context = useWeb3React();
+
     const navigate = useHistory();
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
@@ -48,6 +52,12 @@ const ViewCollection = () => {
             case collectionStatus.GENERATED :
                 navigate.push(`/preview-images/${data.id}`);
                 break;
+            case collectionStatus.FINILIZING:
+                navigate.push(`/live-collection/${data.id}`);
+                break
+            case collectionStatus.FINALIZED :
+                navigate.push(`/live-collection/${data.id}`);
+                break
             default :
                 navigate.push(`/create-collections/${data.id}`);
         }
@@ -88,7 +98,7 @@ const ViewCollection = () => {
             </div>
         )
     }
-
+    // console.log(context, 'network');
     return (
         <div>
          <Header />

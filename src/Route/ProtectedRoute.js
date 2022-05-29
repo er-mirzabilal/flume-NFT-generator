@@ -15,6 +15,7 @@ const isAuthorized = () => {
 }
 export default function ProtectedRoute(props){
     const location = useLocation();
+    console.log(location, 'location');
     const {active, activate} = useWeb3React();
     const {isSocketInit} = useSelector((state)=> state.auth);
 

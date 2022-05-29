@@ -250,15 +250,21 @@ export const counterSlice = createSlice({
                 state.layers = layers;
             }
     },
-    deleteItem: (state, action) => {
+    deleteLayerItem: (state, action) => {
         var layers = [...state.layers];
         const {layerIndex, index} = action.payload;
         if(layers[layerIndex]){
             let targetLayer = layers[layerIndex];
             const targetLayerItem = targetLayer.items;
-            if(targetLayerItem[index]){ 
-                delete targetLayerItem[index];}
-
+            if(targetLayerItem[index]){
+                targetLayer.items.splice(index, 1);
+                targetLayer = {
+                    ...targetLayer,
+                    items:  targetLayerItem
+                }
+                layers[layerIndex] = targetLayer;
+                state.layers = layers;
+            }
         }
     },
     reset: () => initialState
@@ -268,6 +274,6 @@ export const counterSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {updateLoading, updateTitle,updateDimensionHeight, updateDimensionWidth, updateImagePreview,
     updateNoOfNft, updateLayers, addLayer, deleteLayer,updateLayerName, moveLayer,
-     addLayerItem ,updateLayerItem, reset, updateCollectionData, updateError, updateStateAttr, updateState} = counterSlice.actions
+     addLayerItem ,updateLayerItem, reset, updateCollectionData, updateError, updateStateAttr, updateState,deleteLayerItem} = counterSlice.actions
 
 export default counterSlice.reducer

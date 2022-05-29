@@ -29,7 +29,7 @@ import ImagePreview from './ImagePreview';
 
 import {
   addLayer, deleteLayer, fetchCollection, generateCollection, moveLayer, postCollection, reset, updateDimensionHeight,
-  updateDimensionWidth, updateError, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle, uploadImageToServer, updateStateAttr
+  updateDimensionWidth, updateError, updateLayerItem, updateLayerName, updateNoOfNft, updateTitle, uploadImageToServer, updateStateAttr, deleteLayerItem
 } from './store/createCollectionSlice';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -245,7 +245,7 @@ const CreateCollection = () => {
       <div className="flex my-3">
       <div class="w-96 h-auto self-center m-2 relative ">
        <img class="w-full h-full" src={data.imageUrl} />
-       <IconButton  sx={{position:'absolute', top:0, right:0}} color="error">
+       <IconButton  sx={{position:'absolute', top:0, right:0}} color="error" onClick={()=> dispatch(deleteLayerItem({layerIndex, index}))} >
          <DeleteIcon />
        </IconButton>
       </div>

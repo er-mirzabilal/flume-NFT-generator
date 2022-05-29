@@ -2,6 +2,19 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "newShareAddress",
+				"type": "address"
+			}
+		],
+		"name": "changeShareAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "name_",
 				"type": "string"
@@ -15,11 +28,6 @@
 				"internalType": "string",
 				"name": "baseURI_",
 				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "ownerAddress_",
-				"type": "address"
 			},
 			{
 				"internalType": "uint256",
@@ -60,11 +68,22 @@
 				"internalType": "string",
 				"name": "placeholderImage_",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "projectHash",
+				"type": "string"
 			}
 		],
 		"name": "createFlumeContract",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "clone",
+				"type": "address"
+			}
+		],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -73,6 +92,11 @@
 				"internalType": "address",
 				"name": "_libraryAddress",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_fee",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -83,12 +107,12 @@
 		"inputs": [
 			{
 				"indexed": false,
-				"internalType": "address",
+				"internalType": "address payable",
 				"name": "newFlume",
 				"type": "address"
 			}
 		],
-		"name": "FlumeNFTDeployed",
+		"name": "FlumeCreated",
 		"type": "event"
 	},
 	{
@@ -113,6 +137,19 @@
 	{
 		"inputs": [],
 		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newfee",
+				"type": "uint256"
+			}
+		],
+		"name": "setFee",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -145,6 +182,50 @@
 	},
 	{
 		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "deployedCollections",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "collectionAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "exists",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "libraryAddress",
 		"outputs": [
 			{
@@ -159,6 +240,19 @@
 	{
 		"inputs": [],
 		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "shareAddress",
 		"outputs": [
 			{
 				"internalType": "address",

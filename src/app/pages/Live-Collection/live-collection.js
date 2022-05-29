@@ -16,29 +16,24 @@ import { CircularProgress } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import {useWeb3React} from '@web3-react/core'
 import {ethers} from 'ethers';
+import { showMessage } from "../store/messageSlice";
 const abi = require('../../../assets/blockchain/factory_abi.json');
+
 const LiveCollection = () => {
-  const {library} = useWeb3React();
+  const {library, account} = useWeb3React();
 
   const {isImageGenerated} = useSelector((state)=> state.auth);
-
   const params = useParams();
   const [loading, setLoading] = useState(true)
   const [collection, setCollection] = useState(null);
+  const [transectionFilled, setTransectionFilled] = useState(false);
   const dispatch = useDispatch();
   const initialize = async () => {
-    setLoading(true);
     getCollection(params?.id).then((collectionData) =>{
       console.log('colllection', collectionData);
        setCollection(collectionData);
-       const status = collectionData?.project?.status;
-        if(status!== collectionStatus.FINALIZED){
-          setLoading(false);
-            //  getGeneratedCollection(params.id,filterParams).then(data => {
-            //     setImages([...images, ...data]);
-            //     setLoading(false);
-            //  })
-          } 
+        setLoading(false);
+     
     }).catch(err => {
        console.error(err);
     })
@@ -54,9 +49,9 @@ const LiveCollection = () => {
 useEffect(() => {
     console.log('is Image Generated', isImageGenerated);
       if(isImageGenerated){
-        // if(isImageGenerated?.status === 'success'){
-    
-        // }
+           getCollection(params?.id).then((collectionData) =>{
+             setCollection(collectionData);
+           })
       }
     },[isImageGenerated])
   // if(loading){
@@ -68,59 +63,46 @@ useEffect(() => {
   // }
   const doTransection = ()=> {
     console.log('trans', library)
-    const data = {
-
-    }
     const contract = new ethers.Contract(contractAddress[4], abi, library.getSigner() );
     console.log('contract', contract);
     contract.createFlumeContract(
-      "Bilal collection",
+      collection?.project?.edition,
       'BTC', // symbol
-      "ipfs://bafybeifxwe2ybw6qfwl2q2tkfcy4ct26f5jtodysat7rxvbsahhuebc4om/nft/", //baseurl
-      "0x2981040826eAfE3A6C68d5EBd12b59AC83ADA430",
-      100000000000,
-      1,
+      collection?.project?.ipfs_url_metadata, //baseurl
+      account, //account
+      100000000000, // fee
+      1, //count
       false,
       true,
-      "0x2981040826eAfE3A6C68d5EBd12b59AC83ADA430",
-      1,
-      1000,
+       account, //account
+      1, //limit = count
+      1000, // royality
       ""
     ).then(res => {
-        console.log(res, 'res');
+      showMessage({message: "Transection successfully processed!", soverity:"success"})
+        console.log(res, 'Transection successfully submitted');
+        setTransectionFilled(true);
     }).catch(err => {
-      console.log(err, 'err');
+      console.log(err, 'Something went wrong while trasection');
+      showMessage({message: "Something went wrong while trasection !", soverity:"error"})
+
     })
   }
   const renderContent = () => {
-
-   if(loading) {
-     if(collection?.project?.status === collectionStatus.FINALIZED){
-       return(
+    console.log(loading, collection, 'live');
+    if(loading) {
+      return(
         <section>
-        <div class="max-w-screen-2xl w-11/12 mx-auto mb-16 p-10 shadow-lg rounded-lg">
-          <div className="text-center">
-            <h2 class="text-xl font-medium my-8">Files are Synchronized, Please make transection</h2>
-            <Button color="primary" variant="contained" onClick={()=> doTransection()}>
-              Transaction
-            </Button>
+        <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
+          <div class="p-10 shadow-lg rounded-lg text-center">
+          <CircularProgress />
+          <p class="m-2">Fetching Collection status</p>
           </div>
         </div>
       </section>
-       )
-     }
-     return (
-      <section>
-      <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
-        <h2 class="text-2xl font-medium my-8">Files syncing with IPFS</h2>
-        <div class="p-10 shadow-lg rounded-lg">
-        <p class="m-2 text-lg">Please wait until this is done before sharing your collections</p>
-        <LinearProgress />
-        </div>
-      </div>
-    </section>
-     )
-   }
+      )
+    }
+    if( transectionFilled)
     return (
       <>
       <section>
@@ -215,6 +197,35 @@ useEffect(() => {
     </section>
     </>
     )
+
+   if(collection?.project?.status === collectionStatus.PINNING) {
+     return (
+      <section>
+      <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
+        <h2 class="text-2xl font-medium my-8">Files syncing with IPFS</h2>
+        <div class="p-10 shadow-lg rounded-lg">
+        <p class="m-2 text-lg">Please wait until this is done before sharing your collections</p>
+        <LinearProgress />
+        </div>
+      </div>
+    </section>
+     )
+   }
+   if(collection?.project?.status === collectionStatus.FINALIZED){
+    return(
+     <section>
+     <div class="max-w-screen-2xl w-11/12 mx-auto mb-16 p-10 shadow-lg rounded-lg">
+       <div className="text-center">
+         <h2 class="text-xl font-medium my-8">Files are Synchronized, Please make transection</h2>
+         <Button color="primary" variant="contained" onClick={()=> doTransection()}>
+           Transaction
+         </Button>
+       </div>
+     </div>
+   </section>
+    )
+  }
+
   }
   return (
     <div>
