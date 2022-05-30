@@ -8,7 +8,7 @@ import { ArrowRight } from "@mui/icons-material";
 import ViewCollection1img from "../../../assets/images/live/Etherscan.png";
 import ViewCollection2img from "../../../assets/images/live/Opensea.png";
 import { useParams } from 'react-router-dom';
-import { getCollection, getGeneratedCollection } from "../../api/core";
+import { getCollection, getGeneratedCollection, getSaveContract } from "../../api/core";
 import { updateStateAttr } from "../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { collectionStatus, contract_map } from "../../utils/constants";
@@ -21,23 +21,30 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const abi = require('../../../assets/blockchain/factory_abi.json');
 
 const LiveCollection = () => {
-  const {library, account} = useWeb3React();
 
   const {isImageGenerated} = useSelector((state)=> state.auth);
   const params = useParams();
   const [loading, setLoading] = useState(true)
   const [collection, setCollection] = useState(null);
-  const [transectionFilled, setTransectionFilled] = useState(false);
   const dispatch = useDispatch();
   const initialize = async () => {
-    getCollection(params?.id).then((collectionData) =>{
-      console.log('colllection', collectionData);
-       setCollection(collectionData);
-        setLoading(false);
-     
-    }).catch(err => {
-       console.error(err);
+    getSaveContract(params.id)
+    .then((response) => {
+      setCollection(response.data);
+      setLoading(false);
+        console.log(response.data);
     })
+    .catch(() => {
+      console.log('Something went wrong while fetching contract!');
+    })
+    // getCollection(params?.id).then((collectionData) =>{
+    //   // console.log('colllection', collectionData);
+    //    setCollection(collectionData);
+    //     setLoading(false);
+     
+    // }).catch(err => {
+    //    console.error(err);
+    // })
  }
 
  useEffect(() => {
@@ -49,41 +56,20 @@ const LiveCollection = () => {
 
 useEffect(() => {
       if(isImageGenerated){
-           getCollection(params?.id).then((collectionData) =>{
-             setCollection(collectionData);
-           })
+        getSaveContract(params.id)
+        .then((response) => {
+          setCollection(response.data);
+          setLoading(false);
+            console.log(response.data);
+        })
+        .catch(() => {
+          console.log('Something went wrong while fetching contract!');
+        })
       }
     },[isImageGenerated])
 
-  // const doTransection = ()=> {
-  //   console.log('trans', library)
-  //   const contract = new ethers.Contract(contract_map[4].address, abi, library.getSigner() );
-  //   console.log('contract', contract);
-  //   contract.createFlumeContract(
-  //     collection?.project?.edition,
-  //     'BTC', // symbol
-  //     collection?.project?.ipfs_url_metadata, //baseurl
-  //     account, //account
-  //     100000000000, // fee
-  //     1, //count
-  //     false,
-  //     true,
-  //      account, //account
-  //     1, //limit = count
-  //     1000, // royality
-  //     ""
-  //   ).then(res => {
-  //     showMessage({message: "Transection successfully processed!", soverity:"success"})
-  //       console.log(res, 'Transection successfully submitted');
-  //       setTransectionFilled(true);
-  //   }).catch(err => {
-  //     console.log(err, 'Something went wrong while trasection');
-  //     showMessage({message: "Something went wrong while trasection !", soverity:"error"})
 
-  //   })
-  // }
   const renderContent = () => {
-    console.log(loading, collection, 'live');
     if(loading) {
       return(
         <section>
@@ -96,7 +82,7 @@ useEffect(() => {
       </section>
       )
     }
-   
+   console.log(collection, 'col')
     return (
       <>
       <section>
@@ -152,6 +138,7 @@ useEffect(() => {
         <h2 class="text-2xl font-medium my-8">External Links</h2>
         <div class="flex md:flex-row flex-col p-10 shadow-lg rounded-lg justify-between">
           <div class="flex justify-between flex-grow">
+            <a href={`https://rinkeby.etherscan.io/address/${collection.contract_address}`} target="_blank" rel="noreferrer">
             <button
               size="small"
               class="p-2 m-2 flex-grow flex border-1 rounded-lg border-gray bg-gray justify-evenly items-center"
@@ -159,6 +146,8 @@ useEffect(() => {
               <img src={ViewCollection1img} class="px-2"></img>{" "}
               <span class="px-2">View on Etherscan</span> <ArrowRight />
             </button>
+            </a>
+            <a href="https://testnets.opensea.io/get-listed" target="_blank" rel="noreferrer">
             <button
               size="small"
               class="p-2 m-2 flex-grow flex border-1 rounded-lg border-gray bg-gray justify-evenly items-center"
@@ -166,22 +155,20 @@ useEffect(() => {
               <img src={ViewCollection2img} class="px-2"></img>{" "}
               <span class="px-2">View on Opensea</span> <ArrowRight />
             </button>
+            </a>
+            <a href={`https://rinkeby.etherscan.io/address/${collection.contract_address}#code`} target="_blank" rel="noreferrer">
+            <button
+              size="small"
+              class="p-2 m-2 flex-grow flex border-1 rounded-lg border-gray bg-gray justify-evenly items-center"
+            >
+              <span class="px-2">Smart Contract Source Code</span> <ArrowRight />
+            </button>
+            </a>
           </div>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value="10"
-            size="small"
-            className="m-2 md:w-1/2 min-w-fit grow-1"
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
         </div>
       </div>
     </section>
-    {collection?.project?.status === collectionStatus.PINNING ? (
+    {collection?.status === collectionStatus.PINNING ? (
         <section>
         <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
           <h2 class="text-2xl font-medium my-8">Files synchronization with IPFS</h2>
@@ -206,21 +193,6 @@ useEffect(() => {
    
     </>
     )
-
-  //  if(collection?.project?.status === collectionStatus.PINNING) {
-  //    return (
-  //     <section>
-  //     <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
-  //       <h2 class="text-2xl font-medium my-8">Files syncing with IPFS</h2>
-  //       <div class="p-10 shadow-lg rounded-lg">
-  //       <p class="m-2 text-lg">Please wait until this is done before sharing your collections</p>
-  //       <LinearProgress />
-  //       </div>
-  //     </div>
-  //   </section>
-  //    )
-  //  }
-  // }
 
   }
   return (

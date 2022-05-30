@@ -83,7 +83,7 @@ export const getGeneratedCollection = (id, params = {}) => {
 }
 export const postGenerateCollection = (data) => {
     return new Promise((resolve, reject) => {
-        http.post(`/collection`,data).then((response) => {
+        http.put(`/collection`,data).then((response) => {
             resolve(response.data)
         })
         .catch((err) => {
@@ -113,6 +113,16 @@ export const patchSaveContract = (data) => {
     })
 }
 
+export const getSaveContract = (id) => {
+    return new Promise((resolve, reject) => {
+        http.get(`/save-contract/${id}`).then((response) => {
+            resolve(response)
+        })
+        .catch((err) => {
+            reject(err);
+        })
+    })
+}
 export const removeAuthLocalStorage = () => {
     localStorage.removeItem('flume_auth_token');
     localStorage.removeItem('flume_notify_token');

@@ -23,6 +23,8 @@ import { useHistory } from 'react-router-dom';
 import { contract_map } from './app/utils/constants';
 import { showMessage } from './app/pages/store/messageSlice';
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import NotFound from './app/pages/404';
 
 
 
@@ -45,7 +47,7 @@ function App() {
       if(!data || (data && !data.length)){
         deactivate();
         removeAuthLocalStorage();
-        history.push('/')
+        history.push('/') 
       }
       console.log('on updateAccount', data);
     }
@@ -79,7 +81,10 @@ function App() {
                   <ProtectedRoute path="/live-collection/:id" >
                    <LiveCollection/>
                   </ProtectedRoute>
-                 
+                  <Route path="/404" >
+                    <NotFound />
+                  </Route>
+                  {/* <Redirect to="/404" /> */}
                 </Switch>
                 </Router>
         <CustomizedSnackbar />

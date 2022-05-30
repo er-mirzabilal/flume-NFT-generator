@@ -56,7 +56,7 @@ export default function Login(props){
     async function connectMetaMask(){
         if(!active) {
             setLoading(true);
-            await activate(connectors.injected);
+           const data = await activate(connectors.injected);
         }
         
     }

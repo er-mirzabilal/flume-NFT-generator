@@ -17,20 +17,25 @@ export default function ProtectedRoute(props){
     const location = useLocation();
     const {active, activate} = useWeb3React();
     const {isSocketInit} = useSelector((state)=> state.auth);
+    const dispatch = useDispatch()
     
     const path = location?.pathname;
-    const dispatch = useDispatch()
+    // console.log(path, 'path');
     if(isAuthorized()){
         if(!active) activate(connectors.injected);
         if(!isSocketInit) dispatch(initializeSocket());
+        console.log(path, isSocketInit, activate);
         if(path && ( path === '/' || path === '/login')){
             return <Redirect to={{pathname: "/view-collections", state: {from: location}}} />
         }
         return <Route {...props} />
     }
-    if(path && ( path === '/' || path === '/login')){
-        return <Route {...props} />
+    else {
+        if(path && ( path === '/' || path === '/login')){
+            return <Route {...props} />
+        }
+        return <Redirect to={{pathname: "/login", state: {from: location}}} />
     }
-    return <Redirect to={{pathname: "/login", state: {from: location}}} />
+  
 
 }

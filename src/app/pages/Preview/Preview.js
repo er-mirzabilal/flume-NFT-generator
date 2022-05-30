@@ -87,10 +87,14 @@ const Preview = () => {
    useEffect(() => {
       if(isImageGenerated){
         if(isImageGenerated?.status === 'success'){
-         getGeneratedCollection(params.id,filterParams).then(data => {
-            setImages(data);
-            setLoading(false);
-         })
+           getCollection(params.id).then(data => {
+              setCollection(data);
+              getGeneratedCollection(params.id,filterParams).then(data => {
+               setImages(data);
+               setLoading(false);
+            })
+           })
+         
         }
       }
     },[isImageGenerated])
@@ -346,7 +350,9 @@ const Preview = () => {
                             }
                         </div>
                         <Button startIcon={deploying && (<CircularProgress size="1.4rem" />)}  color="primary" variant="contained" onClick={() => deployCollection()} disabled={!contract_map[chainId]  || deploying}>Add Collection to Blockchain</Button>
-                        <p> Transection in progress pleas wait...</p>
+                       {deploying && (
+                          <p className="my-2 text-grey"> Transection in progress pleas wait...</p>
+                       )} 
                         </div>
                         
                       </div>

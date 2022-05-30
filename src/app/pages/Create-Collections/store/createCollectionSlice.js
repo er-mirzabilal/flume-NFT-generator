@@ -87,7 +87,7 @@ export const generateCollection = createAsyncThunk('/collection/generate', async
     try{
         const stateData = getState().createCollection;
         const formattedData = prepareDataForPost(stateData);
-        const data = await http.post(`/collection`,{...formattedData, generate: true, edit: true})
+        const data = await http.put(`/collection`,{...formattedData, generate: true, edit: true})
         return data.response;
     
     }
