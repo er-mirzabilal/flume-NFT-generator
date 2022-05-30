@@ -1,7 +1,7 @@
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button, CircularProgress, TextField } from '@mui/material';
+import { Button, CircularProgress, FormHelperText, TextField } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,8 +10,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { getCollection, getGeneratedCollection, postDeployCollection, postGenerateCollection } from '../../api/core';
-import { collectionStatus,contractAddress } from '../../utils/constants';
+import { getCollection, getGeneratedCollection, patchSaveContract, postDeployCollection, postGenerateCollection } from '../../api/core';
+import { collectionStatus,contract_map } from '../../utils/constants';
 import Header from '../Components/Header/Header';
 import { fetchCollection, generateCollection, getTransformedCollection, reset } from '../Create-Collections/store/createCollectionSlice';
 import { updateStateAttr } from '../store/authSlice';
@@ -49,12 +49,13 @@ const Preview = () => {
    const [fee, setFee] = useState(0.1);
    const [symbol, setSymbol] = useState('');
    const [chain, setChain] = useState(1);
+   const [error, setError] = useState({});
    const [filterParams, setFilterParams] = useState({
       item_no__gte: 1,
       item_no__lte: filterSize
    })
    const [imageProperty, setImageProperty] = useState(null);
-  const {library, account} = useWeb3React();
+  const {library, account, chainId} = useWeb3React();
 
     const handleClose = () => {
       setOpen(false);
@@ -87,7 +88,7 @@ const Preview = () => {
       if(isImageGenerated){
         if(isImageGenerated?.status === 'success'){
          getGeneratedCollection(params.id,filterParams).then(data => {
-            setImages([...images, ...data]);
+            setImages(data);
             setLoading(false);
          })
         }
@@ -120,33 +121,34 @@ const Preview = () => {
       return ethers.utils.parseUnits(originalAmount, decimals);
   }
     const doTransection = async () => {
-      const contract = new ethers.Contract(contractAddress[4], abi, library.getSigner() );
-      console.log(collection.project.project_hash);
+       console.log(contract_map[4].address, abi, library.getSigner());
+      const contract = new ethers.Contract(contract_map[4].address, abi, library.getSigner() );
+      // console.log(collection.project.project_hash);
      
       const deploymentFee = await contract.fee();
-      console.log('deploymentFee', deploymentFee);
+      // console.log('deploymentFee', deploymentFee);
       const options = {
          "value": deploymentFee.toString()
 
       }
       // console.log('fee', fee);
       const mintingFee =   getAmountInWei(fee.toString(), 18);
-      console.log('contract', contract, mintingFee);
-      console.log(
-         collection.project.edition,
-         symbol, // symbol
-         collection.project.ipfs_url_metadata, //baseurl
-         mintingFee, // fee
-         collection.project.count, //count
-         false,
-         true,
-          account, //account
-          collection.project.count, //limit = count
-         1000, // royality
-         "",
-         collection.project.project_hash, //project has
-         options
-      )
+      // console.log('contract', contract, mintingFee);
+      // console.log(
+      //    collection.project.edition,
+      //    symbol, // symbol
+      //    collection.project.ipfs_url_metadata, //baseurl
+      //    mintingFee, // fee
+      //    collection.project.count, //count
+      //    false,
+      //    true,
+      //     account, //account
+      //     collection.project.count, //limit = count
+      //    1000, // royality
+      //    "",
+      //    collection.project.project_hash, //project has
+      //    options
+      // )
    
       contract.createFlumeContract(
         collection?.project?.edition,
@@ -166,29 +168,77 @@ const Preview = () => {
          res.wait()
          .then( async (transectionResponse) => {
             console.log(transectionResponse, 'transection response');
-            console.log( await contract.deployedCollections(collection.project.project_hash));
+            const deployedContractInfo = await contract.deployedCollections(collection.project.project_hash);
+            const addr = deployedContractInfo['collectionAddress'];
+            const data = {
+               mint_fee: mintingFee.toString(),
+               "count": collection?.project?.count,
+               "symbol": symbol,
+               "mint_selection_enabled": false,
+               "mint_random_enabled": true,
+               "whitelist_signer_address": null,
+               "mint_limit": collection?.project?.count,
+               "royalty_basis": 1000,
+               "placeholder": null,
+               "contract_address": addr,
+               "chain_id": chainId,
+               id: collection?.project?.id
+           }
+         //   console.log(data, 'save contract');
+            patchSaveContract(data).then((res) => {
+               console.log('contract saved successfully');
+               history.push(`/live-collection/${params.id}`);
+               return;
+            })
+            .catch(err => {
+               console.log(err, 'something went wrong while saving contract');
+            })
+            .finally(() => {
+               setDeploying(false);
+            })
+            // console.log( await contract.deployedCollections(collection.project.project_hash));
 
             // showMessage({message: "Transection successfully processed!", soverity:"success"})
+
          })
          .catch(err => {
             console.log(err,  'final transection resp');
+        setDeploying(false);
+
          });
        
          //  console.log(res, 'Transection successfully procced');
       }).catch(err => {
         console.log(err, 'Something went wrong while trasection');
-        showMessage({message: "Something went wrong while trasection !", soverity:"error"})
+        dispatch(showMessage({message: "Something went wrong while trasection !", severity:"error"}))
+        setDeploying(false);
   
       })
     }
   
+    const validate = () => {
+       return new Promise((resolve, reject) => {
+          const error = {};
+          if(!symbol) error.symbol = 'Symbol is required';
+          else if( symbol.length > 4 ) error.symbol = 'Symbol must be less than 4 characters';
+          
+          setError(error);
+          if(Object.keys(error).length) reject(error);
+          else resolve(error);
+       })
+    }
     const deployCollection = () => {
        if(params.id){
           const data = {
              project: params.id
           }
-         setDeploying(true);
-         doTransection();
+         validate().then(() => {
+            setDeploying(true);
+            doTransection();
+         })
+         .catch(err => {
+            console.log(err, 'validation');
+         })
          // postDeployCollection(data)
          //  .then((response)=> {
          //     console.log('deploy Collection request is generated', response.data);
@@ -272,27 +322,31 @@ const Preview = () => {
                            <TextField  fullWidth  size="small"
                              value={symbol }
                              onChange={(e)=> {
-                                 console.log(e.target.value);
+                                if(error?.symbol) {
+                                   const updatedError = {...error};
+                                   delete updatedError['symbol'];
+                                   setError(updatedError);
+                                }
                                  setSymbol(e.target.value)}
                               }
-                             
+                             error={error?.symbol}
                              />
+                             {error?.symbol && (
+                             <FormHelperText error> {error?.symbol}</FormHelperText>
+                             )}
                         </div>
                         <div className="my-2">
-                           <lable class="text-sm block mb-2">Change Network</lable>
-                           <Select
-                                 fullWidth
-                                 size="small"
-                                 id="demo-simple-select"
-                                 value={chain}
-                                 onchange={(e)=> setChain(e.target.value)}
-                                 // onChange={(e) => dispatch(updateLayerItem({layerIndex, index, key:'rarity', value: e.target.value}))} 
-                              >
-                                 <MenuItem value={1}>Ethereum</MenuItem>
-                                 <MenuItem value={137}>Polygon</MenuItem>
-                           </Select>
+                           <lable class="text-sm block mb-2 color">Selected Network</lable>
+                           {contract_map[chainId] ?
+                            (
+                            <div className=" p-2 bg-secondary text-white font-samibold rounded inline-block">
+                               <p> {contract_map[chainId].name}</p> </div>)
+                             :
+                           (<div className="my-2 p-2 bg-orange-600 text-white	font-samibold rounded inline-block"> <p> Invalid Network </p> </div>)
+                            }
                         </div>
-                        <Button color="primary" variant="contained" onClick={() => deployCollection()} disabled={deploying} >Add Collection to Blockchain</Button>
+                        <Button startIcon={deploying && (<CircularProgress size="1.4rem" />)}  color="primary" variant="contained" onClick={() => deployCollection()} disabled={!contract_map[chainId]  || deploying}>Add Collection to Blockchain</Button>
+                        <p> Transection in progress pleas wait...</p>
                         </div>
                         
                       </div>
@@ -302,14 +356,12 @@ const Preview = () => {
   }
   const renderImagePropertyModal = () => {
   
-   console.log(JSON.parse(imageProperty));
    const data =  imageProperty ? JSON.parse(imageProperty) : null;
    let rows = [];
    if(data){
       const propertyValue = Object.values(data);
       rows = Object.keys(data).map((key, index) => ({name: key, value: propertyValue[index]}));
    }
-   console.log(rows);
    return (
       <Dialog onClose={()=>setImageProperty(null)} open={imageProperty}>
           <DialogTitle>

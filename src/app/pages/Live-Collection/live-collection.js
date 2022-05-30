@@ -11,12 +11,13 @@ import { useParams } from 'react-router-dom';
 import { getCollection, getGeneratedCollection } from "../../api/core";
 import { updateStateAttr } from "../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { collectionStatus, contractAddress } from "../../utils/constants";
+import { collectionStatus, contract_map } from "../../utils/constants";
 import { CircularProgress } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import {useWeb3React} from '@web3-react/core'
 import {ethers} from 'ethers';
 import { showMessage } from "../store/messageSlice";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const abi = require('../../../assets/blockchain/factory_abi.json');
 
 const LiveCollection = () => {
@@ -54,33 +55,33 @@ useEffect(() => {
       }
     },[isImageGenerated])
 
-  const doTransection = ()=> {
-    console.log('trans', library)
-    const contract = new ethers.Contract(contractAddress[4], abi, library.getSigner() );
-    console.log('contract', contract);
-    contract.createFlumeContract(
-      collection?.project?.edition,
-      'BTC', // symbol
-      collection?.project?.ipfs_url_metadata, //baseurl
-      account, //account
-      100000000000, // fee
-      1, //count
-      false,
-      true,
-       account, //account
-      1, //limit = count
-      1000, // royality
-      ""
-    ).then(res => {
-      showMessage({message: "Transection successfully processed!", soverity:"success"})
-        console.log(res, 'Transection successfully submitted');
-        setTransectionFilled(true);
-    }).catch(err => {
-      console.log(err, 'Something went wrong while trasection');
-      showMessage({message: "Something went wrong while trasection !", soverity:"error"})
+  // const doTransection = ()=> {
+  //   console.log('trans', library)
+  //   const contract = new ethers.Contract(contract_map[4].address, abi, library.getSigner() );
+  //   console.log('contract', contract);
+  //   contract.createFlumeContract(
+  //     collection?.project?.edition,
+  //     'BTC', // symbol
+  //     collection?.project?.ipfs_url_metadata, //baseurl
+  //     account, //account
+  //     100000000000, // fee
+  //     1, //count
+  //     false,
+  //     true,
+  //      account, //account
+  //     1, //limit = count
+  //     1000, // royality
+  //     ""
+  //   ).then(res => {
+  //     showMessage({message: "Transection successfully processed!", soverity:"success"})
+  //       console.log(res, 'Transection successfully submitted');
+  //       setTransectionFilled(true);
+  //   }).catch(err => {
+  //     console.log(err, 'Something went wrong while trasection');
+  //     showMessage({message: "Something went wrong while trasection !", soverity:"error"})
 
-    })
-  }
+  //   })
+  // }
   const renderContent = () => {
     console.log(loading, collection, 'live');
     if(loading) {
@@ -95,7 +96,7 @@ useEffect(() => {
       </section>
       )
     }
-    if( transectionFilled)
+   
     return (
       <>
       <section>
@@ -145,6 +146,7 @@ useEffect(() => {
         </div>
       </div>
     </section>
+    
     <section>
       <div class="max-w-screen-2xl w-11/12 mx-auto">
         <h2 class="text-2xl font-medium my-8">External Links</h2>
@@ -179,45 +181,46 @@ useEffect(() => {
         </div>
       </div>
     </section>
-    <section>
-      <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
-        <h2 class="text-2xl font-medium my-8">Files syncing with IPFS</h2>
-        <div class="p-10 shadow-lg rounded-lg">
-        <p class="m-2 text-lg">Please wait until this is done before sharing your collections</p>
-        <hr class="mx-2 my-4 border-2 bg-primary text-primary"></hr>
+    {collection?.project?.status === collectionStatus.PINNING ? (
+        <section>
+        <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
+          <h2 class="text-2xl font-medium my-8">Files synchronization with IPFS</h2>
+          <div class="p-10 shadow-lg rounded-lg">
+          <p class="m-2 text-lg">Please wait Files are synchronizing</p>
+          <LinearProgress />
+          </div>
         </div>
+        </section>
+    ):
+    (
+      <section>
+      <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
+      <h2 class="text-2xl font-medium my-8">Files synchronization with IPFS</h2>
+      <div class="p-10 shadow-lg rounded-lg">
+          <p class="m-2 text-lg">Files are synchronized <CheckCircleIcon color="primary" /></p>
+          </div>
       </div>
-    </section>
+      </section>
+    )
+    }
+   
     </>
     )
 
-   if(collection?.project?.status === collectionStatus.PINNING) {
-     return (
-      <section>
-      <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
-        <h2 class="text-2xl font-medium my-8">Files syncing with IPFS</h2>
-        <div class="p-10 shadow-lg rounded-lg">
-        <p class="m-2 text-lg">Please wait until this is done before sharing your collections</p>
-        <LinearProgress />
-        </div>
-      </div>
-    </section>
-     )
-   }
-   if(collection?.project?.status === collectionStatus.FINALIZED){
-    return(
-     <section>
-     <div class="max-w-screen-2xl w-11/12 mx-auto mb-16 p-10 shadow-lg rounded-lg">
-       <div className="text-center">
-         <h2 class="text-xl font-medium my-8">Files are Synchronized, Please make transection</h2>
-         <Button color="primary" variant="contained" onClick={()=> doTransection()}>
-           Transaction
-         </Button>
-       </div>
-     </div>
-   </section>
-    )
-  }
+  //  if(collection?.project?.status === collectionStatus.PINNING) {
+  //    return (
+  //     <section>
+  //     <div class="max-w-screen-2xl w-11/12 mx-auto mb-16">
+  //       <h2 class="text-2xl font-medium my-8">Files syncing with IPFS</h2>
+  //       <div class="p-10 shadow-lg rounded-lg">
+  //       <p class="m-2 text-lg">Please wait until this is done before sharing your collections</p>
+  //       <LinearProgress />
+  //       </div>
+  //     </div>
+  //   </section>
+  //    )
+  //  }
+  // }
 
   }
   return (
@@ -227,17 +230,10 @@ useEffect(() => {
         <div class="max-w-screen-2xl w-11/12 mx-auto flex">
           <div class="my-5 sm:my-10 pr-0 sm:pr-6 text-left self-center">
             <h1 class="text-third xl:text-6xl lg:text-5xl md:text-4xl text-3xl mb-3">
-              {loading ? (
-                    <p> Collection is <span class="text-secondary">Uploading</span> </p>
-              ): (
-                <>
-                <p> Collection is <span class="text-secondary">Live</span> </p>
+            <p> Collection is <span class="text-secondary">Live</span> </p>
                  <p class="text-third sm:text-2xl text-xl mb-3">
               Transaction Confirmed
             </p>
-                </>
-
-              )}
             </h1>
           </div>
         </div>

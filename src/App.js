@@ -20,6 +20,9 @@ import {useWeb3React} from '@web3-react/core'
 import ProtectedRoute from './Route/ProtectedRoute'
 import { removeAuthLocalStorage } from './app/api/core';
 import { useHistory } from 'react-router-dom';
+import { contract_map } from './app/utils/constants';
+import { showMessage } from './app/pages/store/messageSlice';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -27,6 +30,7 @@ import { useHistory } from 'react-router-dom';
 function App() {
   const {deactivate} = useWeb3React();
   const history = useHistory()
+  const dispatch = useDispatch()
     // const location = useLocation();
 
     useEffect(() => {
@@ -50,18 +54,19 @@ function App() {
     }
     const updateChain = (data) => {
       console.log('on updateChain', data);
+      if(!contract_map[data]) dispatch(showMessage({message: 'You are connected to unsuported network!', severity: 'warning', autoHideDuration: 7000}))
     }
     
   return (
     <div className="App min-w-[435px] font-poppins">
                 <Router>
                   <Switch>
-                  <Route exact path="/" >
+                  <ProtectedRoute exact path="/" >
                     <Home/>
-                  </Route>
-                  <Route path="/login" >
+                  </ProtectedRoute>
+                  <ProtectedRoute path="/login" >
                     <Login />
-                  </Route>
+                  </ProtectedRoute>
                   <ProtectedRoute path="/view-collections">
                     <ViewCollection/>
                   </ProtectedRoute>

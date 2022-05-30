@@ -7,6 +7,10 @@ export const collectionStatus = {
     PINNING: 'PINNING',
 }
 
-export  const contractAddress = {
-    4: "0x742827F9a7c05F6c2a5D683c97a0b44010519ACB",
+export  const contract_map = {
+    4: {
+        address:"0x742827F9a7c05F6c2a5D683c97a0b44010519ACB",
+        name : "Rinkbay"
+        }
 }
+

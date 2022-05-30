@@ -19,7 +19,6 @@ export default function CustomizedSnackbar() {
     }
     dispatch(hideMessage())
   };
-  console.log(options);
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
       <Snackbar open={state} onClose={handleClose} {...options}>

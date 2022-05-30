@@ -50,13 +50,11 @@ export const getColections = () => {
 export const createCollection = (data) => {
     return new Promise((resolve, reject) => {
         http.post(`/project`, data).then((response) => {
-            console.log(response, 'success');
             if(response)
                     resolve(response)
             reject(response)
         })
         .catch((err) => {
-            console.log(err, 'err')
             reject(err)
         })
     })
@@ -96,6 +94,17 @@ export const postGenerateCollection = (data) => {
 export const postDeployCollection = (data) => {
     return new Promise((resolve, reject) => {
         http.post(`/finalize-collection-v2`,data).then((response) => {
+            resolve(response.data)
+        })
+        .catch((err) => {
+            reject(err);
+        })
+    })
+}
+export const patchSaveContract = (data) => {
+    return new Promise((resolve, reject) => {
+        http.patch(`/save-contract/${data.id}`,data).then((response) => {
+            if(!response) reject(response);
             resolve(response.data)
         })
         .catch((err) => {

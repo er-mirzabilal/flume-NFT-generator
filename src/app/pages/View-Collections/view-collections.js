@@ -69,7 +69,6 @@ const ViewCollection = () => {
       
     }
     const renderCollection = (collection) => {
-        // console.log('col',collection.display_image, collection);
         return (
             <div class="w-80 rounded-xl m-2 p-4 shadow-lg cursor-pointer hover:shadow-2xl" onClick={() => openCollection(collection)}>
                     <ImagePreview images={collection.display_image} />
@@ -103,7 +102,6 @@ const ViewCollection = () => {
             </div>
         )
     }
-    // console.log(context, 'network');
     return (
         <div>
          <Header />

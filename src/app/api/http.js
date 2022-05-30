@@ -18,7 +18,10 @@ http.interceptors.request.use((config) => {
         Authorization: 'Bearer ' + token,
     };
     return config;
-})
+},function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  })
 
 
 http.interceptors.response.use((response) => {
@@ -30,6 +33,9 @@ http.interceptors.response.use((response) => {
         showMessage({message: "Token has expired or invalid.", soverity: "error"});
         // window.location.reload();
     }
-}
+},function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  }
 )
 export default http;
