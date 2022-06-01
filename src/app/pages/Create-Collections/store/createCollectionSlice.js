@@ -69,7 +69,7 @@ export const fetchCollection = createAsyncThunk('/collection/fetchCollection',  
 export const postCollection = createAsyncThunk('/collection/save', async (data, {getState ,dispatch}) => {
     const stateData = getState().createCollection;
     const formattedData = prepareDataForPost(stateData);
-    http.post(`/collection`,{...formattedData, generate: false, edit: true})
+    http.put(`/collection`,{...formattedData, generate: false, edit: true})
     .then((response) => {
         if(!response){
             dispatch(showMessage({message: 'Something went wrong while saving !', severity: 'error'}));
