@@ -18,6 +18,7 @@ import {useWeb3React} from '@web3-react/core'
 import {ethers} from 'ethers';
 import { showMessage } from "../store/messageSlice";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const abi = require('../../../assets/blockchain/factory_abi.json');
 
 const LiveCollection = () => {
@@ -26,6 +27,7 @@ const LiveCollection = () => {
   const params = useParams();
   const [loading, setLoading] = useState(true)
   const [collection, setCollection] = useState(null);
+  const [copied, setCopied] = useState(false);
   const dispatch = useDispatch();
   const initialize = async () => {
     getSaveContract(params.id)
@@ -68,7 +70,16 @@ useEffect(() => {
       }
     },[isImageGenerated])
 
+  const copyToClipboard = () => {
 
+    var  buttonSource = document.getElementById("mint-button-code");
+    if(buttonSource){
+      const cb = navigator.clipboard;
+      cb.writeText(buttonSource.innerHTML);
+      setCopied(true);
+    }
+
+  }
   const renderContent = () => {
     if(loading) {
       return(
@@ -82,7 +93,6 @@ useEffect(() => {
       </section>
       )
     }
-   console.log(collection, 'col')
     return (
       <>
       <section>
@@ -91,41 +101,84 @@ useEffect(() => {
         <div class="flex lg:flex-row flex-col p-10 shadow-lg rounded-lg">
           <div class="flex flex-col justify-between min-w-fit md:mr-5">
             <form class="">
-              <lable class="text-md block mb-2">Mintable NFT Limit</lable>
+              {/* <lable class="text-md block mb-2">Mintable NFT Limit</lable>
               <TextField
                 id="demo-helper-text-misaligned-no-helper"
                 fullWidth
                 size="small"
                 value="2000"
-              />
+              /> */}
               <lable class="text-md block my-2">Cost for Minting</lable>
               <TextField
+              disabled
                 id="demo-helper-text-misaligned-no-helper"
                 size="small"
                 value="2000"
               />
               <p class="inline-flex p-2">Matic</p>
+             
             </form>
             <div>
-              <button class="bg-secondary text-white font-semibold text-lg py-2 px-5 my-4 rounded-lg">
-                Copy
-              </button>
+              <Button startIcon={<ContentCopyIcon />} sx={{color: 'white'}}  color="secondary" variant="contained"  onClick={()=> copyToClipboard()}>
+                {copied? 'Copied Snippet': 'Copy Snippet'} 
+              </Button>
             </div>
           </div>
           <div class="md:ml-5">
             <h4>Snippet</h4>
-            <div class="bg-gray p-10 break-words">
-              <p>
-                // Line height: 44 pt // (identical to box height)
-                view.attributedText = NSMutableAttributedString(string: "Limit
-                Min Table NFT", attributes:
-                [NSAttributedString.Key.paragraphStyle: paragraphStyle]) var
-                parent = self.view!
-                view.heightAnchor.constraint(equalToConstant: 45).isActive =
-                true view.leadingAnchor.constraint(equalTo:
-                parent.leadingAnchor, constant: 260).isActive = true
-                view.topAnchor.constraint(equalTo: parent.topAnchor, constant:
-                500).isActive = true
+            <div class="bg-gray-100 p-10 my-4 break-words">
+              <p id="mint-button-code">
+               {`
+                   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+                   type="application/javascript"></script>
+                   <script >
+                       async function mint(){
+                         if (typeof window.ethereum !== 'undefined'
+                       || (typeof window.web3 !== 'undefined')) {
+                               const contractAddress = ${collection.contract_address};
+                               const provider = new ethers.providers.Web3Provider(window.ethereum)
+                               console.log(provider);
+                                   // MetaMask requires requesting permission to connect users accounts
+                               await provider.send("eth_requestAccounts", []);
+                               const signer = provider.getSigner();
+                                   const abi = [{
+                                           "inputs": [],
+                                           "name": "mintRandom",
+                                           "outputs": [],
+                                           "stateMutability": "payable",
+                                           "type": "function"
+                                           },
+                                           {
+                                               "inputs": [],
+                                               "name": "mintFee",
+                                               "outputs": [
+                                                   {
+                                                       "internalType": "uint256",
+                                                       "name": "",
+                                                       "type": "uint256"
+                                                   }
+                                               ],
+                                               "stateMutability": "view",
+                                               "type": "function"
+                                           }
+                                       ];
+           
+                               const contract = new ethers.Contract(contractAddress, abi, signer );
+                               console.log(contract, signer);
+                               const fee =  await contract.mintFee();
+                               console.log(fee);
+                               var data = contract.mintRandom({ value: fee} );
+                               console.log(data);
+                           }
+                           else {
+                               alert('Metamask is not installed!')
+                           }
+                           
+                       }
+                     
+                   </script>
+                   <button   onclick="javascript:mint()"> MINT BUTTON</button>
+               `}
               </p>
             </div>
           </div>

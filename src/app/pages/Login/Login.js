@@ -9,8 +9,10 @@ import login1img from "../../../assets/images/login/login1-img.png";
 import Logo from "../../../assets/images/Logo.png";
 import { authenticate, getNonce } from '../../api/core';
 import { connectors } from '../../utils/connectors';
+import { useDispatch } from 'react-redux';
+import { showMessage } from '../store/messageSlice';
 export default function Login(props){
-
+    const dispatch = useDispatch()
     const {active, activate, deactivate, library, account} = useWeb3React();
     const [loading, setLoading] = useState(false);
     const navigate = useHistory()
@@ -55,8 +57,15 @@ export default function Login(props){
 
     async function connectMetaMask(){
         if(!active) {
-            setLoading(true);
-           const data = await activate(connectors.injected);
+            if (typeof window.ethereum !== 'undefined'
+            || (typeof window.web3 !== 'undefined')) {
+                setLoading(true);
+                await activate(connectors.injected);
+            }
+            else {
+                dispatch(showMessage({'message' : 'Metamask is not available Please install!', severity:"error"}))
+            }
+      
         }
         
     }

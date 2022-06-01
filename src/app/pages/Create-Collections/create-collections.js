@@ -366,9 +366,9 @@ const CreateCollection = () => {
       <div className="flex my-3">
               <div class="w-96 h-auto self-center relative m-2">
               <img class="w-full h-full" src={blankimg} />
-              <button class=" absolute -bottom-3 left-2/4 -translate-x-2/4 w-fit text-sm text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded" onClick={()=> {
+              <Button startIcon={<AddIcon/>} className=" absolute bottom-3 left-2/4 -translate-x-2/4 w-fit " color="primary" variant="contained"  onClick={()=> {
                 imageInputRef.current[layerIndex].click()}
-                }><AddIcon/> Add Image</button>
+                }> Add Image</Button>
               <input type="file" ref={(el) => {imageInputRef.current[layerIndex]= el}} style={{display: 'none'}} onChange={(e)=> uploadImage(e, layerIndex ,index)}  />
               </div>
               <div class="w-full m-2 flex flex-col justify-between text-sm">

@@ -320,6 +320,7 @@ const Preview = () => {
                              onChange={(e)=> setFee(e.target.value)}
                              
                              />
+                             {contract_map[chainId]?.unit || ''}
                         </div>
                         <div className="my-2">
                            <lable class="text-sm block mb-2">Symbol</lable>
@@ -350,9 +351,6 @@ const Preview = () => {
                             }
                         </div>
                         <Button startIcon={deploying && (<CircularProgress size="1.4rem" />)}  color="primary" variant="contained" onClick={() => deployCollection()} disabled={!contract_map[chainId]  || deploying}>Add Collection to Blockchain</Button>
-                       {deploying && (
-                          <p className="my-2 text-grey"> Transection in progress pleas wait...</p>
-                       )} 
                         </div>
                         
                       </div>
