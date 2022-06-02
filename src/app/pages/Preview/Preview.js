@@ -33,6 +33,9 @@ const abi = require('../../../assets/blockchain/factory_abi.json');
 
 
 const filterSize = 5;
+const ONE_ITEM_GEN_TIME = 0.4;
+let FIRST_HIT_TOTAL_TIME = 0.4 * 1000;
+const HIT_TIME = 2000;
 const Preview = () => {
    const {isImageGenerated} = useSelector((state)=> state.auth);
    const dispatch = useDispatch()
@@ -50,6 +53,9 @@ const Preview = () => {
    const [symbol, setSymbol] = useState('');
    const [chain, setChain] = useState(1);
    const [error, setError] = useState({});
+   const [refetch, setRefetch] = useState(false);
+   const [stopFetch, setStopFetch] = useState(true);
+   const [firstHit, setFirstHit] = useState(true);
    const [filterParams, setFilterParams] = useState({
       item_no__gte: 1,
       item_no__lte: filterSize
@@ -64,14 +70,22 @@ const Preview = () => {
     const initialize = async () => {
       setLoading(true);
       getCollection(params?.id).then((collectionData) =>{
+         const calculateItems = collectionData.layers.reduce((total, item) => {
+            return total + item.layer_items.length;
+         },0 )
+         FIRST_HIT_TOTAL_TIME = calculateItems * ONE_ITEM_GEN_TIME * 1000;
+         console.log(calculateItems, 'items');
          setCollection(collectionData);
          const status = collectionData?.project?.status;
           if(status!== collectionStatus.GENERATING && status!== collectionStatus.PENDING){
                getGeneratedCollection(params.id,filterParams).then(data => {
-                  setImages([...images, ...data]);
+                  setImages(data);
                   setLoading(false);
+                 
                })
-            } 
+            } else {
+               setStopFetch(false);
+            }
       }).catch(err => {
          console.error(err);
       })
@@ -89,6 +103,7 @@ const Preview = () => {
         if(isImageGenerated?.status === 'success'){
            getCollection(params.id).then(data => {
               setCollection(data);
+              setStopFetch(true);
               getGeneratedCollection(params.id,filterParams).then(data => {
                setImages(data);
                setLoading(false);
@@ -98,6 +113,36 @@ const Preview = () => {
         }
       }
     },[isImageGenerated])
+
+    useEffect(() => {
+       
+      if(!stopFetch){
+         console.log(stopFetch, refetch,FIRST_HIT_TOTAL_TIME, firstHit, HIT_TIME);
+         setTimeout(() =>{
+            console.log('set timeout');
+            getCollection(params.id).then(collectionData => {
+               console.log(collectionData.project.status, 'success');
+               if(collectionData?.project?.status === collectionStatus.GENERATED ){
+                  setCollection(collectionData);
+                  setStopFetch(true);
+                  getGeneratedCollection(params.id,filterParams).then(data => {
+                   setImages(data);
+                   setLoading(false);
+                })
+               }
+               else { 
+                  console.log('fail');  
+                  setRefetch(!refetch);
+                  setFirstHit(false);
+               }
+             
+            })
+            .catch(err => {
+               console.log(err);
+            })
+         },firstHit ? FIRST_HIT_TOTAL_TIME : HIT_TIME)
+      }
+    },[refetch,stopFetch])
    
     const generateImage = async() => {
        dispatch(updateStateAttr({attr: 'isImageGenerated', data: null}));
