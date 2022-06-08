@@ -38,9 +38,9 @@ export default function ButtonAppBar() {
             <br></br>All in a matter of minutes!
             </p>
             <div class="flex no-wrap">
-              
+               <a href="https://discord.gg/vxSJggZc4D" target="_blank" rel="noreferrer" >
                 <Button sx={{ fontWeight: 600,margin:'4px'}} color="primary" variant="contained"
-             >Join the Discord</Button>
+             >Join the Discord</Button></a>
             
                 <Button onClick={() => navigate.push('/view-collections')}
                   sx={{ color:'white',fontWeight: 600,margin:'4px'}} color="secondary" variant="contained"
@@ -413,7 +413,7 @@ export default function ButtonAppBar() {
                 <div class="flex flex-row">
                   <div class="p-5 font-semibold self-center">
                     <p class="text-third sm:text-2xl text-lg">Ethereum</p>
-                    <h3 class="text-secondary lg:text-7xl md:text-5xl sm:text-4xl text-2xl m-0">0.02</h3>
+                    <h3 class="text-secondary lg:text-7xl md:text-5xl sm:text-4xl text-2xl m-0">0.015</h3>
                     <h4 class="text-secondary md:text-3xl text-xl">ETH</h4>
                   </div>
                   <div class="p-5 border-l-2 self-center">
@@ -421,7 +421,7 @@ export default function ButtonAppBar() {
                       <li class="flex list-none m-2 text-third">
                         {" "}
                         <CheckCircleIcon fontSize="small" className="self-start m-1 text-secondary"/>
-                        <p class="ml-1">0.02 ETH to add collection to blockchain + pay gas</p>
+                        <p class="ml-1">0.015 ETH to add collection to blockchain + pay gas</p>
                       </li>
                       <li class="flex list-none m-2 text-third">
                         {" "}
@@ -448,7 +448,7 @@ export default function ButtonAppBar() {
               {" "}
               Any question? Just ping us on{" "}
               <span className="text-primary">
-                <a className="hover:cursor-pointer"> Join Discord </a>
+                <a href="https://discord.gg/vxSJggZc4D" target="_blank" className="hover:cursor-pointer" rel="noreferrer"> Join Discord </a>
               </span>
               . We'll be happy to help{" "}
             </p>

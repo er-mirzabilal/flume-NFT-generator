@@ -32,7 +32,7 @@ const abi = require('../../../assets/blockchain/factory_abi.json');
 
 
 
-const filterSize = 5;
+const filterSize = 20   ;
 const ONE_ITEM_GEN_TIME = 0.4;
 let FIRST_HIT_TOTAL_TIME = 0.4 * 1000;
 const HIT_TIME = 2000;
@@ -511,7 +511,7 @@ const Preview = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cacnel</Button>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={()=> navigate.push(`/create-collections/${params.id}`)} autoFocus>
             Edit
           </Button>

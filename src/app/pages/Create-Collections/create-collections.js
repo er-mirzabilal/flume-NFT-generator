@@ -87,7 +87,7 @@ const CreateCollection = () => {
         </a>
         <h2 class="text-2xl font-semibold text-third">
           <span class="px-3 text-primary">Create</span>
-          NFT Collectons
+          NFT Collections
         </h2>
         
       </div>
