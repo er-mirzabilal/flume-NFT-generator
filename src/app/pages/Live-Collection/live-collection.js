@@ -135,7 +135,7 @@ useEffect(() => {
                        async function mint(){
                          if (typeof window.ethereum !== 'undefined'
                        || (typeof window.web3 !== 'undefined')) {
-                               const contractAddress = ${collection.contract_address};
+                               const contractAddress ='${collection.contract_address}';
                                const provider = new ethers.providers.Web3Provider(window.ethereum)
                                console.log(provider);
                                    // MetaMask requires requesting permission to connect users accounts
