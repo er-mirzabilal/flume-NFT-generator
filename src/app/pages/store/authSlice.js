@@ -1,23 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 
-
 export const initializeSocket = createAsyncThunk('/auth/setSocket', async (data, {dispatch, getState}) => {
 
     const state = getState().auth;
     const socketState = state.isSocketInit;
     if(!socketState) {
         const notifyToken = localStorage.getItem('flume_notify_token');
-        const socketUrl = `ws://'http://164.92.157.140:8000/api'/ws/notify/${notifyToken}/`;
+        const socketUrl = `wss://getflume.app:8001/ws/notify/${notifyToken}/`;
+        console.log('going to connect to socket')
         const socket = new WebSocket(socketUrl);
+        // console.log(socket)
         dispatch(updateState({...state, isSocketInit: true}));
-        socket.onmessage = (event) => {
-            const data = event?.data ?  JSON.parse(event.data) : null;
-            console.log('onMessage', data);
-            if(data)  dispatch(updateState({...state, isImageGenerated: data}))
+        socket.onopen = (e) => {
+            console.log('socket opened');
+            socket.onmessage = (event) => {
+                const data = event?.data ?  JSON.parse(event.data) : null;
+                console.log('onMessage', data);
+                if(data)  dispatch(updateState({...state, isImageGenerated: data}))
+            }
+            // console.log(e);
         }
+        
     }
- 
+  
 });
 
 const initialState = {

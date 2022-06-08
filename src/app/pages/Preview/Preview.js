@@ -70,11 +70,11 @@ const Preview = () => {
     const initialize = async () => {
       setLoading(true);
       getCollection(params?.id).then((collectionData) =>{
-         const calculateItems = collectionData.layers.reduce((total, item) => {
-            return total + item.layer_items.length;
-         },0 )
-         FIRST_HIT_TOTAL_TIME = calculateItems * ONE_ITEM_GEN_TIME * 1000;
-         console.log(calculateItems, 'items');
+         // const calculateItems = collectionData.layers.reduce((total, item) => {
+         //    return total + item.layer_items.length;
+         // },0 )
+         // FIRST_HIT_TOTAL_TIME = calculateItems * ONE_ITEM_GEN_TIME * 1000;
+         // console.log(calculateItems, 'items');
          setCollection(collectionData);
          const status = collectionData?.project?.status;
           if(status!== collectionStatus.GENERATING && status!== collectionStatus.PENDING){
@@ -83,9 +83,10 @@ const Preview = () => {
                   setLoading(false);
                  
                })
-            } else {
-               setStopFetch(false);
             }
+            //  else {
+            //    setStopFetch(false);
+            // }
       }).catch(err => {
          console.error(err);
       })
@@ -103,7 +104,7 @@ const Preview = () => {
         if(isImageGenerated?.status === 'success'){
            getCollection(params.id).then(data => {
               setCollection(data);
-              setStopFetch(true);
+            //   setStopFetch(true);
               getGeneratedCollection(params.id,filterParams).then(data => {
                setImages(data);
                setLoading(false);
@@ -114,35 +115,35 @@ const Preview = () => {
       }
     },[isImageGenerated])
 
-    useEffect(() => {
+   //  useEffect(() => {
        
-      if(!stopFetch){
-         console.log(stopFetch, refetch,FIRST_HIT_TOTAL_TIME, firstHit, HIT_TIME);
-         setTimeout(() =>{
-            console.log('set timeout');
-            getCollection(params.id).then(collectionData => {
-               console.log(collectionData.project.status, 'success');
-               if(collectionData?.project?.status === collectionStatus.GENERATED ){
-                  setCollection(collectionData);
-                  setStopFetch(true);
-                  getGeneratedCollection(params.id,filterParams).then(data => {
-                   setImages(data);
-                   setLoading(false);
-                })
-               }
-               else { 
-                  console.log('fail');  
-                  setRefetch(!refetch);
-                  setFirstHit(false);
-               }
+   //    if(!stopFetch){
+   //       console.log(stopFetch, refetch,FIRST_HIT_TOTAL_TIME, firstHit, HIT_TIME);
+   //       setTimeout(() =>{
+   //          console.log('set timeout');
+   //          getCollection(params.id).then(collectionData => {
+   //             console.log(collectionData.project.status, 'success');
+   //             if(collectionData?.project?.status === collectionStatus.GENERATED ){
+   //                setCollection(collectionData);
+   //                setStopFetch(true);
+   //                getGeneratedCollection(params.id,filterParams).then(data => {
+   //                 setImages(data);
+   //                 setLoading(false);
+   //              })
+   //             }
+   //             else { 
+   //                console.log('fail');  
+   //                setRefetch(!refetch);
+   //                setFirstHit(false);
+   //             }
              
-            })
-            .catch(err => {
-               console.log(err);
-            })
-         },firstHit ? FIRST_HIT_TOTAL_TIME : HIT_TIME)
-      }
-    },[refetch,stopFetch])
+   //          })
+   //          .catch(err => {
+   //             console.log(err);
+   //          })
+   //       },firstHit ? FIRST_HIT_TOTAL_TIME : HIT_TIME)
+   //    }
+   //  },[refetch,stopFetch])
    
     const generateImage = async() => {
        dispatch(updateStateAttr({attr: 'isImageGenerated', data: null}));
