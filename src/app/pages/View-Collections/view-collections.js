@@ -13,7 +13,6 @@ import { showMessage } from '../store/messageSlice';
 import { useDispatch } from 'react-redux';
 
 const ViewCollection = () => {
-    const context = useWeb3React();
     const dispatch = useDispatch()
     const navigate = useHistory();
     const [loading, setLoading] = useState(true);

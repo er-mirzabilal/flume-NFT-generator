@@ -26,6 +26,8 @@ import Empty from "../../../assets/images/collections/empty.png";
 import Header from "../Components/Header/Header";
 import LayerToolBar from '../Components/Menu/Menu';
 import ImagePreview from './ImagePreview';
+import { showMessage } from "../store/messageSlice";
+
 
 import {
   addLayer, deleteLayer, fetchCollection, generateCollection, moveLayer, postCollection, reset, updateDimensionHeight,
@@ -105,6 +107,7 @@ const CreateCollection = () => {
   };
   const validate = () => {
     return new Promise((resolve, reject) => {
+      console.log('validate');
       const err = {};
       if(!title) err.title = 'Title is required';
       if (!dimensionHeight) err.dimensionHeight = 'Height is required';
@@ -112,7 +115,48 @@ const CreateCollection = () => {
       if (!dimensionWidth) err.dimensionWidth = 'Width is required';
       else if(dimensionWidth && dimensionWidth > 1200) err.dimensionWidth = 'Width must <= 1200px'; 
       // if(noOfNft < 1 || noOfNft > 10000) err.noOfNft = 'Number of  NFT must >= 1 and <= 10000';
-      
+      console.log('start', layers);
+      layers.map((layer, layerIndex) => {
+        console.log('layer', layer);
+        layer?.items && layer.items.map((item, itemIndex) => {
+          console.log('item', item);
+          if(!item.name) {
+            console.log(item, 'invalid');
+            if(err.layers) {
+                if(err.layers[layerIndex] !== undefined) {
+                  err.layers[layerIndex] = {
+                    ...err.layers[layerIndex],
+                      [itemIndex]: {
+                        name: true
+                      }
+                }
+            }
+            else  {
+              err.layers ={
+                ...err.layers,
+                [layerIndex] : {
+                [itemIndex]: {
+                  name: true
+                } 
+              }}
+            }
+          }
+            else {
+              err.layers = {
+                [layerIndex] : {
+                [itemIndex]: {
+                  name: true
+                } 
+              }}
+            }
+            const prevLayerError = err?.layers ? err.layers : {};  
+            
+            console.log('err', err);
+          }
+          // console.log(error, 'foreach');
+          
+        })
+      })
       if(Object.keys(err).length){
         updateError(err);
         reject(err)
@@ -136,6 +180,7 @@ const CreateCollection = () => {
     })
     .catch(err => {
       dispatch(updateError(err));
+      dispatch(showMessage({'message': "Invalid data entry!", severity: 'warning'}));
     })
    
   }
@@ -251,7 +296,8 @@ const CreateCollection = () => {
       </div>
       <div class="w-96 m-2">
       <lable class="text-md block my-1">Image Name:</lable>
-      <TextField  id="demo-helper-text-misaligned-no-helper" size="small" value={data.name} onChange={(e) => dispatch(updateLayerItem({layerIndex, index, key:'name', value: e.target.value}))}/>
+      <TextField error={error?.layers && error.layers[layerIndex] && error?.layers[layerIndex][index]?.name}   id="demo-helper-text-misaligned-no-helper" size="small" value={data.name} onChange={(e) => dispatch(updateLayerItem({layerIndex, index, key:'name', value: e.target.value}))}/>
+      {(error?.layers && error.layers[layerIndex] && error?.layers[layerIndex][index]?.name) && (<FormHelperText error> Required</FormHelperText>)}
       <lable class="text-md block my-1">Rarity:</lable>
       {/* <TextField  id="demo-helper-text-misaligned-no-helper" onChange={(e) => dispatch(updateLayerItem({layerIndex, index, key:'rarity', value: e.target.value}))} /> */}
       <FormControl fullWidth>
@@ -447,7 +493,7 @@ const CreateCollection = () => {
         <section>
         <div class="max-w-screen-2xl lg:w-11/12 flex items-start flex-wrap mx-auto my-5">
         {renderLayers()}
-        <div class="w-1/3  m-2 p-3">
+        <div class="  m-2 p-3">
         <button class="bg-cyan-500 text-lg py-2 px-5 rounded-lg mx-2 text-white"  onClick={()=> dispatch(addLayer())} > <AddIcon /> Layer</button>
 
         </div>
@@ -468,7 +514,7 @@ const CreateCollection = () => {
     justifyContent: "center",
     alignItems: "center",
   };
-  
+  // console.log(error, 'error');
   return (
     
     <div>

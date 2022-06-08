@@ -233,7 +233,7 @@ const Preview = () => {
                "chain_id": chainId,
                id: collection?.project?.id
            }
-         //   console.log(data, 'save contract');
+           console.log(data, 'save contract');
             patchSaveContract(data).then((res) => {
                console.log('contract saved successfully');
                history.push(`/live-collection/${params.id}`);
