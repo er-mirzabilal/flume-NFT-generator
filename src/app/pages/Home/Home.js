@@ -478,7 +478,8 @@ export default function ButtonAppBar() {
               >
                 Terms of Services
               </a>
-              <a class="mr-5 hover:text-gray-900 hover:cursor-pointer">
+
+              <a  href="https://discord.gg/vxSJggZc4D" target="_blank" rel="noreferrer" class="mr-5 hover:text-gray-900 hover:cursor-pointer">
                 <img src={Vector} />
               </a>
             </nav>

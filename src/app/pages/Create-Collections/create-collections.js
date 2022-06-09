@@ -410,7 +410,7 @@ const CreateCollection = () => {
               </div>
               <div class="w-full m-2 flex flex-col justify-between text-sm">
               <p>Upload multiple images for each layer. Give a name and a rarity level to each images. </p>
-              <a href="">Need Help? <span class=" text-indigo-600 underline">Read our Guidelines</span></a>
+              <a href="https://docs-flume.gitbook.io/flume/guides/uploading-content" target="_blank" rel="noreferrer">Need Help? <span class=" text-indigo-600 underline">Read our Guidelines</span></a>
               </div>
         </div>
     )
