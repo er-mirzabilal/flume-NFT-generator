@@ -68,12 +68,17 @@ useEffect(() => {
       }
     },[isImageGenerated])
 
+    function decodeHtml(html) {
+      var txt = document.createElement("textarea");
+      txt.innerHTML = html;
+      return txt.value;
+  }
   const copyToClipboard = () => {
 
     var  buttonSource = document.getElementById("mint-button-code");
     if(buttonSource){
       const cb = navigator.clipboard;
-      cb.writeText(buttonSource.innerHTML);
+      cb.writeText( decodeHtml(buttonSource.innerHTML.toString));
       setCopied(true);
     }
 
@@ -97,31 +102,7 @@ useEffect(() => {
       <div class="max-w-screen-2xl w-11/12 mx-auto">
         <h2 class="text-2xl font-medium my-8">Embed in Your Website</h2>
         <div class="flex lg:flex-row flex-col p-10 shadow-lg rounded-lg">
-          <div class="flex flex-col justify-between min-w-fit md:mr-5">
-            <form class="">
-              {/* <lable class="text-md block mb-2">Mintable NFT Limit</lable>
-              <TextField
-                id="demo-helper-text-misaligned-no-helper"
-                fullWidth
-                size="small"
-                value="2000"
-              /> */}
-              <lable class="text-md block my-2">Cost for Minting</lable>
-              <TextField
-              disabled
-                id="demo-helper-text-misaligned-no-helper"
-                size="small"
-                value="2000"
-              />
-              <p class="inline-flex p-2">Matic</p>
-             
-            </form>
-            <div>
-              <Button startIcon={<ContentCopyIcon />} sx={{color: 'white'}}  color="secondary" variant="contained"  onClick={()=> copyToClipboard()}>
-                {copied? 'Copied Snippet': 'Copy Snippet'} 
-              </Button>
-            </div>
-          </div>
+        
           <div class="md:ml-5">
             <h4>Snippet</h4>
             <div class="bg-gray-100 p-10 my-4 break-words">
@@ -175,6 +156,14 @@ useEffect(() => {
                `}
               </p>
             </div>
+            <div class="flex flex-col justify-between min-w-fit md:mr-5">
+
+<div>
+  <Button startIcon={<ContentCopyIcon />} sx={{color: 'white'}}  color="secondary" variant="contained"  onClick={()=> copyToClipboard()}>
+    {copied? 'Copied Snippet': 'Copy Snippet'} 
+  </Button>
+</div>
+</div>
           </div>
         </div>
       </div>
