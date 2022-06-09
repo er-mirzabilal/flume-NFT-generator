@@ -107,21 +107,15 @@ const CreateCollection = () => {
   };
   const validate = () => {
     return new Promise((resolve, reject) => {
-      console.log('validate');
       const err = {};
       if(!title) err.title = 'Title is required';
       if (!dimensionHeight) err.dimensionHeight = 'Height is required';
       else if(dimensionHeight && dimensionHeight > 1200) err.dimensionHeight = 'Height must <= 1200px';
       if (!dimensionWidth) err.dimensionWidth = 'Width is required';
       else if(dimensionWidth && dimensionWidth > 1200) err.dimensionWidth = 'Width must <= 1200px'; 
-      // if(noOfNft < 1 || noOfNft > 10000) err.noOfNft = 'Number of  NFT must >= 1 and <= 10000';
-      console.log('start', layers);
       layers.map((layer, layerIndex) => {
-        console.log('layer', layer);
         layer?.items && layer.items.map((item, itemIndex) => {
-          console.log('item', item);
           if(!item.name) {
-            console.log(item, 'invalid');
             if(err.layers) {
                 if(err.layers[layerIndex] !== undefined) {
                   err.layers[layerIndex] = {
@@ -149,11 +143,8 @@ const CreateCollection = () => {
                 } 
               }}
             }
-            const prevLayerError = err?.layers ? err.layers : {};  
             
-            console.log('err', err);
           }
-          // console.log(error, 'foreach');
           
         })
       })
@@ -514,7 +505,6 @@ const CreateCollection = () => {
     justifyContent: "center",
     alignItems: "center",
   };
-  // console.log(error, 'error');
   return (
     
     <div>

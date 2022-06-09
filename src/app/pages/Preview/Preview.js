@@ -74,7 +74,6 @@ const Preview = () => {
             return total + item.layer_items.length;
          },0 )
          FIRST_HIT_TOTAL_TIME = calculateItems * ONE_ITEM_GEN_TIME * 1000;
-         console.log(calculateItems, 'items');
          setCollection(collectionData);
          const status = collectionData?.project?.status;
           if(status!== collectionStatus.GENERATING && status!== collectionStatus.PENDING){
@@ -118,11 +117,8 @@ const Preview = () => {
     useEffect(() => {
        
       if(!stopFetch){
-         console.log(stopFetch, refetch,FIRST_HIT_TOTAL_TIME, firstHit, HIT_TIME);
          setTimeout(() =>{
-            console.log('set timeout');
             getCollection(params.id).then(collectionData => {
-               console.log(collectionData.project.status, 'success');
                if(collectionData?.project?.status === collectionStatus.GENERATED ){
                   setCollection(collectionData);
                   setStopFetch(true);
@@ -132,7 +128,6 @@ const Preview = () => {
                 })
                }
                else { 
-                  console.log('fail');  
                   setRefetch(!refetch);
                   setFirstHit(false);
                }
@@ -171,34 +166,14 @@ const Preview = () => {
       return ethers.utils.parseUnits(originalAmount, decimals);
   }
     const doTransection = async () => {
-       console.log(contract_map[4].address, abi, library.getSigner());
       const contract = new ethers.Contract(contract_map[4].address, abi, library.getSigner() );
-      // console.log(collection.project.project_hash);
-     
       const deploymentFee = await contract.fee();
-      // console.log('deploymentFee', deploymentFee);
       const options = {
          "value": deploymentFee.toString()
 
       }
-      // console.log('fee', fee);
       const mintingFee =   getAmountInWei(fee.toString(), 18);
-      // console.log('contract', contract, mintingFee);
-      // console.log(
-      //    collection.project.edition,
-      //    symbol, // symbol
-      //    collection.project.ipfs_url_metadata, //baseurl
-      //    mintingFee, // fee
-      //    collection.project.count, //count
-      //    false,
-      //    true,
-      //     account, //account
-      //     collection.project.count, //limit = count
-      //    1000, // royality
-      //    "",
-      //    collection.project.project_hash, //project has
-      //    options
-      // )
+
    
       contract.createFlumeContract(
         collection?.project?.edition,
@@ -217,7 +192,6 @@ const Preview = () => {
       ).then(res => {
          res.wait()
          .then( async (transectionResponse) => {
-            console.log(transectionResponse, 'transection response');
             const deployedContractInfo = await contract.deployedCollections(collection.project.project_hash);
             const addr = deployedContractInfo['collectionAddress'];
             const data = {
@@ -234,9 +208,7 @@ const Preview = () => {
                "chain_id": chainId,
                id: collection?.project?.id
            }
-           console.log(data, 'save contract');
             patchSaveContract(data).then((res) => {
-               console.log('contract saved successfully');
                history.push(`/live-collection/${params.id}`);
                return;
             })
@@ -252,7 +224,6 @@ const Preview = () => {
 
          })
          .catch(err => {
-            console.log(err,  'final transection resp');
         setDeploying(false);
 
          });

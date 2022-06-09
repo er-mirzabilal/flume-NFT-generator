@@ -34,7 +34,6 @@ const LiveCollection = () => {
     .then((response) => {
       setCollection(response.data);
       setLoading(false);
-        console.log(response.data);
     })
     .catch(() => {
       console.log('Something went wrong while fetching contract!');
@@ -62,7 +61,6 @@ useEffect(() => {
         .then((response) => {
           setCollection(response.data);
           setLoading(false);
-            console.log(response.data);
         })
         .catch(() => {
           console.log('Something went wrong while fetching contract!');
@@ -137,7 +135,6 @@ useEffect(() => {
                        || (typeof window.web3 !== 'undefined')) {
                                const contractAddress ='${collection.contract_address}';
                                const provider = new ethers.providers.Web3Provider(window.ethereum)
-                               console.log(provider);
                                    // MetaMask requires requesting permission to connect users accounts
                                await provider.send("eth_requestAccounts", []);
                                const signer = provider.getSigner();
@@ -164,11 +161,8 @@ useEffect(() => {
                                        ];
            
                                const contract = new ethers.Contract(contractAddress, abi, signer );
-                               console.log(contract, signer);
                                const fee =  await contract.mintFee();
-                               console.log(fee);
                                var data = contract.mintRandom({ value: fee} );
-                               console.log(data);
                            }
                            else {
                                alert('Metamask is not installed!')

@@ -44,7 +44,7 @@ function App() {
     }, [])
     
     const updateAccount = (data) => {
-      if(!data || (data && !data.length)){
+      if(data && !data.length){
         deactivate();
         removeAuthLocalStorage();
         history.push('/') 
@@ -52,11 +52,12 @@ function App() {
       console.log('on updateAccount', data);
     }
     const updateNetwork = (data) => {
-      console.log('on updateNetwork', data);
+      if(!contract_map[data]) dispatch(showMessage({message: 'You are connected to unsuported network!', severity: 'warning', autoHideDuration: 7000}))
+
     }
     const updateChain = (data) => {
       console.log('on updateChain', data);
-      if(!contract_map[data]) dispatch(showMessage({message: 'You are connected to unsuported network!', severity: 'warning', autoHideDuration: 7000}))
+      // if(!contract_map[data]) dispatch(showMessage({message: 'You are connected to unsuported network!', severity: 'warning', autoHideDuration: 7000}))
     }
     
   return (
