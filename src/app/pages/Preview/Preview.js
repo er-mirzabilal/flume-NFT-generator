@@ -32,10 +32,10 @@ const abi = require('../../../assets/blockchain/factory_abi.json');
 
 
 
-const filterSize = 20   ;
-const ONE_ITEM_GEN_TIME = 0.4;
-let FIRST_HIT_TOTAL_TIME = 0.4 * 1000;
-const HIT_TIME = 2000;
+const filterSize = 20;
+// const ONE_ITEM_GEN_TIME = 0.4;
+// let FIRST_HIT_TOTAL_TIME = 0.4 * 1000;
+// const HIT_TIME = 2000;
 const Preview = () => {
    const {isImageGenerated} = useSelector((state)=> state.auth);
    const dispatch = useDispatch()
@@ -70,10 +70,10 @@ const Preview = () => {
     const initialize = async () => {
       setLoading(true);
       getCollection(params?.id).then((collectionData) =>{
-         const calculateItems = collectionData.layers.reduce((total, item) => {
-            return total + item.layer_items.length;
-         },0 )
-         FIRST_HIT_TOTAL_TIME = calculateItems * ONE_ITEM_GEN_TIME * 1000;
+         // const calculateItems = collectionData.layers.reduce((total, item) => {
+         //    return total + item.layer_items.length;
+         // },0 )
+         // FIRST_HIT_TOTAL_TIME = calculateItems * ONE_ITEM_GEN_TIME * 1000;
          setCollection(collectionData);
          const status = collectionData?.project?.status;
           if(status!== collectionStatus.GENERATING && status!== collectionStatus.PENDING){
@@ -83,9 +83,9 @@ const Preview = () => {
                  
                })
             }
-             else {
-               setStopFetch(false);
-            }
+            //  else {
+            //    setStopFetch(false);
+            // }
       }).catch(err => {
          console.error(err);
       })
@@ -103,7 +103,7 @@ const Preview = () => {
         if(isImageGenerated?.status === 'success'){
            getCollection(params.id).then(data => {
               setCollection(data);
-              setStopFetch(true);
+            //   setStopFetch(true);
               getGeneratedCollection(params.id,filterParams).then(data => {
                setImages(data);
                setLoading(false);
@@ -114,31 +114,31 @@ const Preview = () => {
       }
     },[isImageGenerated])
 
-    useEffect(() => {
+   //  useEffect(() => {
        
-      if(!stopFetch){
-         setTimeout(() =>{
-            getCollection(params.id).then(collectionData => {
-               if(collectionData?.project?.status === collectionStatus.GENERATED ){
-                  setCollection(collectionData);
-                  setStopFetch(true);
-                  getGeneratedCollection(params.id,filterParams).then(data => {
-                   setImages(data);
-                   setLoading(false);
-                })
-               }
-               else { 
-                  setRefetch(!refetch);
-                  setFirstHit(false);
-               }
+   //    if(!stopFetch){
+   //       setTimeout(() =>{
+   //          getCollection(params.id).then(collectionData => {
+   //             if(collectionData?.project?.status === collectionStatus.GENERATED ){
+   //                setCollection(collectionData);
+   //                setStopFetch(true);
+   //                getGeneratedCollection(params.id,filterParams).then(data => {
+   //                 setImages(data);
+   //                 setLoading(false);
+   //              })
+   //             }
+   //             else { 
+   //                setRefetch(!refetch);
+   //                setFirstHit(false);
+   //             }
              
-            })
-            .catch(err => {
-               console.log(err);
-            })
-         },firstHit ? FIRST_HIT_TOTAL_TIME : HIT_TIME)
-      }
-    },[refetch,stopFetch])
+   //          })
+   //          .catch(err => {
+   //             console.log(err);
+   //          })
+   //       },firstHit ? FIRST_HIT_TOTAL_TIME : HIT_TIME)
+   //    }
+   //  },[refetch,stopFetch])
    
     const generateImage = async() => {
        dispatch(updateStateAttr({attr: 'isImageGenerated', data: null}));
