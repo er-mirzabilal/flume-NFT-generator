@@ -60,7 +60,6 @@ export default function Login(props){
         if(!active) {
             if (typeof window.ethereum !== 'undefined'
             || (typeof window.web3 !== 'undefined')) {
-                console.log(contract_map[parseInt(window.ethereum.networkVersion)],window.ethereum.networkVersion)
                 if(contract_map[parseInt(window.ethereum.networkVersion)] ){
                     setLoading(true);
                     await activate(connectors.injected);
