@@ -24,7 +24,7 @@ export default function ProtectedRoute(props){
     if(isAuthorized()){
         if(!active) activate(connectors.injected);
         if(!isSocketInit) dispatch(initializeSocket());
-        console.log(path, isSocketInit, activate);
+        // console.log(path, isSocketInit, activate);
         if(path && ( path === '/' || path === '/login')){
             return <Redirect to={{pathname: "/view-collections", state: {from: location}}} />
         }

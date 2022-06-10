@@ -78,7 +78,7 @@ useEffect(() => {
     var  buttonSource = document.getElementById("mint-button-code");
     if(buttonSource){
       const cb = navigator.clipboard;
-      cb.writeText( decodeHtml(buttonSource.innerHTML.toString));
+      cb.writeText( decodeHtml(buttonSource.innerHTML));
       setCopied(true);
     }
 
@@ -104,7 +104,7 @@ useEffect(() => {
         <div class="flex lg:flex-row flex-col p-10 shadow-lg rounded-lg">
         
           <div class="md:ml-5">
-            <h4>Snippet</h4>
+            <h4>Past the Flume script in the {'<head>'} of every page you wish to enable minting button and use <strong>onclick="javascript:mint()"</strong> funtion in your cusomized minting button </h4>
             <div class="bg-gray-100 p-10 my-4 break-words">
               <p id="mint-button-code">
                {`
@@ -152,7 +152,6 @@ useEffect(() => {
                        }
                      
                    </script>
-                   <button   onclick="javascript:mint()"> MINT BUTTON</button>
                `}
               </p>
             </div>

@@ -33,7 +33,7 @@ const Header = () => {
                   <Link to="/">
                   <div class="flex title-font font-medium items-center text-gray-900 md:mb-0">
                     <img className="w-28 sm:w-full sm:h-auto" src={Logo} />
-                  </div>
+                  </div> 
                   </Link>
                   <nav class="ml-auto flex flex-wrap items-center text-base justify-right">
                     <a class="mr-5 font-semibold text-base text-third hover:cursor-pointer" href="https://docs-flume.gitbook.io/flume/"  target="_blank" rel="noreferrer">Guide</a>
