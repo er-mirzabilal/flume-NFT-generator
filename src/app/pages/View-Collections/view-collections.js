@@ -34,7 +34,6 @@ const ViewCollection = () => {
         const edition = '';
         createCollection({edition, count: 0 })
         .then(response => {
-            console.log(response, 'sucess 2');
             const id = response?.data?.id;
             if(id) navigate.push(`/create-collections/${id}`)
         })

@@ -5,7 +5,8 @@ import { initializeCollectionSocket } from "../app/pages/Create-Collections/stor
 import { initializeSocket } from "../app/pages/store/authSlice";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import { connectors } from '../app/utils/connectors';
-const isAuthorized = () => {
+import { useEffect } from "react";
+export const isAuthorized = () => {
     const token = localStorage.getItem('flume_auth_token');
     const notifyToken  = localStorage.getItem('flume_notify_token');
     if(token && notifyToken) {
@@ -15,16 +16,19 @@ const isAuthorized = () => {
 }
 export default function ProtectedRoute(props){
     const location = useLocation();
-    const {active, activate} = useWeb3React();
+    const {active, activate, chainId} = useWeb3React();
     const {isSocketInit} = useSelector((state)=> state.auth);
     const dispatch = useDispatch()
     
     const path = location?.pathname;
-    // console.log(path, 'path');
-    if(isAuthorized()){
-        if(!active) activate(connectors.injected);
+    useEffect(()=>{
+        if(!active) {
+            activate(connectors.injected)
+        };
         if(!isSocketInit) dispatch(initializeSocket());
-        // console.log(path, isSocketInit, activate);
+    },[])
+    if(isAuthorized() ){
+       
         if(path && ( path === '/' || path === '/login')){
             return <Redirect to={{pathname: "/view-collections", state: {from: location}}} />
         }

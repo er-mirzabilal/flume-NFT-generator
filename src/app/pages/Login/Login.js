@@ -11,6 +11,7 @@ import { authenticate, getNonce } from '../../api/core';
 import { connectors } from '../../utils/connectors';
 import { useDispatch } from 'react-redux';
 import { showMessage } from '../store/messageSlice';
+import { contract_map } from '../../utils/constants';
 export default function Login(props){
     const dispatch = useDispatch()
     const {active, activate, deactivate, library, account} = useWeb3React();
@@ -59,15 +60,19 @@ export default function Login(props){
         if(!active) {
             if (typeof window.ethereum !== 'undefined'
             || (typeof window.web3 !== 'undefined')) {
-                setLoading(true);
-                await activate(connectors.injected);
+                console.log(contract_map[parseInt(window.ethereum.networkVersion)],window.ethereum.networkVersion)
+                if(contract_map[parseInt(window.ethereum.networkVersion)] ){
+                    setLoading(true);
+                    await activate(connectors.injected);
+                }
+                else {
+                    dispatch(showMessage({'message' : 'You are connected to unsuported network!', severity:"error"}))
+                }
             }
             else {
                 dispatch(showMessage({'message' : 'Metamask is not available Please install!', severity:"error"}))
             }
-      
         }
-        
     }
     const renderLoginConfirmation = () => {
         return (
