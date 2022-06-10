@@ -17,6 +17,11 @@ export  const contract_map = {
             address: '0x425Ed153Be3Fde8973f0d11c1F0058724cBc4Df9',
             name: 'Matic testnet',
             unit: 'MATIC'
-        }
+        },
+    137: {
+        address: '0x425Ed153Be3Fde8973f0d11c1F0058724cBc4Df9',
+        name: 'Matic mainnet',
+        unit: 'MATIC'
+    }
 }
 

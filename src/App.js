@@ -32,7 +32,7 @@ import { connectors } from './app/utils/connectors';
 
 function App() {
   const {active, deactivate, activate, account} = useWeb3React();
-  const [currentAccount, setCurrentAccount] = useState(null);
+  const [currentAccount, setCurrentAccount] = useState("initial");
   const history = useHistory()
   const dispatch = useDispatch()
     // const location = useLocation();
@@ -46,7 +46,7 @@ function App() {
     }, [])
     
     useEffect(() => {
-      if(!currentAccount || (isAuthorized() && currentAccount)){
+      if(("initial"!==currentAccount) || (isAuthorized() && currentAccount && "initial"!==currentAccount)){
         deactivate();
         removeAuthLocalStorage();
         history.push('/');
