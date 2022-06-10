@@ -166,7 +166,7 @@ const Preview = () => {
       return ethers.utils.parseUnits(originalAmount, decimals);
   }
     const doTransection = async () => {
-      const contract = new ethers.Contract(contract_map[4].address, abi, library.getSigner() );
+      const contract = new ethers.Contract(contract_map[chainId].address, abi, library.getSigner() );
       const deploymentFee = await contract.fee();
       const options = {
          "value": deploymentFee.toString()
