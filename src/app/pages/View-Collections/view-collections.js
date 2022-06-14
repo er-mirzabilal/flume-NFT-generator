@@ -11,6 +11,13 @@ import ImagePreview from '../Create-Collections/ImagePreview';
 import { useWeb3React } from '@web3-react/core';
 import { showMessage } from '../store/messageSlice';
 import { useDispatch } from 'react-redux';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 const ViewCollection = () => {
     const dispatch = useDispatch()
@@ -18,6 +25,11 @@ const ViewCollection = () => {
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
     const [creating, setCreating] = useState(false);
+    const [open,setOpen] = useState(false);
+
+    const handleClose = () => {
+        setOpen(false);
+      };
 
     useEffect(() =>{
         getColections()
@@ -68,8 +80,13 @@ const ViewCollection = () => {
     }
     const renderCollection = (collection) => {
         return (
-            <div class="w-80 rounded-xl m-2 p-4 shadow-lg cursor-pointer hover:shadow-2xl" onClick={() => openCollection(collection)}>
-                    <ImagePreview images={collection.display_image} />
+            <div class="w-80 rounded-xl m-2 p-4 shadow-lg cursor-pointer hover:shadow-2xl relative" >
+            <IconButton  sx={{position:'absolute', top:0, right:0}} color="error" onClick={()=> setOpen(true)} >
+            <DeleteIcon />
+          </IconButton>
+          <div onClick={() => openCollection(collection)}>   
+                 <ImagePreview images={collection.display_image} />
+                 </div>
                     <div class="flex flex-row pt-2 justify-between">
                     <h3 class="text-third">{collection.edition}</h3><p class="bg-secondary rounded-md text-white px-2 text-sm self-center">{collection.status}</p>
                 </div>
@@ -79,7 +96,7 @@ const ViewCollection = () => {
     const renderCollections = () => {
         if(loading) {
             return (
-                <div className="text-center my-16 ">
+                <div className="my-16 text-center ">
                     <CircularProgress />
                 </div>
             )
@@ -95,7 +112,7 @@ const ViewCollection = () => {
                 </section>
             )
         return (
-            <div className="text-center py-16">
+            <div className="py-16 text-center">
                <p> You have no project yet, create one to get started. </p>
             </div>
         )
@@ -117,11 +134,33 @@ const ViewCollection = () => {
          <section>
          <div class="max-w-screen-2xl w-11/12 mx-auto mt-8 mb-4">
              <Button color="primary" variant="contained"onClick={() => createNewCollection()} startIcon={creating? <CircularProgress size="1.4rem" color="secondary" /> : <AddIcon /> } disabled={creating}>
-             <p  className="text-white font-semibold " >Create NFT Collection </p>
+             <p  className="font-semibold text-white " >Create NFT Collection </p>
              </Button>
          </div>
+         
+         <Dialog
+     open={open}
+     onClose={handleClose}
+     aria-labelledby="alert-dialog-title"
+     aria-describedby="alert-dialog-description">
+     <DialogTitle id="alert-dialog-title">
+       Delete Collection
+     </DialogTitle>
+     <DialogContent>
+       <DialogContentText id="alert-dialog-description">
+       Are you sure you want to delete the collection?
+       </DialogContentText>
+     </DialogContent>
+     <DialogActions>
+       <Button onClick={handleClose}>Cancel</Button>
+       <Button autoFocus>
+         Delete
+       </Button>
+     </DialogActions>
+   </Dialog>
          </section>
             {renderCollections()}
+           
         </div>
     );
 }
