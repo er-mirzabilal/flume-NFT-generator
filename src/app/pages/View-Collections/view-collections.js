@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import noPreviewImage from '../../../assets/images/collections/no-preview2.jpeg';
 import viewCollection1img from '../../../assets/images/collections/view/view-collection1-img.png';
-import { createCollection, getColections } from '../../api/core';
+import { createCollection, getColections, deleteCollection } from '../../api/core';
 import { collectionStatus } from '../../utils/constants';
 import Header from '../Components/Header/Header';
 import ImagePreview from '../Create-Collections/ImagePreview';
@@ -20,15 +20,55 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
 const ViewCollection = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const [deleting, setDeleting] = useState(false);
     const navigate = useHistory();
     const [loading, setLoading] = useState(true);
     const [collections, setCollections] = useState([]);
     const [creating, setCreating] = useState(false);
-    const [open,setOpen] = useState(false);
+    const [popup, setPopup] = useState({
+        show: false,
+        id: null,
+      });
 
-    const handleClose = () => {
-        setOpen(false);
+      const handleDeleteFalse = () => {
+        setPopup({
+          show: false,
+          id: null,
+        });
+      };
+
+      const handleDelete = (id) => {
+        setPopup({
+          show: true,
+          id,
+        });
+        console.log('handleDelete')
+      };
+
+      const handleDeleteTrue = async () => {
+        setDeleting(true);
+        if (popup.show && popup.id) {
+        await deleteCollection(popup.id).then(response => {
+          getColections()
+        .then((response) => {
+            setCollections(response.data);
+            setLoading(false);
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+        })
+        .catch(error => {
+            console.error(error);
+            dispatch(showMessage({message: 'Something went wrong while deleting collection !', severity: 'error'}));
+        })
+         setDeleting(false);
+          setPopup({
+            show: false,
+            id: null,
+          });
+        }
       };
 
     useEffect(() =>{
@@ -81,7 +121,7 @@ const ViewCollection = () => {
     const renderCollection = (collection) => {
         return (
             <div class="w-80 rounded-xl m-2 p-4 shadow-lg cursor-pointer hover:shadow-2xl relative" >
-            <IconButton  sx={{position:'absolute', top:0, right:0}} color="error" onClick={()=> setOpen(true)} >
+            <IconButton  sx={{position:'absolute', top:'15px', right:'15px'}} color="error" onClick={()=>handleDelete(collection.id)} >
             <DeleteIcon />
           </IconButton>
           <div onClick={() => openCollection(collection)}>   
@@ -138,9 +178,8 @@ const ViewCollection = () => {
              </Button>
          </div>
          
-         <Dialog
-     open={open}
-     onClose={handleClose}
+    <Dialog
+     open={popup.show}
      aria-labelledby="alert-dialog-title"
      aria-describedby="alert-dialog-description">
      <DialogTitle id="alert-dialog-title">
@@ -152,15 +191,15 @@ const ViewCollection = () => {
        </DialogContentText>
      </DialogContent>
      <DialogActions>
-       <Button onClick={handleClose}>Cancel</Button>
-       <Button autoFocus>
+       <Button onClick={handleDeleteFalse}>Cancel</Button>
+       {/*<Button autoFocus onClick={handleDeleteTrue}>
          Delete
-       </Button>
+    </Button>*/}
+       <Button startIcon={deleting ? <CircularProgress size="1.4rem" /> : <DeleteIcon />} variant="contained" disabled={deleting} color="primary" onClick={()=> handleDeleteTrue()}>Delete</Button>
      </DialogActions>
    </Dialog>
          </section>
             {renderCollections()}
-           
         </div>
     );
 }

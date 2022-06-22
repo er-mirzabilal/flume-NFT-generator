@@ -60,6 +60,19 @@ export const createCollection = (data) => {
     })
 }
 
+export const deleteCollection = (id) => {
+    return new Promise((resolve, reject) => {
+        http.delete(`/remove-project/${id}`).then((response) => {
+            if(response) console.log(response);
+                    resolve(response)
+            reject(response)
+        })
+        .catch((err) => {
+            reject(err)
+        })
+    })
+}
+
 export const getCollection = (id) => {
     return new Promise((resolve, reject) => {
         http.get(`/collection/${id}`).then((response) => {
