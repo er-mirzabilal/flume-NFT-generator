@@ -26,6 +26,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 const abi = require("../../../assets/blockchain/factory_abi.json");
 
 const LiveCollection = () => {
+  const { chainId } = useWeb3React();
   const { isImageGenerated } = useSelector((state) => state.auth);
   const params = useParams();
   const [loading, setLoading] = useState(true);
@@ -185,7 +186,7 @@ const LiveCollection = () => {
             <div class="flex md:flex-row flex-col p-10 shadow-lg rounded-lg justify-between">
               <div class="flex justify-between flex-grow">
                 <a
-                  href={`https://rinkeby.etherscan.io/address/${collection.contract_address}`}
+                  href={`${contract_map[chainId].link}/address/${collection.contract_address}`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -198,7 +199,7 @@ const LiveCollection = () => {
                   </button>
                 </a>
                 <a
-                  href="https://testnets.opensea.io/get-listed"
+                  href={`${contract_map[chainId]}/get-listed`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -211,7 +212,7 @@ const LiveCollection = () => {
                   </button>
                 </a>
                 <a
-                  href={`https://rinkeby.etherscan.io/address/${collection.contract_address}#code`}
+                  href={`${contract_map[chainId].link}/address/${collection.contract_address}#code`}
                   target="_blank"
                   rel="noreferrer"
                 >
