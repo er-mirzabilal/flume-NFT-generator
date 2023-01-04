@@ -88,11 +88,19 @@ export const generateCollection = createAsyncThunk('/collection/generate', async
         const stateData = getState().createCollection;
         const formattedData = prepareDataForPost(stateData);
         const data = await http.put(`/collection`,{...formattedData, generate: true, edit: true})
-        return data.response;
+        return data?.response;
     
     }
     catch(err) {
-        showMessage({message: "Something went wrong while generating collection!", soverity: "error"});
+        if(err?.response?.data?.non_field_errors?.length)
+        {
+            console.log(err?.response?.data?.non_field_errors[0],'error');
+            dispatch(showMessage({message: err?.response?.data?.non_field_errors[0], severity: "error"}));
+        }
+        else
+        {
+            dispatch(showMessage({message: "Something went wrong while generating collection!", severity: "error"}));
+        }
         return false;
     }
  

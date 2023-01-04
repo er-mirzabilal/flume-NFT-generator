@@ -181,7 +181,8 @@ const CreateCollection = () => {
       if(error && Object.keys(error).length) dispatch(updateError({}));
       setGenerating(true);
       const data = await dispatch(generateCollection());
-      if(data) navigate.push(`/preview-images/${params.id}`);
+      if(data?.payload) navigate.push(`/preview-images/${params.id}`);
+      setGenerating(false);
     })
     .catch(err => {
       dispatch(updateError(err));

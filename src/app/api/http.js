@@ -32,7 +32,11 @@ http.interceptors.response.use((response) => {
         localStorage.removeItem('flume_notify_token');
         showMessage({message: "Token has expired or invalid.", soverity: "error"});
         // window.location.reload();
+
     }
+    return Promise.reject(err);
+   
+
 },function (error) {
     // Do something with request error
     return Promise.reject(error);
