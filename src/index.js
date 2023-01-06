@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import {ethers} from 'ethers';
 import {Web3ReactProvider} from '@web3-react/core'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { QueryClient, QueryClientProvider } from 'react-query';
 const theme = createTheme({
   palette: {
     primary: {
@@ -21,7 +22,7 @@ const theme = createTheme({
     },
   },
 });
-
+const queryClient = new QueryClient();
 const getLibrary = (provider) => {
   return new ethers.providers.Web3Provider(provider);
 }
@@ -29,11 +30,13 @@ ReactDOM.render(
   <React.StrictMode>
      <ThemeProvider theme={theme}>
         <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
             <BrowserRouter>
                 <Web3ReactProvider getLibrary={getLibrary}>
                 <App />
                 </Web3ReactProvider>
             </BrowserRouter>
+            </QueryClientProvider>
         </Provider>
     </ThemeProvider>
     </React.StrictMode>,
